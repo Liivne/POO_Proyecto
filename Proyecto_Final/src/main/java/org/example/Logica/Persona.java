@@ -3,7 +3,7 @@ package org.example.Logica;
  * Representa a una persona como una entidad abstracta.
  * Se registran datos básicos de cada persona (nombre, apellidos, correo).
  */
-public abstract class Persona {
+public class Persona {
 
     private String apellidos;
     private String nombre;

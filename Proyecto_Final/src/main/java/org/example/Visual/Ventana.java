@@ -9,6 +9,10 @@ public class Ventana extends JFrame {
         setTitle("Organizador de Competencias");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(1214, 716));
+        setSize(1214, 716);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 }
