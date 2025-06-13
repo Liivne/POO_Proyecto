@@ -2,7 +2,8 @@ package org.example.Visual;
 
 public class Aplicacion {
     private static Ventana ventana;
-    public Aplicacion(){
+
+    public static void main(String[] args) {
         ventana = new Ventana();
 
     }
