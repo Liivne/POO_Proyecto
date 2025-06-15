@@ -64,7 +64,7 @@ public class VentanaPrincipal extends JFrame {
         JButton btnSalir = crearBotonSecundario("Salir");
 
         // Agregar ActionListeners (sin funcionalidad por ahora)
-        btnOrganizadores.addActionListener(e -> mostrarMensaje("Módulo de Organizadores - En desarrollo"));
+        btnOrganizadores.addActionListener(e -> abrirVentanaOrganizador());
         btnCompetidores.addActionListener(e -> mostrarMensaje("Módulo de Competidores - En desarrollo"));
         btnAcerca.addActionListener(e -> mostrarAcercaDe());
         btnSalir.addActionListener(e -> System.exit(0));
@@ -160,6 +160,10 @@ public class VentanaPrincipal extends JFrame {
         setResizable(false);
     }
 
+    private void abrirVentanaOrganizador() {
+        new VentanaOrganizador().setVisible(true);
+    }
+
     private void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -171,6 +175,7 @@ public class VentanaPrincipal extends JFrame {
                 "Desarrollado con Java Swing";
 
         JOptionPane.showMessageDialog(this, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
+        // Esta pestaña podría ser usada como guía de uso
     }
 
     // Método main para ejecutar la aplicación

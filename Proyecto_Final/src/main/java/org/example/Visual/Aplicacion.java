@@ -1,10 +1,15 @@
-package org.example.Visual;
+import org.example.Visual.VentanaPrincipal;
+import javax.swing.*;
 
-public class Aplicacion {
-    private static Ventana ventana;
+// Método main para ejecutar la aplicación
+public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -> {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-    public static void main(String[] args) {
-        ventana = new Ventana();
-
-    }
+        new VentanaPrincipal().setVisible(true);
+    });
 }
