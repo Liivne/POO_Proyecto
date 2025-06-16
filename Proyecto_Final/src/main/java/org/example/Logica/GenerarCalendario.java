@@ -17,13 +17,6 @@ public abstract class GenerarCalendario {
 
     }
 
-    public GenerarCalendario(LocalDate comienzo, ArrayList<Persona> lista_equipos, FORMATO formato){
-        fechaBase_string = comienzo.format(fecha_tipo);
-        fechaBase = LocalDate.parse(fechaBase_string, fecha_tipo);
-
-        cantidad_partidos = generarCantidadPartidos(formato, lista_equipos.size());
-        fechas_partidos = generarFechasPartidos(cantidad_partidos, fechaBase);
-    }
     protected ArrayList<LocalDate> generarFechasPartidos(int cantidadPartidos, LocalDate fechainicio) {
         ArrayList<LocalDate> fechaspropuestas = new ArrayList<LocalDate>();
         for (int i = 2; i <= 2*cantidadPartidos; i+=2) {
