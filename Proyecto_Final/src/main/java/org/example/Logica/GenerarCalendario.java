@@ -1,27 +1,30 @@
 package org.example.Logica;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.LowerCase;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class GenerarCalendario {
-    private LocalDate fechaBase;
-    private DateTimeFormatter fecha_tipo = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private int cantidad_partidos;
-    private String fechaBase_string;
-    private ArrayList<LocalDate> fechas_partidos;
+public abstract class GenerarCalendario {
+    protected LocalDate fechaBase;
+    protected DateTimeFormatter fecha_tipo = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    protected int cantidad_partidos;
+    protected String fechaBase_string;
+    protected ArrayList<LocalDate> fechas_partidos;
 
-    public GenerarCalendario(LocalDate comienzo, ArrayList<Equipos<Persona>> lista_equipos, FORMATO formato){
+    public GenerarCalendario(LocalDate comienzo){
         fechaBase_string = comienzo.format(fecha_tipo);
         fechaBase = LocalDate.parse(fechaBase_string, fecha_tipo);
-        
+
+    }
+
+    public GenerarCalendario(LocalDate comienzo, ArrayList<Persona> lista_equipos, FORMATO formato){
+        fechaBase_string = comienzo.format(fecha_tipo);
+        fechaBase = LocalDate.parse(fechaBase_string, fecha_tipo);
+
         cantidad_partidos = generarCantidadPartidos(formato, lista_equipos.size());
         fechas_partidos = generarFechasPartidos(cantidad_partidos, fechaBase);
     }
-
-    private ArrayList<LocalDate> generarFechasPartidos(int cantidadPartidos, LocalDate fechainicio) {
+    protected ArrayList<LocalDate> generarFechasPartidos(int cantidadPartidos, LocalDate fechainicio) {
         ArrayList<LocalDate> fechaspropuestas = new ArrayList<LocalDate>();
         for (int i = 2; i <= 2*cantidadPartidos; i+=2) {
             fechaspropuestas.add(fechainicio.plusDays(i));
@@ -29,7 +32,7 @@ public class GenerarCalendario {
         return fechaspropuestas;
     }
 
-    private int generarCantidadPartidos(FORMATO formato, int equipos) {
+    protected int generarCantidadPartidos(FORMATO formato, int equipos) {
         int resultado = 0;
         switch (formato){
             case FORMATO.LIGASIMPLE:
@@ -63,9 +66,5 @@ public class GenerarCalendario {
 
     public LocalDate getFechaBase() {
         return fechaBase;
-    }
-
-    public void setFechaBase(LocalDate fechaBase) {
-        this.fechaBase = fechaBase;
     }
 }

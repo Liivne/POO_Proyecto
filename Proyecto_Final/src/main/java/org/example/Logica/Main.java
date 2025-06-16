@@ -21,7 +21,7 @@ public class Main {
         equipos.add(kfc3);
         equipos.add(kfc4);
 
-        GenerarCalendario c = new GenerarCalendario(LocalDate.now(),equipos,FORMATO.LIGASIMPLE);
+        GenerarCalendario c = new GenerarCalendarioEquipos(LocalDate.now(),equipos,FORMATO.CAMPEONATO);
         fechas_tentativas = c.getFechas_partidos();
 
     }
