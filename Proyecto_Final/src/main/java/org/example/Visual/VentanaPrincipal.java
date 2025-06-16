@@ -65,7 +65,7 @@ public class VentanaPrincipal extends JFrame {
 
         // Agregar ActionListeners (sin funcionalidad por ahora)
         btnOrganizadores.addActionListener(e -> abrirVentanaOrganizador());
-        btnCompetidores.addActionListener(e -> mostrarMensaje("Módulo de Competidores - En desarrollo"));
+        btnCompetidores.addActionListener(e -> abrirVentanaCompetidor());
         btnAcerca.addActionListener(e -> mostrarAcercaDe());
         btnSalir.addActionListener(e -> System.exit(0));
 
@@ -162,6 +162,9 @@ public class VentanaPrincipal extends JFrame {
 
     private void abrirVentanaOrganizador() {
         new VentanaOrganizador().setVisible(true);
+    }
+    private void abrirVentanaCompetidor() {
+        new VentanaCompetidor().setVisible(true);
     }
 
     private void mostrarMensaje(String mensaje) {

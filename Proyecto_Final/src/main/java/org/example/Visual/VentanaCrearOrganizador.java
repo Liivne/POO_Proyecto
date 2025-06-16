@@ -2,11 +2,8 @@ package org.example.Visual;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
-public class VentanaOrganizador extends JFrame {
+public class VentanaCrearOrganizador extends JFrame {
 
     // Componentes del formulario
     private JTextField txtNombreTorneo;
@@ -19,7 +16,7 @@ public class VentanaOrganizador extends JFrame {
     private JTextField txtPremio;
     private JCheckBox chkInscripcionAbierta;
 
-    public VentanaOrganizador() {
+    public VentanaCrearOrganizador() {
         initComponents();
         setupWindow();
     }
@@ -99,11 +96,7 @@ public class VentanaOrganizador extends JFrame {
         String[] formatos = {
                 "Seleccionar formato...",
                 "Eliminatoria Directa",
-                "Eliminatoria Doble",
                 "Liga Simple (Todos contra todos)",
-                "Liga con Playoffs",
-                "Suizo",
-                "Round Robin"
         };
         cbFormato = new JComboBox<>(formatos);
         panelFormulario.add(cbFormato, gbc);
@@ -273,7 +266,7 @@ public class VentanaOrganizador extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaOrganizador().setVisible(true);
+            new VentanaCrearOrganizador().setVisible(true);
         });
     }
 }
