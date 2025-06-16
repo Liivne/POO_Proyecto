@@ -25,4 +25,6 @@ public abstract class Participantes {
     public String getCorreo() {
         return correo;
     }
+
+    public abstract String getTipo();
 }
