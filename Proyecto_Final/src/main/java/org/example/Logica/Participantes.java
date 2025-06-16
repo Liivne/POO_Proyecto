@@ -3,30 +3,23 @@ package org.example.Logica;
  * Representa a una persona como una entidad abstracta.
  * Se registran datos básicos de cada persona (nombre, apellidos, correo).
  */
-public class Persona {
+public abstract class Participantes {
 
-    private String apellidos;
-    private String nombre;
+    private String nombreyApellido;
     private String correo;
     /**
      * Constructor principal para crear una persona con todos sus datos.
      *
-     * @param apellidos Apellidos de la persona.
-     * @param nombre Nombre de la persona.
+     * @param nombreyApellido Nombre de la persona y apellido.
      * @param correo Correo electrónico de la persona.
      */
-    public Persona(String apellidos, String nombre, String correo) {
-        this.apellidos = apellidos;
-        this.nombre = nombre;
+    public Participantes(String nombreyApellido, String correo) {
+        this.nombreyApellido = nombreyApellido;
         this.correo = correo;
     }
 
-    public String getApellidos() {
-        return apellidos;
-    }
-
     public String getNombre() {
-        return nombre;
+        return nombreyApellido;
     }
 
     public String getCorreo() {
