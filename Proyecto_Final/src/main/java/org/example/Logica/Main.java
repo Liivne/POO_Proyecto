@@ -9,12 +9,12 @@ public class Main {
 
         //Forma de uso del GenerarCalendario
         ArrayList<LocalDate> fechas_tentativas = new ArrayList<LocalDate>();
-        ArrayList<Equipos<Participantes>> equipos = new ArrayList<Equipos<Participantes>>();
+        ArrayList<Equipo> equipos = new ArrayList<Equipo>();
 
-        Equipos<Participantes> kfc1 = new Equipos<>("kfc1");
-        Equipos<Participantes> kfc2 = new Equipos<>("kfc2");
-        Equipos<Participantes> kfc3 = new Equipos<>("kfc3");
-        Equipos<Participantes> kfc4 = new Equipos<>("kfc4");
+        Equipo kfc1 = new Equipo("kfc1","kfc1@gmail.com");
+        Equipo kfc2 = new Equipo("kfc2","kfc2@gmail.com");
+        Equipo kfc3 = new Equipo("kfc3","kfc3@gmail.com");
+        Equipo kfc4 = new Equipo("kfc4","kfc4@gmail.com");
 
         equipos.add(kfc1);
         equipos.add(kfc2);
@@ -23,6 +23,6 @@ public class Main {
 
         GenerarCalendario c = new GenerarCalendarioEquipos(LocalDate.now(),equipos,FORMATO.CAMPEONATO);
         fechas_tentativas = c.getFechas_partidos();
-
+        System.out.println(fechas_tentativas);
     }
 }
