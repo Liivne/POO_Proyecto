@@ -6,24 +6,24 @@ package org.example.Logica;
 public abstract class Participantes {
 
     private String nombreyApellido;
-    private String correo;
+    private String contacto;
     /**
      * Constructor principal para crear una persona con todos sus datos.
      *
      * @param nombreyApellido Nombre de la persona y apellido.
-     * @param correo Correo electrónico de la persona.
+     * @param contacto Medio de contacto (correo o numero) de la persona.
      */
-    public Participantes(String nombreyApellido, String correo) {
+    public Participantes(String nombreyApellido, String contacto) {
         this.nombreyApellido = nombreyApellido;
-        this.correo = correo;
+        this.contacto = contacto;
     }
 
     public String getNombre() {
         return nombreyApellido;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getContacto() {
+        return contacto;
     }
 
     public abstract String getTipo();
