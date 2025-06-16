@@ -9,7 +9,7 @@ public class Torneo {
     //public static ArrayList<Partidos> partidos;
     public FORMATO formatoTorneo;
 
-    public void registrarJugador(Persona jugador) {}
+    public void registrarJugador(Participantes jugador) {}
 
     public void generarCalendario() {}
 
