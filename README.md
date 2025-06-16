@@ -1,3 +1,3 @@
 # POO_Proyecto
 
-![image](https://github.com/user-attachments/assets/0f6b3f3e-c9f3-4b41-b535-31a4c6713ff8)
+![image](https://github.com/Liivne/POO_Proyecto/blob/main/Caso%20de%20uso%20(1).jpg)
