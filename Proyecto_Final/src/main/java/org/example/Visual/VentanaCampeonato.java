@@ -4,17 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.Window;
 
-public class VentanaCampeonato {
+abstract public class VentanaCampeonato extends JFrame{
     public VentanaCampeonato() {
-        initComponents();
-        setupWindow();
+        /**
+        configurarVentana();
+        inicializarComponentes();
+        configurarLayout();
+        asignarEventos();
+        inicializarEquipos();
+         **/
     }
-
-    private void initComponents() {
-    }
-    private void setupWindow() {
-        setSize(900, 650);
-        setLocationRelativeTo(null);
-        setResizable(true);
-    }
+    private void initComponents() {}
+    private void setupWindow() {}
 }

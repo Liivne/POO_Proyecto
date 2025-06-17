@@ -1,4 +1,4 @@
 package org.example.Visual;
 
-public class VentanaCampeonato8 {
+public class VentanaCampeonato8 extends VentanaCampeonato{
 }
