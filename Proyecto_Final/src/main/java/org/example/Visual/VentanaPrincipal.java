@@ -2,8 +2,6 @@ package org.example.Visual;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -161,7 +159,7 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void abrirVentanaOrganizador() {
-        new VentanaOrganizador().setVisible(true);
+        new VentanaAdministrarOrganizador().setVisible(true);
     }
     private void abrirVentanaCompetidor() {
         new VentanaCompetidor().setVisible(true);
