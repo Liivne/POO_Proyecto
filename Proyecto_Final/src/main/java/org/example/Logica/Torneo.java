@@ -39,6 +39,10 @@ public class Torneo {
         listaParticipantes.add(participantes);
         System.out.println("el participante agregado " + participantes.getNombre());
     }
-    
+
+    public ArrayList<Participantes> getListaParticipantes() {
+        return listaParticipantes;
+    }
+
     public void registrarResultado(){}
 }
