@@ -5,9 +5,19 @@ import java.util.ArrayList;
 public class Torneo {
 
     private String nombreTorneo;
-    public static ArrayList<Equipo> listaEquipos;
+    private ArrayList<Participantes> listaParticipantes;
     //public static ArrayList<Partidos> partidos;
-    public FORMATO formatoTorneo;
+    private FORMATO formatoTorneo;
+    private GenerarCalendario calendario;
+    private TIPOPARTICIPANTES tipoParticipantes;
+
+    public Torneo (String nombreTorneo, FORMATO formatoTorneo, GenerarCalendario calendario) {
+        this.nombreTorneo = nombreTorneo;
+        this.formatoTorneo = formatoTorneo;
+        this.calendario = calendario;
+
+        this.listaParticipantes = new ArrayList<>();
+    }
 
     public void registrarJugador(Participantes jugador) {}
 
