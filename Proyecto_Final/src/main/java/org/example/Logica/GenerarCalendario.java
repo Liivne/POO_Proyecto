@@ -19,7 +19,7 @@ public abstract class GenerarCalendario {
 
     protected ArrayList<LocalDate> generarFechasPartidos(int cantidadPartidos, LocalDate fechainicio) {
         ArrayList<LocalDate> fechaspropuestas = new ArrayList<LocalDate>();
-        for (int i = 2; i <= 2*cantidadPartidos; i+=2) {
+        for (int i = 0; i < 2*cantidadPartidos; i+=2) {
             fechaspropuestas.add(fechainicio.plusDays(i));
         }
         return fechaspropuestas;
