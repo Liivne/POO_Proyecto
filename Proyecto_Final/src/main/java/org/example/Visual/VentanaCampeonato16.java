@@ -58,14 +58,14 @@ public class VentanaCampeonato16 extends VentanaCampeonato {
         inicializarEquipos();
     }
 
-    private void configurarVentana() {
+    protected void configurarVentana() {
         setTitle("Gestión de Torneo - Eliminación Directa (16 Equipos)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setMinimumSize(new Dimension(1200, 800));
     }
 
-    private void inicializarComponentes() {
+    protected void inicializarComponentes() {
         // Panel principal
         panelPrincipal = new JPanel(new BorderLayout());
         panelPrincipal.setBackground(new Color(240, 248, 255));
@@ -330,7 +330,7 @@ public class VentanaCampeonato16 extends VentanaCampeonato {
         });
     }
 
-    private void inicializarEquipos() {
+    protected void inicializarEquipos() {
         // Asignar nombres iniciales a los botones de octavos
         for (int i = 0; i < 16; i++) {
             botonesOctavos[i].setText(equiposIniciales[i]);
