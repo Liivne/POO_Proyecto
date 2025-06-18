@@ -11,17 +11,34 @@ public class Torneo {
     private GenerarCalendario calendario;
     private TIPOPARTICIPANTES tipoParticipantes;
 
-    public Torneo (String nombreTorneo, FORMATO formatoTorneo, GenerarCalendario calendario) {
+    public Torneo (String nombreTorneo, FORMATO formatoTorneo, GenerarCalendario calendario, TIPOPARTICIPANTES tipoParticipantes) {
         this.nombreTorneo = nombreTorneo;
         this.formatoTorneo = formatoTorneo;
         this.calendario = calendario;
+        this.tipoParticipantes = tipoParticipantes;
 
         this.listaParticipantes = new ArrayList<>();
     }
 
-    public void registrarJugador(Participantes jugador) {}
+    public void addParticipantes (Participantes participantes) {
+        boolean esEquipo = participantes instanceof Equipo;
+        boolean esJugador = participantes instanceof Jugador;
 
-    public void generarCalendario() {}
-
+        switch (tipoParticipantes) {
+            case ENEQUIPOS:
+                if (!esEquipo) {
+                    System.out.println("Este torneo solo admite equipos");
+                    return;
+                } break;
+            case INDIVIDUAL:
+                if (!esJugador) {
+                    System.out.println("Este torneo no admite equipos");
+                    return;
+                } break;
+        }
+        listaParticipantes.add(participantes);
+        System.out.println("el participante agregado " + participantes.getNombre());
+    }
+    
     public void registrarResultado(){}
 }
