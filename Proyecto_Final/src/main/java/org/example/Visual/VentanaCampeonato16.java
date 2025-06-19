@@ -176,7 +176,7 @@ public class VentanaCampeonato16 extends VentanaCampeonato {
         labelEstadoCampeon.setBorder(BorderFactory.createEtchedBorder());
     }
 
-    private void configurarLayout() {
+    protected void configurarLayout() {
         // Agregar enfrentamientos a los paneles
 
         // Octavos - crear enfrentamientos (2 botones por enfrentamiento)
@@ -261,7 +261,7 @@ public class VentanaCampeonato16 extends VentanaCampeonato {
         add(panelPrincipal);
     }
 
-    private void asignarEventos() {
+    protected void asignarEventos() {
         // Aquí puedes agregar los ActionListeners para cada botón
         // Ejemplo para botones de octavos:
         for (int i = 0; i < 16; i++) {
@@ -358,12 +358,12 @@ public class VentanaCampeonato16 extends VentanaCampeonato {
         System.out.println("Seleccionado equipo en final: " + indice);
     }
 
-    private void confirmarTorneo() {
+    protected void confirmarTorneo() {
         // TODO: Implementar lógica de confirmación
         System.out.println("Confirmar torneo");
     }
 
-    private void reiniciarTorneo() {
+    protected void reiniciarTorneo() {
         // TODO: Implementar lógica de reinicio
         System.out.println("Reiniciar torneo");
     }

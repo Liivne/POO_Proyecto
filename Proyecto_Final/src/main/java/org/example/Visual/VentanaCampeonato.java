@@ -16,15 +16,17 @@ abstract public class VentanaCampeonato extends JFrame{
 
 
         // Componentes principales
-        protected JPanel panelPrincipal;
-        protected JPanel panelOctavos;
-        protected JPanel panelCuartos;
-        protected JPanel panelSemifinales;
-        protected JPanel panelFinal;
+       ;
+       protected JPanel panelPrincipal;
         protected JPanel panelCampeon;
         protected JPanel panelControles;
         protected JPanel panelEstado;
         protected JButton[] botones;
+
+        // Listas para manejar todas las rondas dinámicamente
+        protected List panelesRondas;
+        protected List botonesRondas;
+        protected List labelsEstado;
 
 
         // Botón y label para el campeón
@@ -71,13 +73,6 @@ abstract public class VentanaCampeonato extends JFrame{
             panelPrincipal = new JPanel(new BorderLayout());
             panelPrincipal.setBackground(new Color(240, 248, 255));
 
-            panelSemifinales = new JPanel(new GridLayout(2, 1, 5, 40));
-            panelSemifinales.setBorder(BorderFactory.createTitledBorder("SEMIFINALES"));
-            panelSemifinales.setBackground(Color.WHITE);
-
-            panelFinal = new JPanel(new GridLayout(1, 1, 5, 80));
-            panelFinal.setBorder(BorderFactory.createTitledBorder("FINAL"));
-            panelFinal.setBackground(Color.WHITE);
 
             panelCampeon = new JPanel(new FlowLayout());
             panelCampeon.setBorder(BorderFactory.createTitledBorder("CAMPEÓN"));
@@ -132,63 +127,11 @@ abstract public class VentanaCampeonato extends JFrame{
 
         protected void inicializarBotones(){}
 
-
-
-        private void configurarLayout() {
+        protected void configurarLayout() {
             // Agregar enfrentamientos a los paneles
-            /**
-
-            // Octavos - crear enfrentamientos (2 botones por enfrentamiento)
-            for (int i = 0; i < 8; i++) {
-                JPanel enfrentamiento = new JPanel(new GridLayout(3, 1, 2, 2));
-                enfrentamiento.add(botonesOctavos[i * 2]);
-
-                JLabel vs = new JLabel("VS", SwingConstants.CENTER);
-                vs.setFont(new Font("Arial", Font.BOLD, 10));
-                enfrentamiento.add(vs);
-
-                enfrentamiento.add(botonesOctavos[i * 2 + 1]);
-                panelOctavos.add(enfrentamiento);
+            for(JPanel panel: panelesRondas){
+                panelTorneo.add(panel);
             }
-
-            // Cuartos - crear enfrentamientos
-            for (int i = 0; i < 4; i++) {
-                JPanel enfrentamiento = new JPanel(new GridLayout(3, 1, 2, 2));
-                enfrentamiento.add(botonesCuartos[i * 2]);
-
-                JLabel vs = new JLabel("VS", SwingConstants.CENTER);
-                vs.setFont(new Font("Arial", Font.BOLD, 10));
-                enfrentamiento.add(vs);
-
-                enfrentamiento.add(botonesCuartos[i * 2 + 1]);
-                panelCuartos.add(enfrentamiento);
-            }
-
-            // Semifinales - crear enfrentamientos
-            for (int i = 0; i < 2; i++) {
-                JPanel enfrentamiento = new JPanel(new GridLayout(3, 1, 2, 2));
-                enfrentamiento.add(botonesSemifinales[i * 2]);
-
-                JLabel vs = new JLabel("VS", SwingConstants.CENTER);
-                vs.setFont(new Font("Arial", Font.BOLD, 10));
-                enfrentamiento.add(vs);
-
-                enfrentamiento.add(botonesSemifinales[i * 2 + 1]);
-                panelSemifinales.add(enfrentamiento);
-            }
-
-            // Final - crear enfrentamiento
-            JPanel enfrentamientoFinal = new JPanel(new GridLayout(3, 1, 2, 2));
-            enfrentamientoFinal.add(botonesFinal[0]);
-
-            JLabel vsFinal = new JLabel("VS", SwingConstants.CENTER);
-            vsFinal.setFont(new Font("Arial", Font.BOLD, 10));
-            enfrentamientoFinal.add(vsFinal);
-
-            enfrentamientoFinal.add(botonesFinal[1]);
-            panelFinal.add(enfrentamientoFinal);
-
-             **/
 
             // Campeón
             panelCampeon.add(labelCampeon);
@@ -222,7 +165,7 @@ abstract public class VentanaCampeonato extends JFrame{
             add(panelPrincipal);
         }
 
-        private void asignarEventos() {
+        protected void asignarEventos() {
             // Aquí puedes agregar los ActionListeners para cada botón
 
 
@@ -247,6 +190,8 @@ abstract public class VentanaCampeonato extends JFrame{
 
         protected abstract void inicializarEquipos();
 
+        /**
+
         // Métodos para manejar la lógica (aquí es donde implementarás tu lógica)
         private void manejarSeleccionOctavos(int indice) {
             // TODO: Implementar lógica de selección para octavos
@@ -267,16 +212,10 @@ abstract public class VentanaCampeonato extends JFrame{
             // TODO: Implementar lógica de selección para final
             System.out.println("Seleccionado equipo en final: " + indice);
         }
+         **/
 
-        private void confirmarTorneo() {
-            // TODO: Implementar lógica de confirmación
-            System.out.println("Confirmar torneo");
-        }
-
-        private void reiniciarTorneo() {
-            // TODO: Implementar lógica de reinicio
-            System.out.println("Reiniciar torneo");
-        }
+        protected abstract void confirmarTorneo();
+        protected abstract void reiniciarTorneo();
 
         // Métodos auxiliares para acceder a los componentes desde fuera de la clase
         public JButton[] getBotones() { return botones; }
@@ -287,21 +226,6 @@ abstract public class VentanaCampeonato extends JFrame{
         public JLabel getLabelEstadoSemifinales() { return labelEstadoSemifinales; }
         public JLabel getLabelEstadoFinalistas() { return labelEstadoFinalistas; }
         public JLabel getLabelEstadoCampeon() { return labelEstadoCampeon; }
-
-        public static void main(String[] args) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    new org.example.Visual.VentanaCampeonato16().setVisible(true);
-                }
-            });
-        }
     }
 
 
