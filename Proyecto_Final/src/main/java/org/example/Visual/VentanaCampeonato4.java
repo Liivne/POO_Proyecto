@@ -13,6 +13,7 @@ public class VentanaCampeonato4 extends VentanaCampeonato{
         Además, se vuelve a llamar cuando un nuevo equipo se suma
          desde la pestaña de usuario
          **/
+
         super.inicializarEquipos();
     }
 
