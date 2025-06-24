@@ -2,7 +2,7 @@ package org.example.Logica;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-
+/*
 public class GenerarCalendarioPersonas extends GenerarCalendario {
 
     public GenerarCalendarioPersonas(LocalDate comienzo, ArrayList<Jugador> lista_personas, FORMATO formato) {
@@ -11,3 +11,4 @@ public class GenerarCalendarioPersonas extends GenerarCalendario {
         this.fechas_partidos = generarFechasPartidos(cantidad_partidos, fechaBase);
     }
 }
+*/

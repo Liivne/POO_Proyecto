@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Welcome to the final proyect!");
+        System.out.println("Welcome to the final proyect!");
 
         Equipo kfc1 = new Equipo("kfc1","kfc1@gmail.com");
         Equipo kfc2 = new Equipo("kfc2","kfc2@gmail.com");
@@ -18,17 +18,18 @@ public class Main {
         participantes.add(kfc3);
         participantes.add(kfc4);
 
-        GenerarCalendario c2 = new GenerarCalendarioEquipos(LocalDate.now(),participantes,FORMATO.CAMPEONATO);
+        //GenerarCalendario c2 = new GenerarCalendarioEquipos(LocalDate.now(),participantes,FORMATO.CAMPEONATO);
 
-        Torneo torneo1 = new Torneo("ChampionsLeague", FORMATO.CAMPEONATO, c2, TIPOPARTICIPANTES.ENEQUIPOS);
+        Torneo torneo1 = new Torneo("ChampionsLeague", FORMATO.CAMPEONATO, TIPOPARTICIPANTES.ENEQUIPOS, LocalDate.now());
 
         torneo1.addParticipantes(kfc1);
         torneo1.addParticipantes(kfc2);
         torneo1.addParticipantes(kfc3);
         torneo1.addParticipantes(kfc4);
+        torneo1.crearCalendario();
 
         // Mostrar fechas generadas
-        ArrayList<LocalDate> fechasTentativas = c2.getFechas_partidos();
+        ArrayList<LocalDate> fechasTentativas = torneo1.calendario.getFechas_partidos();
         System.out.println("Fechas de los partidos:");
         for (LocalDate fecha : fechasTentativas) {
             System.out.println(fecha);
