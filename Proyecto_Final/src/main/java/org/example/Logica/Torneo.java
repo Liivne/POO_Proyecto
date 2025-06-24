@@ -1,5 +1,7 @@
 package org.example.Logica;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Torneo {
@@ -8,14 +10,16 @@ public class Torneo {
     private ArrayList<Participantes> listaParticipantes;
     //public static ArrayList<Partidos> partidos;
     private FORMATO formatoTorneo;
-    private GenerarCalendario calendario;
+    public GenerarCalendario calendario;
     private TIPOPARTICIPANTES tipoParticipantes;
+    private LocalDate comienzo;
 
-    public Torneo (String nombreTorneo, FORMATO formatoTorneo, GenerarCalendario calendario, TIPOPARTICIPANTES tipoParticipantes) {
+
+    public Torneo (String nombreTorneo, FORMATO formatoTorneo, TIPOPARTICIPANTES tipoParticipantes, LocalDate comienzo) {
         this.nombreTorneo = nombreTorneo;
         this.formatoTorneo = formatoTorneo;
-        this.calendario = calendario;
         this.tipoParticipantes = tipoParticipantes;
+        this.comienzo = comienzo;
 
         this.listaParticipantes = new ArrayList<>();
     }
@@ -45,4 +49,8 @@ public class Torneo {
     }
 
     public void registrarResultado(){}
+
+    public void crearCalendario(){
+        calendario = new GenerarCalendario(comienzo,getListaParticipantes().size(),formatoTorneo);
+    }
 }

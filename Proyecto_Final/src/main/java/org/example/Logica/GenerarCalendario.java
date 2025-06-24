@@ -1,19 +1,22 @@
 package org.example.Logica;
 
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public abstract class GenerarCalendario {
+public class GenerarCalendario {
     protected LocalDate fechaBase;
     protected DateTimeFormatter fecha_tipo = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     protected int cantidad_partidos;
     protected String fechaBase_string;
     protected ArrayList<LocalDate> fechas_partidos;
 
-    public GenerarCalendario(LocalDate comienzo){
+    public GenerarCalendario(LocalDate comienzo, int cant_contrincantes, FORMATO formato){
         fechaBase_string = comienzo.format(fecha_tipo);
         fechaBase = LocalDate.parse(fechaBase_string, fecha_tipo);
+        cantidad_partidos = generarCantidadPartidos(formato, cant_contrincantes);
+        fechas_partidos = generarFechasPartidos(cantidad_partidos, fechaBase);
 
     }
 
@@ -25,17 +28,17 @@ public abstract class GenerarCalendario {
         return fechaspropuestas;
     }
 
-    protected int generarCantidadPartidos(FORMATO formato, int equipos) {
+    protected int generarCantidadPartidos(FORMATO formato, int contrincantes) {
         int resultado = 0;
         switch (formato){
             case FORMATO.LIGASIMPLE:
-                resultado = (equipos * (equipos - 1))/2;
+                resultado = (contrincantes * (contrincantes - 1))/2;
                 break;
             case FORMATO.CAMPEONATO:
-                if ((equipos % 2) == 0) {
-                    resultado = equipos - 1;
+                if ((contrincantes % 2) == 0) {
+                    resultado = contrincantes - 1;
                 } else {
-                    int totalEquipos = equipos;
+                    int totalEquipos = contrincantes;
                     while (totalEquipos > 1) {
                         int partidos = totalEquipos / 2;
                         int pasodirecto = totalEquipos % 2;
