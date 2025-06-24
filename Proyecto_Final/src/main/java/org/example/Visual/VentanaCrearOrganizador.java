@@ -1,7 +1,12 @@
 package org.example.Visual;
 
+import org.example.Logica.FORMATO;
+import org.example.Logica.TIPOPARTICIPANTES;
+import org.example.Logica.Torneo;
+
 import javax.swing.*;
 import java.awt.*;
+import java.text.Normalizer;
 
 public class VentanaCrearOrganizador extends JFrame {
 
@@ -230,8 +235,34 @@ public class VentanaCrearOrganizador extends JFrame {
         info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
 
         JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
+/*
+        FORMATO tipo;
+        if (cbFormato.getSelectedItem() == "Eliminatoria Directa"){
+            tipo = FORMATO.CAMPEONATO;
+        } else {
+            tipo = FORMATO.LIGASIMPLE;
+        }
 
+        TIPOPARTICIPANTES participa;
+        switch (cbDisciplina.getSelectedItem()){
+            case ("Fútbol", "Baloncesto", "Tenis", "Volleyball",
+                 "Ping Pong", "Natación", "Atletismo",
+                 "Ciclismo", "Rugby", "Bádminton", "Boxeo")
+                participa = TIPOPARTICIPANTES.ENEQUIPOS;
+                break;
+            case ("Ajedrez")
+                participa = TIPOPARTICIPANTES.INDIVIDUAL;
+                break;
+
+
+
+        }
+
+        Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem())
+        */
+        
         // Limpiar formulario después de crear
+
         limpiarFormulario();
     }
 
