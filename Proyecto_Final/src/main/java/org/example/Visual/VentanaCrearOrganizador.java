@@ -68,9 +68,7 @@ public class VentanaCrearOrganizador extends JFrame {
         gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
         String[] disciplinas = {
                 "Seleccionar disciplina...",
-                "Fútbol", "Baloncesto", "Tenis", "Volleyball",
-                "Ping Pong", "Ajedrez", "Natación", "Atletismo",
-                "Ciclismo", "Rugby", "Bádminton", "Boxeo"
+                "Fútbol", "Baloncesto", "Volleyball", "Ajedrez", "Rugby", "Boxeo"
         };
         cbDisciplina = new JComboBox<>(disciplinas);
         panelFormulario.add(cbDisciplina, gbc);
@@ -258,7 +256,7 @@ public class VentanaCrearOrganizador extends JFrame {
 
         }
 
-        Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem())
+        Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem(), LocalDate)
         */
         
         // Limpiar formulario después de crear
