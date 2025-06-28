@@ -40,4 +40,8 @@ public class TorneoBuilder {
         this.premiosTorneo = premios;
         return this;
     }
+
+    public Torneo build() {
+        return new Torneo(nombreTorneo, formatoTorneo, tipoParticipantes, comienzoTorneo);
+    }
 }
