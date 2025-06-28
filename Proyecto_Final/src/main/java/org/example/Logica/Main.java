@@ -26,7 +26,14 @@ public class Main {
 
         //GenerarCalendario c2 = new GenerarCalendarioEquipos(LocalDate.now(),participantes,FORMATO.CAMPEONATO);
 
-        Torneo torneo1 = new Torneo("ChampionsLeague", FORMATO.CAMPEONATO, TIPOPARTICIPANTES.ENEQUIPOS, LocalDate.now());
+        Torneo torneo1 = new TorneoBuilder() //aplicacion del Builder
+                .conNombre("Campeonato del KFC")
+                .conFormato(FORMATO.CAMPEONATO)
+                .conTipoParticipantes(TIPOPARTICIPANTES.ENEQUIPOS)
+                .conFechaInicio(LocalDate.now())
+                .conLugar("Cancha UdeC")
+                .build();
+
 
         torneo1.addParticipantes(kfc1);
         torneo1.addParticipantes(kfc2);
