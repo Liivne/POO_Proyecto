@@ -258,7 +258,9 @@ public class VentanaCrearOrganizador extends JFrame {
 
         Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem(), LocalDate)
         */
-        
+
+        //editor.addTorneo(torneo en forma de TorneoBuilder)
+
         // Limpiar formulario después de crear
 
         limpiarFormulario();
