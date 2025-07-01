@@ -3,10 +3,14 @@ package org.example.Visual;
 import org.example.Logica.FORMATO;
 import org.example.Logica.TIPOPARTICIPANTES;
 import org.example.Logica.Torneo;
+import org.example.Logica.TorneoBuilder;
 
 import javax.swing.*;
 import java.awt.*;
 import java.text.Normalizer;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Set;
 
 public class VentanaCrearOrganizador extends JFrame {
 
@@ -56,16 +60,24 @@ public class VentanaCrearOrganizador extends JFrame {
         gbc.anchor = GridBagConstraints.WEST;
 
         // Nombre del torneo
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         panelFormulario.add(crearEtiqueta("Nombre del Torneo:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         txtNombreTorneo = new JTextField(20);
         panelFormulario.add(txtNombreTorneo, gbc);
 
         // Disciplina
-        gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Disciplina:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         String[] disciplinas = {
                 "Seleccionar disciplina...",
                 "Fútbol", "Baloncesto", "Volleyball", "Ajedrez", "Rugby", "Boxeo"
@@ -74,16 +86,26 @@ public class VentanaCrearOrganizador extends JFrame {
         panelFormulario.add(cbDisciplina, gbc);
 
         // Lugar
-        gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Lugar:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         txtLugar = new JTextField(20);
         panelFormulario.add(txtLugar, gbc);
 
         // Fecha
-        gbc.gridx = 0; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Fecha de inicio:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
 
         // Configurar spinner de fecha
         SpinnerDateModel modeloFecha = new SpinnerDateModel();
@@ -93,9 +115,14 @@ public class VentanaCrearOrganizador extends JFrame {
         panelFormulario.add(spnFecha, gbc);
 
         // Formato del torneo
-        gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Formato:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         String[] formatos = {
                 "Seleccionar formato...",
                 "Eliminatoria Directa",
@@ -105,25 +132,41 @@ public class VentanaCrearOrganizador extends JFrame {
         panelFormulario.add(cbFormato, gbc);
 
         // Máximo de participantes
-        gbc.gridx = 0; gbc.gridy = 5; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Máx. Participantes:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         spnMaxParticipantes = new JSpinner(new SpinnerNumberModel(16, 4, 256, 1));
         panelFormulario.add(spnMaxParticipantes, gbc);
 
         // Premio
-        gbc.gridx = 0; gbc.gridy = 6; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         panelFormulario.add(crearEtiqueta("Premio:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL; gbc.weightx = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
         txtPremio = new JTextField(20);
         txtPremio.setToolTipText("Ej: $500, Trofeo, Medalla de oro, etc.");
         panelFormulario.add(txtPremio, gbc);
 
         // Descripción
-        gbc.gridx = 0; gbc.gridy = 7; gbc.fill = GridBagConstraints.NONE; gbc.weightx = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         panelFormulario.add(crearEtiqueta("Descripción:"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.BOTH; gbc.weightx = 1.0; gbc.weighty = 1.0;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
         txtDescripcion = new JTextArea(4, 20);
         txtDescripcion.setLineWrap(true);
         txtDescripcion.setWrapStyleWord(true);
@@ -132,8 +175,13 @@ public class VentanaCrearOrganizador extends JFrame {
         panelFormulario.add(scrollDescripcion, gbc);
 
         // Checkbox inscripción abierta
-        gbc.gridx = 0; gbc.gridy = 8; gbc.gridwidth = 2; gbc.fill = GridBagConstraints.NONE;
-        gbc.weightx = 0; gbc.weighty = 0; gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
         chkInscripcionAbierta = new JCheckBox("Inscripción abierta inmediatamente");
         chkInscripcionAbierta.setSelected(true);
         chkInscripcionAbierta.setBackground(Color.WHITE);
@@ -196,6 +244,7 @@ public class VentanaCrearOrganizador extends JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 boton.setBackground(colorHover);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 boton.setBackground(color);
             }
@@ -205,6 +254,65 @@ public class VentanaCrearOrganizador extends JFrame {
     }
 
     private void crearTorneo() {
+        if (txtNombreTorneo.getText().trim().isEmpty()) {
+            mostrarError("Por favor ingrese el nombre del torneo.");
+            return;
+        }
+        if (cbDisciplina.getSelectedIndex() == 0) {
+            mostrarError("Por favor seleccione una disciplina.");
+            return;
+        }
+        if (cbFormato.getSelectedIndex() == 0) {
+            mostrarError("Por favor seleccione un formato de torneo.");
+            return;
+        }
+
+        try {
+            String formatoSeleccionado = (String) cbFormato.getSelectedItem();
+            FORMATO formato = formatoSeleccionado.equalsIgnoreCase("Eliminatoria Directa")
+                    ? FORMATO.CAMPEONATO
+                    : FORMATO.LIGASIMPLE;
+
+            String disciplina = (String) cbDisciplina.getSelectedItem();
+            Set<String> deportesEquipo = Set.of("Fútbol", "Baloncesto", "Tenis", "Volleyball",
+                    "Ping Pong", "Natación", "Atletismo",
+                    "Ciclismo", "Rugby", "Bádminton", "Boxeo");
+
+            TIPOPARTICIPANTES tipo = deportesEquipo.contains(disciplina)
+                    ? TIPOPARTICIPANTES.ENEQUIPOS
+                    : TIPOPARTICIPANTES.INDIVIDUAL;
+
+            java.util.Date fecha = (java.util.Date) spnFecha.getValue();
+            LocalDate fechaInicio = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            //creacion de Torneo con Builder
+            Torneo torneo = new TorneoBuilder()
+                    .conNombre(txtNombreTorneo.getText().trim())
+                    .conFormato(formato)
+                    .conTipoParticipantes(tipo)
+                    .conFechaInicio(fechaInicio)
+                    .build();
+
+            StringBuilder info = new StringBuilder();
+            info.append("¡Torneo creado exitosamente!\n\n");
+            info.append("Nombre: ").append(torneo.getNombreTorneo()).append("\n");
+            info.append("Disciplina: ").append(disciplina).append("\n");
+            info.append("Lugar: ").append(txtLugar.getText().isEmpty() ? "No especificado" : txtLugar.getText()).append("\n");
+            info.append("Formato: ").append(formatoSeleccionado).append("\n");
+            info.append("Máx. Participantes: ").append(spnMaxParticipantes.getValue()).append("\n");
+            info.append("Premio: ").append(txtPremio.getText().isEmpty() ? "No especificado" : txtPremio.getText()).append("\n");
+            info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
+
+            JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
+
+            limpiarFormulario();
+
+        } catch (Exception ex) {
+            mostrarError("Error al crear el torneo: " + ex.getMessage());
+        }
+    }
+
+   /* private void crearTorneo() {
         // Validaciones básicas
         if (txtNombreTorneo.getText().trim().isEmpty()) {
             mostrarError("Por favor ingrese el nombre del torneo.");
@@ -257,14 +365,14 @@ public class VentanaCrearOrganizador extends JFrame {
         }
 
         Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem(), LocalDate)
-        */
 
-        //editor.addTorneo(torneo en forma de TorneoBuilder)
 
-        // Limpiar formulario después de crear
+    //editor.addTorneo(torneo en forma de TorneoBuilder)
 
-        limpiarFormulario();
-    }
+    // Limpiar formulario después de crear
+
+    limpiarFormulario();
+} */
 
     private void limpiarFormulario() {
         txtNombreTorneo.setText("");
