@@ -6,16 +6,14 @@ import java.util.List;
 
 public class Editor {
     public EventManager events;
-    public List<TorneoBuilder> Torneos;
+    public List<Torneo> torneos;
 
     public Editor() {
         this.events = new EventManager("open", "save");
-        Torneos = new ArrayList<TorneoBuilder>();
+        this.torneos = new ArrayList<>();
     }
 
-    public void addTorneo(TorneoBuilder torneo){
-    Torneos.add(torneo);
+    public void addTorneo(Torneo torneo){
+        torneos.add(torneo);
     }
-
-
 }
