@@ -8,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the final proyect!");
 
+        LoginPersonas iniciosesion = new LoginPersonas();
+
         //Implementación del factory method (aplicado de manera simplificada)
         Participantes kfc1 = ParticipanteFactory.crearParticipante(TIPOPARTICIPANTES.ENEQUIPOS, "KFC1", "KFC1@gmail.com");
         Participantes kfc2 = ParticipanteFactory.crearParticipante(TIPOPARTICIPANTES.ENEQUIPOS, "KFC2", "KFC2@gmail.com");

@@ -329,19 +329,6 @@ public class VentanaCrearOrganizador extends JFrame {
             return;
         }
 
-        // Mostrar información del torneo creado (prototipo)
-        StringBuilder info = new StringBuilder();
-        info.append("¡Torneo creado exitosamente!\n\n");
-        info.append("Nombre: ").append(txtNombreTorneo.getText()).append("\n");
-        info.append("Disciplina: ").append(cbDisciplina.getSelectedItem()).append("\n");
-        info.append("Lugar: ").append(txtLugar.getText().isEmpty() ? "No especificado" : txtLugar.getText()).append("\n");
-        info.append("Formato: ").append(cbFormato.getSelectedItem()).append("\n");
-        info.append("Máx. Participantes: ").append(spnMaxParticipantes.getValue()).append("\n");
-        info.append("Premio: ").append(txtPremio.getText().isEmpty() ? "No especificado" : txtPremio.getText()).append("\n");
-        info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
-
-        JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
-/*
         FORMATO tipo;
         if (cbFormato.getSelectedItem() == "Eliminatoria Directa"){
             tipo = FORMATO.CAMPEONATO;
@@ -360,14 +347,27 @@ public class VentanaCrearOrganizador extends JFrame {
                 participa = TIPOPARTICIPANTES.INDIVIDUAL;
                 break;
 
-
-
         }
 
         Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem(), LocalDate)
 
 
-    //editor.addTorneo(torneo en forma de TorneoBuilder)
+        //editor.addTorneo(Torneo)
+
+        // Mostrar información del torneo creado (prototipo)
+        StringBuilder info = new StringBuilder();
+        info.append("¡Torneo creado exitosamente!\n\n");
+        info.append("Nombre: ").append(txtNombreTorneo.getText()).append("\n");
+        info.append("Disciplina: ").append(cbDisciplina.getSelectedItem()).append("\n");
+        info.append("Lugar: ").append(txtLugar.getText().isEmpty() ? "No especificado" : txtLugar.getText()).append("\n");
+        info.append("Formato: ").append(cbFormato.getSelectedItem()).append("\n");
+        info.append("Máx. Participantes: ").append(spnMaxParticipantes.getValue()).append("\n");
+        info.append("Premio: ").append(txtPremio.getText().isEmpty() ? "No especificado" : txtPremio.getText()).append("\n");
+        info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
+
+        JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
+/*
+
 
     // Limpiar formulario después de crear
 
