@@ -57,4 +57,12 @@ public class Torneo {
     public String getNombreTorneo() {
         return nombreTorneo;
     }
+
+    public FORMATO getFormatoTorneo() {
+        return formatoTorneo;
+    }
+
+    public TIPOPARTICIPANTES getTipoParticipantes() {
+        return tipoParticipantes;
+    }
 }
