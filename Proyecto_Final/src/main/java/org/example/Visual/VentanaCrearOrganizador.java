@@ -1,9 +1,6 @@
 package org.example.Visual;
 
-import org.example.Logica.FORMATO;
-import org.example.Logica.TIPOPARTICIPANTES;
-import org.example.Logica.Torneo;
-import org.example.Logica.TorneoBuilder;
+import org.example.Logica.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +21,10 @@ public class VentanaCrearOrganizador extends JFrame {
     private JTextArea txtDescripcion;
     private JTextField txtPremio;
     private JCheckBox chkInscripcionAbierta;
+    private Editor editor;
 
-    public VentanaCrearOrganizador() {
+    public VentanaCrearOrganizador() { //Debería pedir como parámetro a Editor?
+        //this.editor = editor; ???
         initComponents();
         setupWindow();
     }
@@ -269,18 +268,24 @@ public class VentanaCrearOrganizador extends JFrame {
 
         try {
             String formatoSeleccionado = (String) cbFormato.getSelectedItem();
-            FORMATO formato = formatoSeleccionado.equalsIgnoreCase("Eliminatoria Directa")
-                    ? FORMATO.CAMPEONATO
-                    : FORMATO.LIGASIMPLE;
+            FORMATO formato;
+            if (formatoSeleccionado.equalsIgnoreCase("Eliminatoria Directa")) {
+                formato = FORMATO.CAMPEONATO;
+            } else {
+                formato = FORMATO.LIGASIMPLE;
+            }
 
             String disciplina = (String) cbDisciplina.getSelectedItem();
             Set<String> deportesEquipo = Set.of("Fútbol", "Baloncesto", "Tenis", "Volleyball",
                     "Ping Pong", "Natación", "Atletismo",
                     "Ciclismo", "Rugby", "Bádminton", "Boxeo");
 
-            TIPOPARTICIPANTES tipo = deportesEquipo.contains(disciplina)
-                    ? TIPOPARTICIPANTES.ENEQUIPOS
-                    : TIPOPARTICIPANTES.INDIVIDUAL;
+            TIPOPARTICIPANTES tipo;
+            if (deportesEquipo.contains(disciplina)) {
+                tipo = TIPOPARTICIPANTES.ENEQUIPOS;
+            } else {
+                tipo = TIPOPARTICIPANTES.INDIVIDUAL;
+            }
 
             java.util.Date fecha = (java.util.Date) spnFecha.getValue();
             LocalDate fechaInicio = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -292,6 +297,8 @@ public class VentanaCrearOrganizador extends JFrame {
                     .conTipoParticipantes(tipo)
                     .conFechaInicio(fechaInicio)
                     .build();
+            //agregar torneo al editor
+            editor.addTorneo(torneo);
 
             StringBuilder info = new StringBuilder();
             info.append("¡Torneo creado exitosamente!\n\n");
