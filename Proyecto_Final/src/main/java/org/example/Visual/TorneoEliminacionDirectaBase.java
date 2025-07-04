@@ -114,6 +114,7 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
 
     protected JButton[] crearBotonesRonda(int numBotones, boolean habilitado) {
         JButton[] botones = new JButton[numBotones];
+        // Para los equipos iniciales
         for (int i = 0; i < numBotones; i++) {
             botones[i] = new JButton(habilitado ? equiposIniciales[i] : "Esperando...");
             botones[i].setPreferredSize(new Dimension(180, 40));
@@ -202,12 +203,64 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     }
 
     // Métodos que pueden ser sobrescritos por las subclases
+    // Método principal para manejar la selección de equipos ganadores
     protected void manejarSeleccion(int ronda, int indice) {
         if (torneoConfirmado) return;
 
-        System.out.println("Selección en ronda " + ronda + ", índice " + indice);
-        // Aquí implementarías la lógica común de avance
-        // Las subclases pueden sobrescribir este método para lógica específica
+        System.out.println("Selección en ronda " + (ronda + 1) + ", equipo " + indice);
+
+        // Obtener el equipo ganador
+        JButton equipoGanador = botonesRondas.get(ronda)[indice];
+        String nombreGanador = equipoGanador.getText();
+
+        // Verificar que el equipo tiene nombre válido
+        if (nombreGanador.equals("Esperando...") || nombreGanador.trim().isEmpty()) {
+            return;
+        }
+
+        // Pasar el ganador a la siguiente ronda
+        pasarGanadorSiguienteRonda(ronda, indice, nombreGanador);
+
+        // Actualizar el estado del torneo
+        actualizarEstadoTorneo();
+    }
+
+    // Método para pasar el ganador a la siguiente ronda
+    protected void pasarGanadorSiguienteRonda(int ronda, int indice, String nombreGanador) {
+        // Verificar que existe una ronda siguiente
+        if (ronda + 1 >= botonesRondas.size()) {
+            return;
+        }
+
+        // Calcular la posición en la siguiente ronda
+        int enfrentamiento = indice / 2;
+        int posicionSiguienteRonda = enfrentamiento;
+
+        // Obtener los botones de la siguiente ronda
+        JButton[] siguienteRonda = botonesRondas.get(ronda + 1);
+
+        // Verificar que la posición es válida
+        if (posicionSiguienteRonda < siguienteRonda.length) {
+            // Asignar el ganador a la siguiente ronda
+            siguienteRonda[posicionSiguienteRonda].setText(nombreGanador);
+            siguienteRonda[posicionSiguienteRonda].setEnabled(true);
+            siguienteRonda[posicionSiguienteRonda].setBackground(Color.LIGHT_GRAY);
+            siguienteRonda[posicionSiguienteRonda].setForeground(Color.BLACK);
+        }
+    }
+
+    // Método para actualizar el estado del torneo
+    protected void actualizarEstadoTorneo() {
+        String[] nombresRondas = getNombresRondas();
+
+        for (int i = 0; i < labelsEstado.size(); i++) {
+            int rondaActual = i + 1; // Las rondas en labelsEstado empiezan desde la segunda
+            // int equiposCompletados = contarEquiposCompletados(rondaActual);
+            int totalEquipos = getNumeroEquipos() / (int)Math.pow(2, rondaActual);
+
+            // Actualizar el label de estado
+            labelsEstado.get(i).setText(nombresRondas[rondaActual]);
+        }
     }
 
     protected void confirmarTorneo() {
@@ -226,8 +279,8 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         labelCampeon.setText("Esperando campeón...");
 
         // Reiniciar primera ronda
-        if (botonesRondas.size() > 0) {
-            JButton[] primeraRonda = botonesRondas.get(0);
+        if (!botonesRondas.isEmpty()) {
+            JButton[] primeraRonda = botonesRondas.getFirst();
             for (int i = 0; i < equiposIniciales.length && i < primeraRonda.length; i++) {
                 primeraRonda[i].setText(equiposIniciales[i]);
                 primeraRonda[i].setEnabled(true);
@@ -251,6 +304,9 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
             int equiposPorRonda = getNumeroEquipos() / (int)Math.pow(2, i + 1);
             labelsEstado.get(i).setText("<html><center>" + nombresRondas[i + 1] + "<br>0/" + equiposPorRonda + "</center></html>");
         }
+    }
+
+    protected void pasarSiguienteRonda(){
     }
 
     // Getters para acceso externo
@@ -451,8 +507,13 @@ class TestTorneos {
             }
 
             // Crear diferentes tipos de torneo
-            new Torneo8Equipos().setVisible(true);
-            new Torneo4Equipos().setVisible(true);
+            //new Torneo8Equipos().setVisible(true);
+            new Torneo16Equipos().setVisible(true);
         });
     }
 }
+/** Nota: Para hacer esta clase mas robusta se podría hacer que no dejara confirmar
+ * hasta que el torneo esté lleno
+ *
+ * También tira excepción al manejar los  resultados, hay que ver eso
+ */
