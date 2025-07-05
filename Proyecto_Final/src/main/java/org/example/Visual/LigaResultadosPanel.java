@@ -30,7 +30,7 @@ public class LigaResultadosPanel extends JPanel {
             @Override
             public boolean isCellEditable(int row, int col) {
                 // Solo editable si no es la diagonal principal (mismo equipo)
-                return row != col && col > 0;
+                return row != col - 1 && col > 0;
             }
 
             @Override
@@ -288,3 +288,10 @@ public class LigaResultadosPanel extends JPanel {
         });
     }
 }
+/** Esta pestaña gestiona torneos todos contra todos de ida y vuelta
+ *  podría hacerse otra similar solo para vuelta
+ *
+ *  Falta gestionar que es lo que pasa cuando faltan equipos, no debería estar permitido
+ *  inicializar el torneo hasta que estén todos los equipos propuestos al ocupar crearTorneo
+ *
+ */

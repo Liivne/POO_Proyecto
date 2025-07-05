@@ -404,8 +404,3 @@ public class VentanaCrearTorneo extends JFrame {
         });
     }
 }
-/** Hay que arreglar un bug que permite que los equipos puedan jugar dos veces, este
- * formato es de solo una vuelta (si hay tiempo se podría evaluar hacer un torneo de dos vueltas)
- *
- *
- */
