@@ -7,6 +7,8 @@ import java.awt.*;
 import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class VentanaCrearTorneo extends JFrame {
@@ -23,8 +25,19 @@ public class VentanaCrearTorneo extends JFrame {
     private JCheckBox chkInscripcionAbierta;
     private Editor editor;
 
+    //Componentes para equipos
+    private JTextField txtNombreEquipo;
+    private JTextField txtContactoEquipo;
+    private JButton btnAgregarEquipo;
+    private JList<Equipo> listaEquipos;
+    private DefaultListModel<Equipo> modeloListaEquipos;
+    private JButton btnEliminarEquipo;
+    private ArrayList<Equipo> equiposParticipantes;
+
+
     public VentanaCrearTorneo() { //Debería pedir como parámetro a Editor?
         //this.editor = editor; ???
+        this.equiposParticipantes = new ArrayList<>();
         initComponents();
         setupWindow();
     }
@@ -187,6 +200,51 @@ public class VentanaCrearTorneo extends JFrame {
         chkInscripcionAbierta.setBackground(Color.WHITE);
         panelFormulario.add(chkInscripcionAbierta, gbc);
 
+        //Panel para agregar equipos
+        JPanel panelEquipos = new JPanel(new BorderLayout());
+        panelEquipos.setBorder(BorderFactory.createTitledBorder("Equipos participantes"));
+        panelEquipos.setBackground(Color.WHITE);
+
+        //Panel para agregar nuevo equipo
+        JPanel panelNuevoEquipo = new JPanel(new GridLayout(0, 2, 5, 5));
+        panelNuevoEquipo.setBackground(Color.WHITE);
+
+        panelNuevoEquipo.add(new JLabel("Nombre del equipo:"));
+        txtNombreEquipo = new JTextField();
+        panelNuevoEquipo.add(txtNombreEquipo);
+
+        panelNuevoEquipo.add(new JLabel("Contacto:"));
+        txtContactoEquipo = new JTextField();
+        panelNuevoEquipo.add(txtContactoEquipo);
+
+        btnAgregarEquipo = new JButton("Agregar equipo");
+        btnAgregarEquipo.addActionListener(e -> agregarEquipo());
+        panelNuevoEquipo.add(btnAgregarEquipo);
+
+        btnEliminarEquipo = new JButton("Eliminar seleccionado");
+        btnEliminarEquipo.addActionListener(e -> eliminarEquipo());
+        panelNuevoEquipo.add(btnEliminarEquipo);
+
+        //Lista de equipos
+        modeloListaEquipos = new DefaultListModel<>();
+        listaEquipos = new JList<>(modeloListaEquipos);
+        listaEquipos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollEquipos = new JScrollPane(listaEquipos);
+
+        panelEquipos.add(panelNuevoEquipo, BorderLayout.NORTH);
+        panelEquipos.add(scrollEquipos, BorderLayout.CENTER);
+
+        //Agregar el panel de equipos al formulario principal
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.insets = new Insets(10, 0, 10, 0);
+        panelFormulario.add(panelEquipos, gbc);
+
         // Panel de botones
         JPanel panelBotones = new JPanel(new FlowLayout());
         panelBotones.setOpaque(false);
@@ -252,6 +310,39 @@ public class VentanaCrearTorneo extends JFrame {
         return boton;
     }
 
+    private void agregarEquipo() {
+        String nombre = txtNombreEquipo.getText().trim();
+        String contacto = txtContactoEquipo.getText().trim();
+
+        if (nombre.isEmpty()) {
+            mostrarError("Por favor ingrese el nombre del equipo");
+            return;
+        }
+
+        if (contacto.isEmpty()) {
+            mostrarError("ingrese un contacto para el equipo");
+            return;
+        }
+
+        Equipo nuevoEquipo = new Equipo(nombre, contacto);
+        equiposParticipantes.add(nuevoEquipo);
+        modeloListaEquipos.addElement(nuevoEquipo);
+
+        txtNombreEquipo.setText("");
+        txtContactoEquipo.setText("");
+    }
+
+    private void eliminarEquipo() {
+        int selectedIndex = listaEquipos.getSelectedIndex();
+        if (selectedIndex != -1) {
+            Equipo equipoAEliminar = modeloListaEquipos.getElementAt(selectedIndex);
+            equiposParticipantes.remove(equipoAEliminar);
+            modeloListaEquipos.remove(selectedIndex);
+        } else {
+            mostrarError("Por favor seleccione un equipo para eliminar");
+        }
+    }
+
     private void crearTorneo() {
         if (txtNombreTorneo.getText().trim().isEmpty()) {
             mostrarError("Por favor ingrese el nombre del torneo.");
@@ -297,6 +388,10 @@ public class VentanaCrearTorneo extends JFrame {
                     .conTipoParticipantes(tipo)
                     .conFechaInicio(fechaInicio)
                     .build();
+            //agregar equipos al torneo
+            for (Equipo equipo : equiposParticipantes) {
+                torneo.addParticipantes(equipo);
+            }
             //agregar torneo al editor
             editor.addTorneo(torneo);
 
@@ -318,68 +413,6 @@ public class VentanaCrearTorneo extends JFrame {
             mostrarError("Error al crear el torneo: " + ex.getMessage());
         }
     }
-
-   /* private void crearTorneo() {
-        // Validaciones básicas
-        if (txtNombreTorneo.getText().trim().isEmpty()) {
-            mostrarError("Por favor ingrese el nombre del torneo.");
-            return;
-        }
-
-        if (cbDisciplina.getSelectedIndex() == 0) {
-            mostrarError("Por favor seleccione una disciplina.");
-            return;
-        }
-
-        if (cbFormato.getSelectedIndex() == 0) {
-            mostrarError("Por favor seleccione un formato de torneo.");
-            return;
-        }
-
-        FORMATO tipo;
-        if (cbFormato.getSelectedItem() == "Eliminatoria Directa"){
-            tipo = FORMATO.CAMPEONATO;
-        } else {
-            tipo = FORMATO.LIGASIMPLE;
-        }
-
-        TIPOPARTICIPANTES participa;
-        switch (cbDisciplina.getSelectedItem()){
-            case ("Fútbol", "Baloncesto", "Tenis", "Volleyball",
-                 "Ping Pong", "Natación", "Atletismo",
-                 "Ciclismo", "Rugby", "Bádminton", "Boxeo")
-                participa = TIPOPARTICIPANTES.ENEQUIPOS;
-                break;
-            case ("Ajedrez")
-                participa = TIPOPARTICIPANTES.INDIVIDUAL;
-                break;
-
-        }
-
-        Torneo = new Torneo(txtNombreTorneo.getText(),cbFormato.getSelectedItem(), cbDisciplina.getSelectedItem(), LocalDate)
-
-
-        //editor.addTorneo(Torneo)
-
-        // Mostrar información del torneo creado (prototipo)
-        StringBuilder info = new StringBuilder();
-        info.append("¡Torneo creado exitosamente!\n\n");
-        info.append("Nombre: ").append(txtNombreTorneo.getText()).append("\n");
-        info.append("Disciplina: ").append(cbDisciplina.getSelectedItem()).append("\n");
-        info.append("Lugar: ").append(txtLugar.getText().isEmpty() ? "No especificado" : txtLugar.getText()).append("\n");
-        info.append("Formato: ").append(cbFormato.getSelectedItem()).append("\n");
-        info.append("Máx. Participantes: ").append(spnMaxParticipantes.getValue()).append("\n");
-        info.append("Premio: ").append(txtPremio.getText().isEmpty() ? "No especificado" : txtPremio.getText()).append("\n");
-        info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
-
-        JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
-/*
-
-
-    // Limpiar formulario después de crear
-
-    limpiarFormulario();
-} */
 
     private void limpiarFormulario() {
         txtNombreTorneo.setText("");

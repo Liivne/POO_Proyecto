@@ -10,6 +10,7 @@ public class Equipo extends Participantes {
     public Equipo(String nombre, String contacto){
         super(nombre, contacto);
         this.integrantes = new ArrayList<>();
+        this.nombre = nombre;
     }
 
     public String getNombreEquipo() {
@@ -35,6 +36,11 @@ public class Equipo extends Participantes {
     
     public int size(){
         return integrantes.size();
+    }
+
+    @Override
+    public String toString() {
+        return getNombreEquipo() + " (" + getContacto() + ")";
     }
 
     public String getTipo() {
