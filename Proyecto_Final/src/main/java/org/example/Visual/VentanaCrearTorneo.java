@@ -129,6 +129,7 @@ public class VentanaCrearTorneo extends JFrame {
         };
         cbFormato = new JComboBox<>(formatos);
         panelFormulario.add(cbFormato, gbc);
+        cbFormato.addActionListener(e -> actualizarMaxParticipantes());
 
         // Máximo de participantes
         gbc.gridx = 0;
@@ -218,6 +219,17 @@ public class VentanaCrearTorneo extends JFrame {
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void actualizarMaxParticipantes() {
+        String formatoSeleccionado = (String) cbFormato.getSelectedItem();
+
+        if ("Eliminatoria Directa".equalsIgnoreCase(formatoSeleccionado)) {
+            spnMaxParticipantes.setModel(new SpinnerListModel(new Integer[]{4, 8, 16}));
+            spnMaxParticipantes.setValue(4); // valor por defecto
+        } else {
+            spnMaxParticipantes.setModel(new SpinnerNumberModel(2, 2, 100, 1));
+        }
     }
 
     private JLabel crearEtiqueta(String texto) {
