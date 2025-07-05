@@ -139,7 +139,7 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     }
 
     protected JLabel crearLabelEstado(String nombreRonda, int actual, int total) {
-        JLabel label = new JLabel("<html><center>" + nombreRonda + "<br>" + actual + "/" + total + "</center></html>");
+        JLabel label = new JLabel(nombreRonda + actual + "/" + total);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(BorderFactory.createEtchedBorder());
         return label;

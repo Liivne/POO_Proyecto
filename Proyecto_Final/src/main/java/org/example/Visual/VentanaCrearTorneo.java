@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Set;
 
-public class VentanaCrearOrganizador extends JFrame {
+public class VentanaCrearTorneo extends JFrame {
 
     // Componentes del formulario
     private JTextField txtNombreTorneo;
@@ -23,7 +23,7 @@ public class VentanaCrearOrganizador extends JFrame {
     private JCheckBox chkInscripcionAbierta;
     private Editor editor;
 
-    public VentanaCrearOrganizador() { //Debería pedir como parámetro a Editor?
+    public VentanaCrearTorneo() { //Debería pedir como parámetro a Editor?
         //this.editor = editor; ???
         initComponents();
         setupWindow();
@@ -237,18 +237,6 @@ public class VentanaCrearOrganizador extends JFrame {
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.setPreferredSize(new Dimension(120, 35));
 
-        // Efecto hover
-        Color colorHover = color.darker();
-        boton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(colorHover);
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(color);
-            }
-        });
-
         return boton;
     }
 
@@ -412,7 +400,12 @@ public class VentanaCrearOrganizador extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaCrearOrganizador().setVisible(true);
+            new VentanaCrearTorneo().setVisible(true);
         });
     }
 }
+/** Hay que arreglar un bug que permite que los equipos puedan jugar dos veces, este
+ * formato es de solo una vuelta (si hay tiempo se podría evaluar hacer un torneo de dos vueltas)
+ *
+ *
+ */
