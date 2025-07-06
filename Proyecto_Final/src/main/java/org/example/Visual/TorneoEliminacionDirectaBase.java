@@ -515,4 +515,6 @@ class TestTorneos {
 /** Nota: Para hacer esta clase mas robusta se podría hacer que no dejara confirmar
  * hasta que el torneo esté lleno
  *
+ * Hay problemas para confirmar y definir un ganador
+ *
  */

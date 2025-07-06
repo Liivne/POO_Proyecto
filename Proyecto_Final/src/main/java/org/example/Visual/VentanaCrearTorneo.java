@@ -35,8 +35,8 @@ public class VentanaCrearTorneo extends JFrame {
     private ArrayList<Equipo> equiposParticipantes;
 
 
-    public VentanaCrearTorneo() { //Debería pedir como parámetro a Editor?
-        //this.editor = editor; ???
+    public VentanaCrearTorneo() { //Debería pedir como parámetro a Editor? @liivne: si, el editor tiene una lista de torneos adminstrados por él, y al crear el torneo este se agrega a la lista
+        this.editor = editor;
         this.equiposParticipantes = new ArrayList<>();
         initComponents();
         setupWindow();

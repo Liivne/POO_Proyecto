@@ -41,7 +41,9 @@ public class VentanaAdministrarOrganizador extends JFrame {
         // new VentanaLiga().setVisible(true);
     }
     private void abrirVentanaCampeonato() {
-        // new VentanaCampeonato().setVisible(true);
+        // case torneo == torneo16
+        // v = new Torneo16Equipos
+        // v.setVisible(true);
     }
 
     // Método main para ejecutar la aplicación

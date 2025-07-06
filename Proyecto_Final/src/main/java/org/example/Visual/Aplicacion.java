@@ -1,4 +1,5 @@
-import org.example.Visual.VentanaPrincipal;
+import org.example.Visual.VentanaPrincipalEditor;
+
 import javax.swing.*;
 
 // Método main para ejecutar la aplicación
@@ -10,6 +11,6 @@ public static void main(String[] args) {
             e.printStackTrace();
         }
 
-        new VentanaPrincipal().setVisible(true);
+        new VentanaPrincipalEditor().setVisible(true);
     });
 }

@@ -3,9 +3,9 @@ package org.example.Visual;
 import javax.swing.*;
 import java.awt.*;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipalEditor extends JFrame {
 
-    public VentanaPrincipal() {
+    public VentanaPrincipalEditor() {
         initComponents();
         setupWindow();
     }
@@ -188,7 +188,7 @@ public class VentanaPrincipal extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaPrincipal().setVisible(true);
+            new VentanaPrincipalEditor().setVisible(true);
         });
     }
 }
