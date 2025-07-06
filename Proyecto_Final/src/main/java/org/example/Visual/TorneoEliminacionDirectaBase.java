@@ -207,8 +207,6 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     protected void manejarSeleccion(int ronda, int indice) {
         if (torneoConfirmado) return;
 
-        System.out.println("Selección en ronda " + (ronda + 1) + ", equipo " + indice);
-
         // Obtener el equipo ganador
         JButton equipoGanador = botonesRondas.get(ronda)[indice];
         String nombreGanador = equipoGanador.getText();
@@ -217,6 +215,8 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         if (nombreGanador.equals("Esperando...") || nombreGanador.trim().isEmpty()) {
             return;
         }
+
+        System.out.println("Selección en ronda " + (ronda + 1) + ", equipo " + nombreGanador);
 
         // Pasar el ganador a la siguiente ronda
         pasarGanadorSiguienteRonda(ronda, indice, nombreGanador);
@@ -259,7 +259,7 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
             int totalEquipos = getNumeroEquipos() / (int)Math.pow(2, rondaActual);
 
             // Actualizar el label de estado
-            labelsEstado.get(i).setText(nombresRondas[rondaActual]);
+            labelsEstado.get(i).setText(nombresRondas[rondaActual-1]);
         }
     }
 
@@ -515,5 +515,4 @@ class TestTorneos {
 /** Nota: Para hacer esta clase mas robusta se podría hacer que no dejara confirmar
  * hasta que el torneo esté lleno
  *
- * También tira excepción al manejar los  resultados, hay que ver eso
  */
