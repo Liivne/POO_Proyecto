@@ -1,11 +1,17 @@
 package org.example.Visual;
 
+import org.example.Logica.LoginPersonas;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class VentanaPrincipalEditor extends JFrame {
+public class VentanaPrincipal extends JFrame {
+    private LoginPersonas iniciosesion = new LoginPersonas();
+    private JTextField txtUsuario;
+    private JPasswordField txtContra;
 
-    public VentanaPrincipalEditor() {
+
+    public VentanaPrincipal() {
         initComponents();
         setupWindow();
     }
@@ -33,6 +39,46 @@ public class VentanaPrincipalEditor extends JFrame {
         subtitulo.setForeground(new Color(70, 70, 70));
         subtitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Panel de inicio de sesión
+        JPanel panelLogin = new JPanel();
+        panelLogin.setLayout(new GridBagLayout());
+        panelLogin.setOpaque(false); 
+        panelLogin.setMaximumSize(new Dimension(400, 120));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+        JLabel lblUsuario = new JLabel("Usuario:");
+        txtUsuario = new JTextField(20);
+
+        JLabel lblContra = new JLabel("Contraseña:");
+        txtContra = new JPasswordField(20);
+
+        JButton btnLogin = new JButton("Iniciar sesión");
+        btnLogin.addActionListener(e -> iniciarSesion());
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panelLogin.add(lblUsuario, gbc);
+
+        gbc.gridx = 1;
+        panelLogin.add(txtUsuario, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panelLogin.add(lblContra, gbc);
+
+        gbc.gridx = 1;
+        panelLogin.add(txtContra, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panelLogin.add(btnLogin, gbc);
+
+        /*
         // Panel para los botones principales
         JPanel panelBotones = new JPanel(new GridLayout(2, 1, 0, 20));
         panelBotones.setOpaque(false);
@@ -53,7 +99,7 @@ public class VentanaPrincipalEditor extends JFrame {
                 new Color(30, 144, 255),
                 new Color(25, 118, 210)
         );
-
+*/
         // Panel para botones secundarios
         JPanel panelSecundario = new JPanel(new FlowLayout());
         panelSecundario.setOpaque(false);
@@ -62,14 +108,14 @@ public class VentanaPrincipalEditor extends JFrame {
         JButton btnSalir = crearBotonSecundario("Salir");
 
         // Agregar ActionListeners (sin funcionalidad por ahora)
-        btnOrganizadores.addActionListener(e -> abrirVentanaOrganizador());
-        btnCompetidores.addActionListener(e -> abrirVentanaCompetidor());
+        //btnOrganizadores.addActionListener(e -> abrirVentanaOrganizador());
+        //btnCompetidores.addActionListener(e -> abrirVentanaCompetidor());
         btnAcerca.addActionListener(e -> mostrarAcercaDe());
         btnSalir.addActionListener(e -> System.exit(0));
 
         // Agregar componentes al panel de botones
-        panelBotones.add(btnOrganizadores);
-        panelBotones.add(btnCompetidores);
+        //panelBotones.add(btnOrganizadores);
+        //panelBotones.add(btnCompetidores);
 
         panelSecundario.add(btnAcerca);
         panelSecundario.add(Box.createHorizontalStrut(20));
@@ -80,7 +126,10 @@ public class VentanaPrincipalEditor extends JFrame {
         panelPrincipal.add(Box.createRigidArea(new Dimension(0, 10)));
         panelPrincipal.add(subtitulo);
         panelPrincipal.add(Box.createRigidArea(new Dimension(0, 50)));
-        panelPrincipal.add(panelBotones);
+        //panelPrincipal.add(panelBotones);
+        panelPrincipal.add(panelLogin);
+        panelPrincipal.add(Box.createRigidArea(new Dimension(0, 20)));
+
         panelPrincipal.add(Box.createRigidArea(new Dimension(0, 40)));
         panelPrincipal.add(panelSecundario);
 
@@ -158,6 +207,21 @@ public class VentanaPrincipalEditor extends JFrame {
         setResizable(false);
     }
 
+    private void iniciarSesion() {
+            String usuario = txtUsuario.getText();
+            String contra = new String(txtContra.getPassword());
+
+            if (iniciosesion.login(usuario, contra)) {
+                mostrarMensaje("Inicio de sesión como editor exitoso");
+                abrirVentanaOrganizador();
+            } else {
+                mostrarMensaje("Inicio de sesión como usuario exitoso");
+                abrirVentanaCompetidor();
+            }
+    }
+
+
+
     private void abrirVentanaOrganizador() {
         new VentanaAdministrarOrganizador().setVisible(true);
     }
@@ -188,7 +252,7 @@ public class VentanaPrincipalEditor extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaPrincipalEditor().setVisible(true);
+            new VentanaPrincipal().setVisible(true);
         });
     }
 }
