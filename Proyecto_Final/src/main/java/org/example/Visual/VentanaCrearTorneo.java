@@ -35,8 +35,8 @@ public class VentanaCrearTorneo extends JFrame {
     private ArrayList<Equipo> equiposParticipantes;
 
 
-    public VentanaCrearTorneo() { //Debería pedir como parámetro a Editor?
-        //this.editor = editor; ???
+    public VentanaCrearTorneo(Editor editor) { //Debería pedir como parámetro a Editor?
+        this.editor = editor;
         this.equiposParticipantes = new ArrayList<>();
         initComponents();
         setupWindow();
@@ -277,6 +277,11 @@ public class VentanaCrearTorneo extends JFrame {
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         add(scrollPane, BorderLayout.CENTER);
+
+        spnMaxParticipantes.addChangeListener(e -> {
+            int max = (int) spnMaxParticipantes.getValue();
+            btnAgregarEquipo.setEnabled(equiposParticipantes.size() < max);
+        });
     }
 
     private void actualizarMaxParticipantes() {
@@ -311,6 +316,13 @@ public class VentanaCrearTorneo extends JFrame {
     }
 
     private void agregarEquipo() {
+        int maxParticipant = (int) spnMaxParticipantes.getValue();
+
+        if (equiposParticipantes.size() > maxParticipant) {
+            mostrarError("No se pueden agregar más equipos. Límite: " + maxParticipant);
+            return;
+        }
+
         String nombre = txtNombreEquipo.getText().trim();
         String contacto = txtContactoEquipo.getText().trim();
 
@@ -330,6 +342,8 @@ public class VentanaCrearTorneo extends JFrame {
 
         txtNombreEquipo.setText("");
         txtContactoEquipo.setText("");
+
+        btnAgregarEquipo.setEnabled(equiposParticipantes.size() < maxParticipant);
     }
 
     private void eliminarEquipo() {
@@ -376,6 +390,14 @@ public class VentanaCrearTorneo extends JFrame {
                 tipo = TIPOPARTICIPANTES.ENEQUIPOS;
             } else {
                 tipo = TIPOPARTICIPANTES.INDIVIDUAL;
+            }
+
+            int maxParticipantes = (int) spnMaxParticipantes.getValue();
+            int participantesRegistrados = equiposParticipantes.size();
+
+            if (participantesRegistrados != maxParticipantes) {
+                mostrarError("Debe registrar" + maxParticipantes + "equipos.");
+                return;
             }
 
             java.util.Date fecha = (java.util.Date) spnFecha.getValue();
@@ -445,7 +467,7 @@ public class VentanaCrearTorneo extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaCrearTorneo().setVisible(true);
+            new VentanaCrearTorneo(new Editor("Ganon", "Gerudo")).setVisible(true);
         });
     }
 }
