@@ -54,6 +54,10 @@ public class Torneo {
         calendario = new GenerarCalendario(comienzo,getListaParticipantes().size(),formatoTorneo);
     }
 
+    public GenerarCalendario getCalendario() {
+        return calendario;
+    }
+
     public String getNombreTorneo() {
         return nombreTorneo;
     }
