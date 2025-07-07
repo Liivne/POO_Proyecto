@@ -14,11 +14,11 @@ public class LoginPersonas {
     public boolean login(String usuario, String contra) {
         for (Editor editor : EditoresRegistrados) {
             if (editor.getUsuario().equals(usuario) && editor.getContra().equals(contra)) {
-                System.out.println("Inicio de sesión exitoso para: " + usuario);
+                System.out.println("Inicio de sesión como editor exitoso para: " + usuario);
                 return true;
             }
         }
-        System.out.println("Credenciales incorrectas para: " + usuario);
+        System.out.println("Credenciales no validas como editor: " + usuario);
         return false;
     }
 }
