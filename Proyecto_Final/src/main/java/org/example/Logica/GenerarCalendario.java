@@ -5,21 +5,44 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * La clase {@code GenerarCalendario} se encarga de generar un calendario
+ * de fechas para los partidos de un torneo, basado en la fecha de inicio,
+ * el número de participantes y el formato del torneo.
+ */
 public class GenerarCalendario {
     protected LocalDate fechaBase;
+    //Formato de la fecha en cadena ("dd/MM/yyyy").
     protected DateTimeFormatter fecha_tipo = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    //Cantidad total de partidos.
     protected int cantidad_partidos;
+    //Fecha inicio como cadena formateada.
     protected String fechaBase_string;
+    //Lista de fechas para los partidos.
     protected ArrayList<LocalDate> fechas_partidos;
 
+    /**
+     * Crea un nuevo {@code GenerarCalendario} generando automáticamente
+     * las fechas de los partidos según el formato y número de participantes.
+     *
+     * @param comienzo Fecha de inicio del torneo.
+     * @param cant_contrincantes Numero de participantes en el torneo.
+     * @param formato Formato del torneo (Liga Simple o Campeonato).
+     */
     public GenerarCalendario(LocalDate comienzo, int cant_contrincantes, FORMATO formato){
         fechaBase_string = comienzo.format(fecha_tipo);
         fechaBase = LocalDate.parse(fechaBase_string, fecha_tipo);
         cantidad_partidos = generarCantidadPartidos(formato, cant_contrincantes);
         fechas_partidos = generarFechasPartidos(cantidad_partidos, fechaBase);
-
     }
 
+    /**
+     * Genera las fechas de los partidos, cada 2 días desde la fecha de inicio.
+     *
+     * @param cantidadPartidos Número total de partidos a programar.
+     * @param fechainicio Fecha de inicio del torneo.
+     * @return Lista de fechas para cada partido.
+     */
     protected ArrayList<LocalDate> generarFechasPartidos(int cantidadPartidos, LocalDate fechainicio) {
         ArrayList<LocalDate> fechaspropuestas = new ArrayList<LocalDate>();
         for (int i = 0; i < 2*cantidadPartidos; i+=2) {
@@ -28,6 +51,13 @@ public class GenerarCalendario {
         return fechaspropuestas;
     }
 
+    /**
+     * Calcula el número total de partidos según el formato del torneo.
+     *
+     * @param formato Formato del torneo.
+     * @param contrincantes Número de participantes.
+     * @return Número total de partidos a programar.
+     */
     protected int generarCantidadPartidos(FORMATO formato, int contrincantes) {
         int resultado = 0;
         switch (formato){
