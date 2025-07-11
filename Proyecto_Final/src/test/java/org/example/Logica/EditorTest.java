@@ -8,7 +8,7 @@ public class EditorTest {
 
     @Test
     void agregarTorneos() {
-        Editor editor = new Editor("xXCarlosXx", "carlitos123", true);
+        Editor editor = new Editor("xXCarlosXx", "carlitos123");
         Torneo torneo = new TorneoBuilder()
                 .conNombre("Champions League")
                 .conFormato(FORMATO.CAMPEONATO)

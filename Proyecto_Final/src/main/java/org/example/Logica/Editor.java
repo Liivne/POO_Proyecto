@@ -17,10 +17,10 @@ public class Editor extends Usuarios{
      * @param nombre_usuario Nombre de nombre
      * @param contra Contraseña del nombre
      */
-    public Editor(String nombre_usuario, String contra, Boolean esEditor) {
+    public Editor(String nombre_usuario, String contra) {
         this.events = new EventManager("open", "save");
         this.torneos = new ArrayList<>();
-        super(nombre_usuario,contra,esEditor);
+        super(nombre_usuario,contra);
     }
 
     public void addTorneo(Torneo torneo){
