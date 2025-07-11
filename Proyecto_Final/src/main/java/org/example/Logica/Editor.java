@@ -8,33 +8,23 @@ import java.util.List;
  * Permite gestionar y editar los Torneos y manejar los eventos asociados
  */
 
-public class Editor {
-    private String usuario;
-    private String contra;
+public class Editor extends Usuarios{
     public EventManager events;
     public List<Torneo> torneos;
 
     /**
      * Crea un nuevo editor con credenciales específicas.
-     * @param usuario Nombre de usuario
-     * @param contra Contraseña del usuario
+     * @param nombre_usuario Nombre de nombre
+     * @param contra Contraseña del nombre
      */
-    public Editor(String usuario, String contra) {
+    public Editor(String nombre_usuario, String contra, Boolean esEditor) {
         this.events = new EventManager("open", "save");
         this.torneos = new ArrayList<>();
-        this.usuario = usuario;
-        this.contra = contra;
+        super(nombre_usuario,contra,esEditor);
     }
 
     public void addTorneo(Torneo torneo){
         torneos.add(torneo);
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public String getContra() {
-        return contra;
-    }
 }

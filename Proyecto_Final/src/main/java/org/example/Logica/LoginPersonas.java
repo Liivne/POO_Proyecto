@@ -10,14 +10,14 @@ import java.util.List;
  */
 public class LoginPersonas {
     private List<Editor> EditoresRegistrados = new ArrayList<>(); // Almacenaría usuarios, por simplicidad aquí es solo una lista
-
+    private List<UsuarioBasico> UsuariosBasicos = new ArrayList<>();
     /**
      * Crea una nueva instancia de {@code LoginPersonas} y
      * agrega algunos editores predefinidos para realizar pruebas.
      */
     public LoginPersonas(){
-        EditoresRegistrados.add(new Editor("Link", "Hyrule"));
-        EditoresRegistrados.add(new Editor("Ganon", "Gerudo"));
+        EditoresRegistrados.add(new Editor("Link", "Hyrule", true));
+        EditoresRegistrados.add(new Editor("Ganon", "Gerudo", true));
     }
 
     /**
@@ -30,12 +30,13 @@ public class LoginPersonas {
      */
     public boolean login(String usuario, String contra) {
         for (Editor editor : EditoresRegistrados) {
-            if (editor.getUsuario().equals(usuario) && editor.getContra().equals(contra)) {
+            if (editor.getNombre_Usuario().equals(usuario) && editor.getContra().equals(contra)) {
                 System.out.println("Inicio de sesión como editor exitoso para: " + usuario);
                 return true;
             }
         }
         System.out.println("Credenciales no validas como editor: " + usuario);
+
         return false;
     }
 }
