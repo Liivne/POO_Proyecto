@@ -1,17 +1,18 @@
 package org.example.Visual;
 
+import org.example.Logica.Editor;
 import org.example.Logica.LoginPersonas;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
-    // Usuario u = new Usuario(Nombre, Password);
-    // Usuario puede ser editor o usuarioParticipante
-    // Después, JTextField y JPassword son .toString de parámetros de usuario
     private LoginPersonas iniciosesion = new LoginPersonas();
     private JTextField txtUsuario;
     private JPasswordField txtContra;
+    // Usuario u = new Usuario(Nombre, Password);
+    // Usuario puede ser editor o usuarioParticipante
+    // Después, JTextField y JPassword son .toString de parámetros de usuario
 
 
     public VentanaPrincipal() {
@@ -216,7 +217,8 @@ public class VentanaPrincipal extends JFrame {
 
             if (iniciosesion.login(usuario, contra)) {
                 mostrarMensaje("Inicio de sesión como editor exitoso");
-                abrirVentanaOrganizador();
+                Editor e = new Editor(usuario, contra);
+                abrirVentanaOrganizador(e);
             } else {
                 mostrarMensaje("Inicio de sesión como usuario exitoso");
                 abrirVentanaCompetidor();
@@ -225,8 +227,10 @@ public class VentanaPrincipal extends JFrame {
 
 
 
-    private void abrirVentanaOrganizador() {
-        new VentanaAdministrarOrganizador().setVisible(true);
+    private void abrirVentanaOrganizador(Editor editor) {
+        VentanaAdministrarOrganizador ventana = new VentanaAdministrarOrganizador(editor);
+        ventana.setVisible(true);
+        this.dispose();
     }
     private void abrirVentanaCompetidor() {
         new VentanaCompetidor().setVisible(true);
@@ -237,10 +241,13 @@ public class VentanaPrincipal extends JFrame {
     }
 
     private void mostrarAcercaDe() {
-        String mensaje = "Sistema Organizador de Torneos v1.0\n\n" +
-                "Prototipo de aplicación para la gestión\n" +
-                "de torneos deportivos.\n\n" +
-                "Desarrollado con Java Swing";
+        String mensaje = """
+                Sistema Organizador de Torneos v1.0
+                
+                Prototipo de aplicación para la gestión
+                de torneos deportivos.
+                
+                Desarrollado con Java Swing""";
 
         JOptionPane.showMessageDialog(this, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
         // Esta pestaña podría ser usada como guía de uso

@@ -10,7 +10,8 @@ import static org.example.Logica.FORMATO.*;
 
 public class VentanaAdministrarOrganizador extends JFrame {
     private Editor editor;
-    public VentanaAdministrarOrganizador() {
+    public VentanaAdministrarOrganizador(Editor editor) {
+        this.editor = editor;
         initComponents();
         setupWindow();
         cargarDatosPrueba();
@@ -201,7 +202,7 @@ public class VentanaAdministrarOrganizador extends JFrame {
         panelInfo.setBackground(new Color(245, 245, 220));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Mi Información"));
 
-        JLabel lblNombre = new JLabel("Nombre: [Usuario no identificado]");
+        JLabel lblNombre = new JLabel("Nombre: " + editor.getNombre_Usuario());
         JLabel lblTorneosActivos = new JLabel("Torneos Activos: 0");
         JLabel lblTorneosCompletados = new JLabel("Torneos Completados: 0");
         JLabel lblVictorias = new JLabel("Victorias: 0");
@@ -262,6 +263,7 @@ public class VentanaAdministrarOrganizador extends JFrame {
 
     private void cargarDatosPrueba() {
         // Datos de prueba para torneos
+        // for(VentanaCrearTorneo(editor))
         modeloTorneos.addRow(new Object[]{"Copa Primavera 2025", "Fútbol", "15/07/2025", "Estadio Central", "Eliminatoria Directa", "12/16", "Inscripción Abierta", "$1000"});
         modeloTorneos.addRow(new Object[]{"Torneo Relámpago", "Ping Pong", "20/06/2025", "Club Deportivo", "Liga Simple", "6/8", "Inscripción Abierta", "Trofeo"});
         modeloTorneos.addRow(new Object[]{"Championship Basketball", "Baloncesto", "10/07/2025", "Polideportivo Norte", "Eliminatoria Doble", "8/16", "En Curso", "$500"});
@@ -343,8 +345,8 @@ public class VentanaAdministrarOrganizador extends JFrame {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            new VentanaAdministrarOrganizador().setVisible(true);
+            Editor e = new Editor("Link", "Hyrule");
+            new VentanaAdministrarOrganizador(e).setVisible(true);
         });
     }
 }
