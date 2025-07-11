@@ -1,4 +1,4 @@
-import org.example.Visual.VentanaPrincipalEditor;
+import org.example.Visual.VentanaPrincipal;
 
 import javax.swing.*;
 
@@ -11,6 +11,6 @@ public static void main(String[] args) {
             e.printStackTrace();
         }
 
-        new VentanaPrincipalEditor().setVisible(true);
+        new VentanaPrincipal().setVisible(true);
     });
 }

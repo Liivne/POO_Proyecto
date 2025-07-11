@@ -84,7 +84,6 @@ public class VentanaCompetidor extends JFrame {
         panelFiltros.add(cbFiltroEstado);
 
         JButton btnFiltrar = crearBotonPequeno("Filtrar", new Color(30, 144, 255));
-        btnFiltrar.addActionListener(e -> aplicarFiltros());
         panelFiltros.add(btnFiltrar);
 
         // Tabla de torneos
@@ -170,17 +169,10 @@ public class VentanaCompetidor extends JFrame {
 
         // Panel de botones para resultados
         JPanel panelBotonesResultados = new JPanel(new FlowLayout());
-        JButton btnVerBracket = crearBoton("Ver Bracket", new Color(138, 43, 226));
-        JButton btnDescargarResultados = crearBoton("Descargar PDF", new Color(220, 20, 60));
-        JButton btnCompartir = crearBoton("Compartir", new Color(32, 178, 170));
+        JButton btnVerResultados = crearBoton("Ver Resultados", new Color(138, 43, 226));
+        btnVerResultados .addActionListener(e -> verResultados());
 
-        btnVerBracket.addActionListener(e -> verBracket());
-        btnDescargarResultados.addActionListener(e -> descargarResultados());
-        btnCompartir.addActionListener(e -> compartirResultados());
-
-        panelBotonesResultados.add(btnVerBracket);
-        panelBotonesResultados.add(btnDescargarResultados);
-        panelBotonesResultados.add(btnCompartir);
+        panelBotonesResultados.add(btnVerResultados );
 
         panel.add(scrollResultados, BorderLayout.CENTER);
         panel.add(panelBotonesResultados, BorderLayout.SOUTH);
@@ -229,14 +221,6 @@ public class VentanaCompetidor extends JFrame {
 
         // Panel de botones
         JPanel panelBotonesMis = new JPanel(new FlowLayout());
-        JButton btnEditarPerfil = crearBoton("Editar Perfil", new Color(70, 130, 180));
-        JButton btnMisEstadisticas = crearBoton("Mis Estadísticas", new Color(255, 140, 0));
-
-        btnEditarPerfil.addActionListener(e -> editarPerfil());
-        btnMisEstadisticas.addActionListener(e -> verEstadisticas());
-
-        panelBotonesMis.add(btnEditarPerfil);
-        panelBotonesMis.add(btnMisEstadisticas);
 
         panel.add(panelInfo, BorderLayout.NORTH);
         panel.add(scrollPartidos, BorderLayout.CENTER);
@@ -335,33 +319,15 @@ public class VentanaCompetidor extends JFrame {
         JOptionPane.showMessageDialog(this, detalles.toString(), "Detalles del Torneo", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void aplicarFiltros() {
-        JOptionPane.showMessageDialog(this, "Filtros aplicados (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
 
     private void actualizarTorneos() {
         JOptionPane.showMessageDialog(this, "Lista de torneos actualizada", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void verBracket() {
+    private void verResultados() {
         JOptionPane.showMessageDialog(this, "Abriendo bracket del torneo (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void descargarResultados() {
-        JOptionPane.showMessageDialog(this, "Descargando resultados en PDF (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void compartirResultados() {
-        JOptionPane.showMessageDialog(this, "Compartiendo resultados (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void editarPerfil() {
-        JOptionPane.showMessageDialog(this, "Abriendo editor de perfil (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
-
-    private void verEstadisticas() {
-        JOptionPane.showMessageDialog(this, "Mostrando estadísticas personales (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
 
     private void setupWindow() {
         setSize(900, 650);

@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
+    // Usuario u = new Usuario(Nombre, Password);
+    // Usuario puede ser editor o usuarioParticipante
+    // Después, JTextField y JPassword son .toString de parámetros de usuario
     private LoginPersonas iniciosesion = new LoginPersonas();
     private JTextField txtUsuario;
     private JPasswordField txtContra;
