@@ -2,6 +2,7 @@ package org.example.Visual;
 
 import org.example.Logica.Editor;
 import org.example.Logica.LoginPersonas;
+import org.example.Logica.UsuarioBasico;
 
 import javax.swing.*;
 import java.awt.*;
@@ -221,7 +222,8 @@ public class VentanaPrincipal extends JFrame {
                 abrirVentanaOrganizador(e);
             } else {
                 mostrarMensaje("Inicio de sesión como usuario exitoso");
-                abrirVentanaCompetidor();
+                UsuarioBasico u = new UsuarioBasico(usuario, contra);
+                abrirVentanaCompetidor(u);
             }
     }
 
@@ -232,8 +234,10 @@ public class VentanaPrincipal extends JFrame {
         ventana.setVisible(true);
         this.dispose();
     }
-    private void abrirVentanaCompetidor() {
-        new VentanaCompetidor().setVisible(true);
+    private void abrirVentanaCompetidor(UsuarioBasico usuario) {
+        VentanaCompetidor ventana = new VentanaCompetidor(usuario);
+        ventana.setVisible(true);
+        this.dispose();
     }
 
     private void mostrarMensaje(String mensaje) {

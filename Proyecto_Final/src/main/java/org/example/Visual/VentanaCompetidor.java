@@ -1,11 +1,15 @@
 package org.example.Visual;
 
+import org.example.Logica.UsuarioBasico;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 
 public class VentanaCompetidor extends JFrame {
+
+    private UsuarioBasico usuario;
 
     // Componentes principales
     private JTabbedPane pestanas;
@@ -17,7 +21,8 @@ public class VentanaCompetidor extends JFrame {
     private JComboBox<String> cbFiltroDeporte;
     private JComboBox<String> cbFiltroEstado;
 
-    public VentanaCompetidor() {
+    public VentanaCompetidor(UsuarioBasico usuario) {
+        this.usuario = usuario;
         initComponents();
         setupWindow();
         cargarDatosPrueba();
@@ -190,7 +195,7 @@ public class VentanaCompetidor extends JFrame {
         panelInfo.setBackground(new Color(245, 245, 220));
         panelInfo.setBorder(BorderFactory.createTitledBorder("Mi Información"));
 
-        JLabel lblNombre = new JLabel("Nombre: [Usuario no identificado]");
+        JLabel lblNombre = new JLabel("Nombre: " + usuario.getNombre_Usuario());
         JLabel lblTorneosActivos = new JLabel("Torneos Activos: 0");
         JLabel lblTorneosCompletados = new JLabel("Torneos Completados: 0");
         JLabel lblVictorias = new JLabel("Victorias: 0");
@@ -344,7 +349,9 @@ public class VentanaCompetidor extends JFrame {
                 e.printStackTrace();
             }
 
-            new VentanaCompetidor().setVisible(true);
+            UsuarioBasico u = new UsuarioBasico("Pepito", "Fiumba");
+
+            new VentanaCompetidor(u).setVisible(true);
         });
     }
 }
