@@ -1,9 +1,6 @@
 package org.example.Visual;
 
-import org.example.Logica.Equipo;
-import org.example.Logica.EventListener;
-import org.example.Logica.Torneo;
-import org.example.Logica.UsuarioBasico;
+import org.example.Logica.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -130,17 +127,14 @@ public class VentanaCompetidor extends JFrame implements EventListener {
 
         // Panel de botones para torneos
         JPanel panelBotones = new JPanel(new FlowLayout());
-        JButton btnInscribirse = crearBoton("Inscribirse", new Color(34, 139, 34));
         JButton btnVerDetalles = crearBoton("Ver Detalles", new Color(255, 140, 0));
         JButton btnActualizar = crearBoton("Actualizar", new Color(70, 130, 180));
         JButton btnVerFechas = crearBoton("Ver Fechas Tentativas", new Color(150, 0, 0));
 
-        btnInscribirse.addActionListener(e -> inscribirseEnTorneo());
         btnVerDetalles.addActionListener(e -> verDetallesCompetidor());
         btnActualizar.addActionListener(e -> actualizarTorneos());
         btnVerFechas.addActionListener(e -> verFechasTentativas());
 
-        panelBotones.add(btnInscribirse);
         panelBotones.add(btnVerDetalles);
         panelBotones.add(btnActualizar);
         panelBotones.add(btnVerFechas);
@@ -289,13 +283,13 @@ public class VentanaCompetidor extends JFrame implements EventListener {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 6; i++) {
-            torneo2.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo2.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 8; i++) {
             torneo3.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 16; i++) {
-            torneo4.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo4.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
         }
 
         listaTorneos.add(torneo1);
@@ -351,31 +345,6 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         modeloResultados.addRow(new Object[]{"Torneo Invierno 2024", "Fútbol", "15/12/2024", "Águilas FC", "Leones SC", "Tigres United", "16"});
         modeloResultados.addRow(new Object[]{"Liga de Ajedrez", "Ajedrez", "30/11/2024", "Magnus C.", "Anna K.", "Boris S.", "12"});
         modeloResultados.addRow(new Object[]{"Copa Volleyball", "Volleyball", "22/01/2025", "Spikers Team", "Net Warriors", "Ace Makers", "8"});
-    }
-
-    private void inscribirseEnTorneo() {
-        int filaSeleccionada = tablaTorneos.getSelectedRow();
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(this, "Por favor seleccione un torneo.", "Información", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-        String nombreTorneo = (String) modeloTorneos.getValueAt(filaSeleccionada, 0);
-        String estado = (String) modeloTorneos.getValueAt(filaSeleccionada, 6);
-
-        if (!estado.equals("Inscripción Abierta")) {
-            JOptionPane.showMessageDialog(this, "Este torneo no está disponible para inscripción.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        int respuesta = JOptionPane.showConfirmDialog(this,
-                "¿Confirma su inscripción al torneo: " + nombreTorneo + "?",
-                "Confirmar Inscripción",
-                JOptionPane.YES_NO_OPTION);
-
-        if (respuesta == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(this, "¡Inscripción exitosa!\n\nEn una versión completa, recibirá un email con los detalles.", "Inscripción Completada", JOptionPane.INFORMATION_MESSAGE);
-        }
     }
 
     private void verFechasTentativas() {
