@@ -35,10 +35,6 @@ public class VentanaCrearTorneo extends JFrame {
     private JButton btnEliminarEquipo;
     private ArrayList<Equipo> equiposParticipantes;
 
-
-
-    public VentanaCrearTorneo(Editor editor, VentanaAdministrarOrganizador ventanaAdmin) {
-
     public VentanaCrearTorneo(Editor editor) {
         this.eventManager = new EventManager("nuevoTorneo");
 
@@ -424,6 +420,7 @@ public class VentanaCrearTorneo extends JFrame {
             for (Equipo equipo : equiposParticipantes) {
                 torneo.addParticipantes(equipo);
             }
+
 
             torneo.crearCalendario();
             //agregar torneo al editor

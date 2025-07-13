@@ -394,6 +394,23 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         JOptionPane.showMessageDialog(this, mensaje.toString(), "Fechas Tentativas", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    private void actualizarTabla(Torneo torneo) {
+
+        String estado = "Inscripción Abierta";
+        String premio = "No especificado";
+
+        //agregar una nueva fila a la tabla
+        modeloTorneos.addRow(new Object[]{
+                torneo.getNombreTorneo(),
+                torneo.getFormatoTorneo(),
+                torneo.getCalendario().getFechaBase().toString(),
+                "No especificado", //por el momento
+                torneo.getFormatoTorneo().toString(),
+                torneo.getListaParticipantes().size() + "/" + torneo.getListaParticipantes().size(),
+                estado,
+                premio
+        });
+    }
 
     private void verResultados() {
         JOptionPane.showMessageDialog(this, "Abriendo bracket del torneo (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -461,10 +478,15 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
     @Override
     public void update(String eventType) {
         if (eventType.equals("nuevoTorneo")) {
-            System.out.println("ventanaAdmin recibió notificación: nuevo torneo ");
-            // lógica para actualizar lista de torneos
-        }
+            //para obtener el ultimo torneo agregado al editor
+            Torneo nuevoTorneo = editor.getTorneos().get(editor.getTorneos().size() - 1);
 
+            listaTorneos.add(nuevoTorneo);
+
+            actualizarTabla(nuevoTorneo);
+
+            JOptionPane.showMessageDialog(this, "Torneo agregado exitosamente!", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     // Método para probar la ventana independientemente
