@@ -2,10 +2,14 @@ package org.example.Visual;
 
 import org.example.Logica.Editor;
 import org.example.Logica.FORMATO;
+import org.example.Logica.Torneo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import static org.example.Logica.FORMATO.*;
 
 public class VentanaAdministrarOrganizador extends JFrame {
@@ -158,14 +162,18 @@ public class VentanaAdministrarOrganizador extends JFrame {
         JButton btnAdministrar = crearBoton("Subir Resultados", new Color(34, 139, 34));
         JButton btnVerDetalles = crearBoton("Ver Detalles", new Color(255, 140, 0));
         JButton btnActualizar = crearBoton("Actualizar", new Color(70, 130, 180));
+        JButton btnVerFechas = crearBoton("Ver Fechas Tentativas", new Color(150, 0, 0));
+
 
         // btnAdministrar.addActionListener(e -> actualizarResultados());
         btnVerDetalles.addActionListener(e -> verDetallesTorneo());
         btnActualizar.addActionListener(e -> actualizarTorneos());
+        btnVerFechas.addActionListener(e -> verFechasTentativas());
 
         panelBotones.add(btnAdministrar);
         panelBotones.add(btnVerDetalles);
         panelBotones.add(btnActualizar);
+        panelBotones.add(btnVerFechas);
 
         panel.add(panelFiltros, BorderLayout.NORTH);
         panel.add(scrollTorneos, BorderLayout.CENTER);
@@ -297,6 +305,25 @@ public class VentanaAdministrarOrganizador extends JFrame {
     private void actualizarTorneos() {
         JOptionPane.showMessageDialog(this, "Lista de torneos actualizada", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    private void verFechasTentativas() {
+        int filaSeleccionada = tablaTorneos.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un torneo.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        //ArrayList<LocalDate> fechasTentativas = torneo.calendario.getFechas_partidos();
+
+        StringBuilder mensaje = new StringBuilder("Fechas de los partidos:\n");
+        /*
+        for (LocalDate fecha : fechasTentativas) {
+            mensaje.append(fecha.toString()).append("\n");
+        }
+*/
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Fechas Tentativas", JOptionPane.INFORMATION_MESSAGE);
+    }
+
 
     private void verResultados() {
         JOptionPane.showMessageDialog(this, "Abriendo bracket del torneo (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
