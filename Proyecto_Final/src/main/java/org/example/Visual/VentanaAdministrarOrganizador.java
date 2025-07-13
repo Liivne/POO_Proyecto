@@ -1,21 +1,25 @@
 package org.example.Visual;
 
-import org.example.Logica.Editor;
-import org.example.Logica.FORMATO;
-import org.example.Logica.Torneo;
+import org.example.Logica.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.example.Logica.FORMATO.*;
+import static org.example.Logica.TIPOPARTICIPANTES.*;
 
 public class VentanaAdministrarOrganizador extends JFrame {
     private Editor editor;
+    // Se añade una lista para almacenar los objetos Torneo y poder recuperarlos por índice.
+    private ArrayList<Torneo> listaTorneos;
+
     public VentanaAdministrarOrganizador(Editor editor) {
         this.editor = editor;
+        this.listaTorneos = new ArrayList<>(); // Inicializa la lista
         initComponents();
         setupWindow();
         cargarDatosPrueba();
@@ -59,8 +63,7 @@ public class VentanaAdministrarOrganizador extends JFrame {
     private JTable tablaTorneos;
     private DefaultTableModel modeloTorneos;
     private JTextField txtBuscar;
-    private JComboBox<String> cbFiltroDeporte;
-    private JComboBox<String> cbFiltroEstado;
+    // Se eliminan los JComboBox de filtro de deporte y estado.
 
     private void initComponents() {
         setTitle("Competidor - Torneos y Resultados");
@@ -112,18 +115,18 @@ public class VentanaAdministrarOrganizador extends JFrame {
         txtBuscar = new JTextField(15);
         panelFiltros.add(txtBuscar);
 
-        panelFiltros.add(Box.createHorizontalStrut(10));
-        panelFiltros.add(new JLabel("Deporte:"));
-        String[] deportes = {"Todos", "Fútbol", "Baloncesto", "Tenis", "Volleyball", "Ping Pong", "Ajedrez"};
-        cbFiltroDeporte = new JComboBox<>(deportes);
-        panelFiltros.add(cbFiltroDeporte);
+        // HAY QUE VER SI OCUPAMOS ESTOS FILTROS DEL TORNEO
+        // panelFiltros.add(Box.createHorizontalStrut(10));
+        // panelFiltros.add(new JLabel("Deporte:"));
+        // String[] deportes = {"Todos", "Fútbol", "Baloncesto", "Tenis", "Volleyball", "Ping Pong", "Ajedrez"};
+        // cbFiltroDeporte = new JComboBox<>(deportes);
+        // panelFiltros.add(cbFiltroDeporte);
 
-        panelFiltros.add(Box.createHorizontalStrut(10));
-        panelFiltros.add(new JLabel("Estado:"));
-        String[] estados = {"Todos", "Inscripción Abierta", "En Curso", "Finalizado"};
-        cbFiltroEstado = new JComboBox<>(estados);
-        panelFiltros.add(cbFiltroEstado);
-
+        // panelFiltros.add(Box.createHorizontalStrut(10));
+        // panelFiltros.add(new JLabel("Estado:"));
+        // String[] estados = {"Todos", "Inscripción Abierta", "En Curso", "Finalizado"};
+        // cbFiltroEstado = new JComboBox<>(estados);
+        // panelFiltros.add(cbFiltroEstado);
 
         JButton btnFiltrar = crearBotonPequeno("Filtrar", new Color(30, 144, 255));
         panelFiltros.add(btnFiltrar);
@@ -227,8 +230,6 @@ public class VentanaAdministrarOrganizador extends JFrame {
         panelInfo.add(lblVictorias);
         panelInfo.add(Box.createRigidArea(new Dimension(0, 10)));
 
-
-
         // Panel de botones
         JPanel panelBotonesMis = new JPanel(new FlowLayout());
 
@@ -270,17 +271,81 @@ public class VentanaAdministrarOrganizador extends JFrame {
     }
 
     private void cargarDatosPrueba() {
-        // Datos de prueba para torneos
-        // for(VentanaCrearTorneo(editor))
-        modeloTorneos.addRow(new Object[]{"Copa Primavera 2025", "Fútbol", "15/07/2025", "Estadio Central", "Eliminatoria Directa", "12/16", "Inscripción Abierta", "$1000"});
-        modeloTorneos.addRow(new Object[]{"Torneo Relámpago", "Ping Pong", "20/06/2025", "Club Deportivo", "Liga Simple", "6/8", "Inscripción Abierta", "Trofeo"});
-        modeloTorneos.addRow(new Object[]{"Championship Basketball", "Baloncesto", "10/07/2025", "Polideportivo Norte", "Eliminatoria Doble", "8/16", "En Curso", "$500"});
-        modeloTorneos.addRow(new Object[]{"Masters de Tenis", "Tenis", "01/06/2025", "Club de Tenis", "Round Robin", "16/16", "Finalizado", "Medalla"});
+        modeloTorneos.setRowCount(0);
+        listaTorneos.clear();
+
+        Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15));
+        Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20));
+        Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10));
+        Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1));
+
+        for (int i = 0; i < 12; i++) {
+            torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
+        }
+        for (int i = 0; i < 6; i++) {
+            torneo2.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+        }
+        for (int i = 0; i < 8; i++) {
+            torneo3.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
+        }
+        for (int i = 0; i < 16; i++) {
+            torneo4.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+        }
+
+        listaTorneos.add(torneo1);
+        listaTorneos.add(torneo2);
+        listaTorneos.add(torneo3);
+        listaTorneos.add(torneo4);
+
+        torneo1.crearCalendario();
+        torneo2.crearCalendario();
+        torneo3.crearCalendario();
+        torneo4.crearCalendario();
+
+        modeloTorneos.addRow(new Object[]{
+                torneo1.getNombreTorneo(),
+                "Fútbol",
+                torneo1.getCalendario().getFechaBase().toString(),
+                "Estadio Central",
+                torneo1.getFormatoTorneo().toString(),
+                torneo1.getListaParticipantes().size() + "/16",
+                "Inscripción Abierta",
+                "$1000"
+        });
+
+        modeloTorneos.addRow(new Object[]{
+                torneo2.getNombreTorneo(),
+                "Ping Pong",
+                torneo2.getCalendario().getFechaBase().toString(),
+                "Club Deportivo",
+                torneo2.getFormatoTorneo().toString(),
+                torneo2.getListaParticipantes().size() + "/8",
+                "Inscripción Abierta",
+                "Trofeo"
+        });
+
+        modeloTorneos.addRow(new Object[]{
+                torneo3.getNombreTorneo(),
+                "Baloncesto",
+                torneo3.getCalendario().getFechaBase().toString(),
+                "Polideportivo Norte",
+                torneo3.getFormatoTorneo().toString(),
+                torneo3.getListaParticipantes().size() + "/16",
+                "En Curso",
+                "$500"
+        });
+
+        modeloTorneos.addRow(new Object[]{
+                torneo4.getNombreTorneo(),
+                "Tenis",
+                torneo4.getCalendario().getFechaBase().toString(),
+                "Club de Tenis",
+                torneo4.getFormatoTorneo().toString(),
+                torneo4.getListaParticipantes().size() + "/16",
+                "Finalizado",
+                "Medalla"
+        });
     }
-
-    // Métodos de acción (prototipos)
-
-    // A esta clase le falta reglamento y tipo de inscripción
 
     private void verDetallesTorneo() {
         int filaSeleccionada = tablaTorneos.getSelectedRow();
@@ -301,7 +366,6 @@ public class VentanaAdministrarOrganizador extends JFrame {
         JOptionPane.showMessageDialog(this, detalles.toString(), "Detalles del Torneo", JOptionPane.INFORMATION_MESSAGE);
     }
 
-
     private void actualizarTorneos() {
         JOptionPane.showMessageDialog(this, "Lista de torneos actualizada", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -313,14 +377,19 @@ public class VentanaAdministrarOrganizador extends JFrame {
             return;
         }
 
-        //ArrayList<LocalDate> fechasTentativas = torneo.calendario.getFechas_partidos();
+        Torneo torneoSeleccionado = listaTorneos.get(filaSeleccionada);
 
-        StringBuilder mensaje = new StringBuilder("Fechas de los partidos:\n");
-        /*
-        for (LocalDate fecha : fechasTentativas) {
-            mensaje.append(fecha.toString()).append("\n");
+        ArrayList<LocalDate> fechasTentativas = torneoSeleccionado.getCalendario().getFechas_partidos();
+
+        StringBuilder mensaje = new StringBuilder("Fechas de los partidos para " + torneoSeleccionado.getNombreTorneo() + ":\n");
+        if (fechasTentativas.isEmpty()) {
+            mensaje.append("No hay fechas de partidos programadas.");
+        } else {
+            for (LocalDate fecha : fechasTentativas) {
+                mensaje.append(fecha.toString()).append("\n");
+            }
         }
-*/
+
         JOptionPane.showMessageDialog(this, mensaje.toString(), "Fechas Tentativas", JOptionPane.INFORMATION_MESSAGE);
     }
 
