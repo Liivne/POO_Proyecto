@@ -14,10 +14,10 @@ class LoginPersonasTest {
 
     @Test
     void loginUsuario() {
-        assertFalse(iniciosesion.login("Eduardo","contra"));
+        assertFalse(iniciosesion.loginUsuario("Eduardo","contra"));
     }
     @Test
     void loginEditor() {
-        assertTrue(iniciosesion.login("Link","Hyrule"));
+        assertTrue(iniciosesion.loginEditor("Link","Hyrule"));
     }
 }

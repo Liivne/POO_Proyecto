@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
 
-public class VentanaAdministrarOrganizador extends JFrame {
+public class VentanaAdministrarOrganizador extends JFrame implements EventListener {
     private Editor editor;
     private ArrayList<Torneo> listaTorneos;
 
@@ -34,22 +34,24 @@ public class VentanaAdministrarOrganizador extends JFrame {
      * al confirmar pasas a la pestaña actualizarResultados
      */
     // private void elegirTorneo(Torneos t){}
+
     /**
      * actualizarResultados simplemente deriva según el tipo de torneo
      * si es campeonato simple, deriva a una pestaña con llaves de octavos, cuartos, semis...
      * si es liga, otra pestaña con los partidos programados
      */
-    private void actualizarResultados(FORMATO f){
-        if (LIGASIMPLE == f){
+    private void actualizarResultados(FORMATO f) {
+        if (LIGASIMPLE == f) {
             abrirVentanaLiga();
-        }
-        else{
+        } else {
             abrirVentanaCampeonato();
         }
     }
+
     private void abrirVentanaLiga() {
         // new VentanaLiga().setVisible(true);
     }
+
     private void abrirVentanaCampeonato() {
         // case torneo == torneo16
         // v = new Torneo16Equipos
@@ -253,6 +255,7 @@ public class VentanaAdministrarOrganizador extends JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 boton.setBackground(colorHover);
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 boton.setBackground(color);
             }
@@ -278,16 +281,16 @@ public class VentanaAdministrarOrganizador extends JFrame {
         Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1));
 
         for (int i = 0; i < 12; i++) {
-            torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
+            torneo1.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
         }
         for (int i = 0; i < 6; i++) {
-            torneo2.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo2.addParticipantes(new Jugador("Jugador " + (i + 1), "Jugador" + (i + 1) + "@prueba.test"));
         }
         for (int i = 0; i < 8; i++) {
-            torneo3.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
+            torneo3.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
         }
         for (int i = 0; i < 16; i++) {
-            torneo4.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo4.addParticipantes(new Jugador("Jugador " + (i + 1), "Jugador" + (i + 1) + "@prueba.test"));
         }
 
         listaTorneos.add(torneo1);
@@ -425,11 +428,21 @@ public class VentanaAdministrarOrganizador extends JFrame {
 
         return btnCircular;
     }
+
     private void abrirVentanaCrearTorneo() {
-        new VentanaCrearTorneo(editor).setVisible(true);
+        VentanaCrearTorneo v = new VentanaCrearTorneo(editor);
+        v.getEventManager().subscribe("nuevoTorneo", this);
+        v.setVisible(true);
     }
 
+    @Override
+    public void update(String eventType) {
+        if (eventType.equals("nuevoTorneo")) {
+            System.out.println("ventanaAdmin recibió notificación: nuevo torneo ");
+            // lógica para actualizar lista de torneos
+        }
 
+    }
 
     // Método para probar la ventana independientemente
     public static void main(String[] args) {
