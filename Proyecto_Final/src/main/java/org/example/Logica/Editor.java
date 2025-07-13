@@ -28,6 +28,10 @@ public class Editor extends Usuarios{
         torneos.add(torneo);
     }
 
+    public List<Torneo> getTorneos() {
+        return torneos;
+    }
+
     // Modificar el método addTorneo para notificar
     public void crearTorneo(String nombreTorneo) {
         System.out.println("Torneo creado: " + nombreTorneo);

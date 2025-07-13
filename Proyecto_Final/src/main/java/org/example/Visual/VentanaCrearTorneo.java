@@ -24,6 +24,7 @@ public class VentanaCrearTorneo extends JFrame {
     private JTextField txtPremio;
     private JCheckBox chkInscripcionAbierta;
     private Editor editor;
+    private VentanaAdministrarOrganizador ventanaAdmin;
 
     //Componentes para equipos
     private JTextField txtNombreEquipo;
@@ -35,10 +36,15 @@ public class VentanaCrearTorneo extends JFrame {
     private ArrayList<Equipo> equiposParticipantes;
 
 
+
+    public VentanaCrearTorneo(Editor editor, VentanaAdministrarOrganizador ventanaAdmin) {
+
     public VentanaCrearTorneo(Editor editor) {
         this.eventManager = new EventManager("nuevoTorneo");
+
         this.editor = editor;
         this.equiposParticipantes = new ArrayList<>();
+        this.ventanaAdmin = ventanaAdmin;
         initComponents();
         setupWindow();
     }
@@ -418,9 +424,16 @@ public class VentanaCrearTorneo extends JFrame {
             for (Equipo equipo : equiposParticipantes) {
                 torneo.addParticipantes(equipo);
             }
+
+            torneo.crearCalendario();
+            //agregar torneo al editor
+          
             //agregar torneo al editor y avisar
             editor.addTorneo(torneo);
             eventManager.notify("nuevoTorneo");
+
+            //actualizar ventanaAdministrador
+            ventanaAdmin.actualizarTablaTorneos();
 
             StringBuilder info = new StringBuilder();
             info.append("¡Torneo creado exitosamente!\n\n");
@@ -466,13 +479,9 @@ public class VentanaCrearTorneo extends JFrame {
     // Método para probar la ventana independientemente
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            try {
-                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            new VentanaCrearTorneo(new Editor("Ganon", "Gerudo")).setVisible(true);
+            Editor editor = new Editor("Ganon", "Gerudo");
+            VentanaAdministrarOrganizador ventanaAdmin = new VentanaAdministrarOrganizador(editor);
+            new VentanaCrearTorneo(editor, ventanaAdmin).setVisible(true);
         });
     }
 }
