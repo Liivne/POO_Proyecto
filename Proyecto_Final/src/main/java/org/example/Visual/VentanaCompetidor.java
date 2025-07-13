@@ -9,9 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-// Se asume que existen estas clases en el paquete org.example.Logica
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
 
