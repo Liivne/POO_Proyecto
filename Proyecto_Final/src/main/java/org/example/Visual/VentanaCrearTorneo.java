@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 public class VentanaCrearTorneo extends JFrame {
-
+    private EventManager eventManager;
     // Componentes del formulario
     private JTextField txtNombreTorneo;
     private JComboBox<String> cbDisciplina;
@@ -36,12 +36,20 @@ public class VentanaCrearTorneo extends JFrame {
     private ArrayList<Equipo> equiposParticipantes;
 
 
+
     public VentanaCrearTorneo(Editor editor, VentanaAdministrarOrganizador ventanaAdmin) {
+
+    public VentanaCrearTorneo(Editor editor) {
+        this.eventManager = new EventManager("nuevoTorneo");
+
         this.editor = editor;
         this.equiposParticipantes = new ArrayList<>();
         this.ventanaAdmin = ventanaAdmin;
         initComponents();
         setupWindow();
+    }
+    public EventManager getEventManager() {
+        return eventManager;
     }
 
     private void initComponents() {
@@ -416,9 +424,13 @@ public class VentanaCrearTorneo extends JFrame {
             for (Equipo equipo : equiposParticipantes) {
                 torneo.addParticipantes(equipo);
             }
+
             torneo.crearCalendario();
             //agregar torneo al editor
+          
+            //agregar torneo al editor y avisar
             editor.addTorneo(torneo);
+            eventManager.notify("nuevoTorneo");
 
             //actualizar ventanaAdministrador
             ventanaAdmin.actualizarTablaTorneos();

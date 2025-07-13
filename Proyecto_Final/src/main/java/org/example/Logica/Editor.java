@@ -1,5 +1,6 @@
 package org.example.Logica;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  */
 
 public class Editor extends Usuarios{
+
     public EventManager events;
     public List<Torneo> torneos;
 
@@ -18,11 +20,10 @@ public class Editor extends Usuarios{
      * @param contra Contraseña del nombre
      */
     public Editor(String nombre_usuario, String contra) {
-        this.events = new EventManager("open", "save");
+        this.events = new EventManager("nuevoTorneo");
         this.torneos = new ArrayList<>();
         super(nombre_usuario,contra);
     }
-
     public void addTorneo(Torneo torneo){
         torneos.add(torneo);
     }
@@ -31,6 +32,18 @@ public class Editor extends Usuarios{
         return torneos;
     }
 
+    // Modificar el método addTorneo para notificar
+    public void crearTorneo(String nombreTorneo) {
+        System.out.println("Torneo creado: " + nombreTorneo);
+
+        // notificar a los observadores
+        events.notify("nuevoTorneo" + nombreTorneo);
+    }
+
+
+    public EventManager getEventManager() {
+        return events;
+    }
     public boolean isEditable(){return true;}
 
 }

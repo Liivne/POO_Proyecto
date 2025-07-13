@@ -1,6 +1,7 @@
 package org.example.Visual;
 
 import org.example.Logica.Equipo;
+import org.example.Logica.EventListener;
 import org.example.Logica.Torneo;
 import org.example.Logica.UsuarioBasico;
 
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
 
-public class VentanaCompetidor extends JFrame {
+public class VentanaCompetidor extends JFrame implements EventListener {
 
     private UsuarioBasico usuario;
     private ArrayList<Torneo> listaTorneos;
@@ -446,5 +447,14 @@ public class VentanaCompetidor extends JFrame {
 
             new VentanaCompetidor(u).setVisible(true);
         });
+    }
+
+    @Override
+    public void update(String eventType) {
+        if (eventType.equals("nuevoTorneo")) {
+            System.out.println("ventanaAdmin recibió notificación: nuevo torneo ");
+            // lógica para actualizar lista de torneos
+        }
+
     }
 }
