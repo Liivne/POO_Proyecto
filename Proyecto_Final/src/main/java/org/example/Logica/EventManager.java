@@ -56,10 +56,10 @@ public class EventManager {
      *
      * @param eventType El nombre del evento que ocurrió.
      */
-    public void notify(String eventType) {
+    public void notify(String eventType, Object data) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
-            listener.update(eventType);
+            listener.update(eventType, data);
         }
     }
 }

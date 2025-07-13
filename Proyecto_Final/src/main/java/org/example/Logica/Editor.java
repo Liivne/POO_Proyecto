@@ -28,18 +28,10 @@ public class Editor extends Usuarios{
         torneos.add(torneo);
     }
 
-    // Modificar el método addTorneo para notificar
-    public void crearTorneo(String nombreTorneo) {
-        System.out.println("Torneo creado: " + nombreTorneo);
-
-        // notificar a los observadores
-        events.notify("nuevoTorneo" + nombreTorneo);
+    public List<Torneo> getTorneos() {
+        return torneos;
     }
 
-
-    public EventManager getEventManager() {
-        return events;
-    }
     public boolean isEditable(){return true;}
 
 }

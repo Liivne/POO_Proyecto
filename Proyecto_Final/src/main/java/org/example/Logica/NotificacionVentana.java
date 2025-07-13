@@ -15,7 +15,7 @@ public class NotificacionVentana implements EventListener {
     }
 
     @Override
-    public void update(String eventType) {
+    public void update(String eventType, Object data) {
         System.out.println("Email to " + email + ": Someone has performed " + eventType);
     }
 }

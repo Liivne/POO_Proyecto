@@ -21,7 +21,7 @@ class EventManagerTest {
     @Test
     void testNotificarUnListener() {
         eventManager.subscribe("inicio", listener1);
-        eventManager.notify("inicio");
+        eventManager.notify("inicio", null);
         assertTrue(listener1.notificado);
     }
 
@@ -30,7 +30,7 @@ class EventManagerTest {
         eventManager.subscribe("inicio", listener1);
         eventManager.subscribe("inicio", listener2);
 
-        eventManager.notify("inicio");
+        eventManager.notify("inicio", null);
 
         assertTrue(listener1.notificado);
         assertTrue(listener2.notificado);
@@ -38,15 +38,15 @@ class EventManagerTest {
 
     @Test
     void testNotificarSinListeners() {
-        assertDoesNotThrow(() -> eventManager.notify("inicio"));
+        assertDoesNotThrow(() -> eventManager.notify("inicio", null));
     }
 
     static class TestListener implements EventListener {
         boolean notificado = false;
 
         @Override
-        public void update(String eventType) {
-            this.notificado = true;
+        public void update(String eventType, Object data) {
+            notificado  = true;
         }
     }
 }

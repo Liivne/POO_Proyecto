@@ -420,7 +420,7 @@ public class VentanaCrearTorneo extends JFrame {
             }
             //agregar torneo al editor y avisar
             editor.addTorneo(torneo);
-            eventManager.notify("nuevoTorneo");
+            eventManager.notify("nuevoTorneo", torneo);
 
             StringBuilder info = new StringBuilder();
             info.append("¡Torneo creado exitosamente!\n\n");

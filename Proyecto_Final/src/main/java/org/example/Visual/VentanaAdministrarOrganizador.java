@@ -436,7 +436,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
     }
 
     @Override
-    public void update(String eventType) {
+    public void update(String eventType, Object data) {
         if (eventType.equals("nuevoTorneo")) {
             System.out.println("ventanaAdmin recibió notificación: nuevo torneo ");
             // lógica para actualizar lista de torneos

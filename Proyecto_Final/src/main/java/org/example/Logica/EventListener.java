@@ -7,5 +7,5 @@ package org.example.Logica;
  * Es parte del patrón de diseño Observer.
  */
 public interface EventListener {
-    void update(String eventType);
+    void update(String eventType, Object data);
 }
