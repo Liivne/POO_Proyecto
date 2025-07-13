@@ -36,7 +36,9 @@ public class Editor extends Usuarios{
         events.notify("nuevoTorneo" + nombreTorneo);
     }
 
-
+    public List<Torneo> getTorneos() {
+        return torneos;
+    }
     public EventManager getEventManager() {
         return events;
     }
