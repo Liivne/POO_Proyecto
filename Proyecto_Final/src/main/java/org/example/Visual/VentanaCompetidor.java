@@ -18,10 +18,8 @@ import static org.example.Logica.TIPOPARTICIPANTES.*;
 public class VentanaCompetidor extends JFrame {
 
     private UsuarioBasico usuario;
-    // Se añade una lista para almacenar los objetos Torneo y poder recuperarlos por índice.
     private ArrayList<Torneo> listaTorneos;
 
-    // Componentes principales
     private JTabbedPane pestanas;
     private JTable tablaTorneos;
     private JTable tablaResultados;
@@ -33,7 +31,7 @@ public class VentanaCompetidor extends JFrame {
 
     public VentanaCompetidor(UsuarioBasico usuario) {
         this.usuario = usuario;
-        this.listaTorneos = new ArrayList<>(); // Inicializa la lista
+        this.listaTorneos = new ArrayList<>();
         initComponents();
         setupWindow();
         cargarDatosPrueba();
@@ -280,17 +278,14 @@ public class VentanaCompetidor extends JFrame {
     }
 
     private void cargarDatosPrueba() {
-        // Limpiar filas y lista existentes antes de cargar los nuevos datos
         modeloTorneos.setRowCount(0);
         listaTorneos.clear();
 
-        // Crear objetos Torneo de ejemplo
         Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15));
         Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20));
         Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10));
         Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1));
 
-        // Agregar participantes de ejemplo para mostrar el recuento
         for (int i = 0; i < 12; i++) {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
         }
@@ -304,32 +299,29 @@ public class VentanaCompetidor extends JFrame {
             torneo4.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
         }
 
-        // Se guardan los objetos Torneo en la lista
         listaTorneos.add(torneo1);
         listaTorneos.add(torneo2);
         listaTorneos.add(torneo3);
         listaTorneos.add(torneo4);
 
-        // Se asume que crearCalendario() ya genera los partidos
         torneo1.crearCalendario();
         torneo2.crearCalendario();
         torneo3.crearCalendario();
         torneo4.crearCalendario();
 
-        // Agregar datos a la tabla a partir de los objetos Torneo
         modeloTorneos.addRow(new Object[]{
                 torneo1.getNombreTorneo(),
-                "Fútbol", // Dato no disponible en la clase Torneo, se mantiene fijo
+                "Fútbol",
                 torneo1.getCalendario().getFechaBase().toString(),
-                "Estadio Central", // Dato no disponible en la clase Torneo, se mantiene fijo
+                "Estadio Central",
                 torneo1.getFormatoTorneo().toString(),
-                torneo1.getListaParticipantes().size() + "/16", // Se obtiene el conteo de participantes actual
-                "Inscripción Abierta", // Dato no disponible en la clase Torneo, se mantiene fijo
-                "$1000" // Dato no disponible en la clase Torneo, se mantiene fijo
+                torneo1.getListaParticipantes().size() + "/16",
+                "Inscripción Abierta",
+                "$1000"
         });
         modeloTorneos.addRow(new Object[]{
                 torneo2.getNombreTorneo(),
-                "Ping Pong", // Dato no disponible en la clase Torneo, se mantiene fijo
+                "Ping Pong",
                 torneo2.getCalendario().getFechaBase().toString(),
                 "Club Deportivo",
                 torneo2.getFormatoTorneo().toString(),
@@ -357,13 +349,11 @@ public class VentanaCompetidor extends JFrame {
                 "Finalizado",
                 "Medalla"
         });
-        // Datos de prueba para resultados
         modeloResultados.addRow(new Object[]{"Torneo Invierno 2024", "Fútbol", "15/12/2024", "Águilas FC", "Leones SC", "Tigres United", "16"});
         modeloResultados.addRow(new Object[]{"Liga de Ajedrez", "Ajedrez", "30/11/2024", "Magnus C.", "Anna K.", "Boris S.", "12"});
         modeloResultados.addRow(new Object[]{"Copa Volleyball", "Volleyball", "22/01/2025", "Spikers Team", "Net Warriors", "Ace Makers", "8"});
     }
 
-    // Métodos de acción (prototipos)
     private void inscribirseEnTorneo() {
         int filaSeleccionada = tablaTorneos.getSelectedRow();
         if (filaSeleccionada == -1) {
@@ -395,13 +385,10 @@ public class VentanaCompetidor extends JFrame {
             JOptionPane.showMessageDialog(this, "Por favor seleccione un torneo.", "Información", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        // Se obtiene el objeto Torneo correspondiente a la fila seleccionada
         Torneo torneoSeleccionado = listaTorneos.get(filaSeleccionada);
 
-        // Se obtienen las fechas del calendario del torneo
         ArrayList<LocalDate> fechasTentativas = torneoSeleccionado.getCalendario().getFechas_partidos();
 
-        // Se construye el mensaje
         StringBuilder mensaje = new StringBuilder("Fechas de los partidos para " + torneoSeleccionado.getNombreTorneo() + ":\n");
         if (fechasTentativas.isEmpty()) {
             mensaje.append("No hay fechas de partidos programadas.");
