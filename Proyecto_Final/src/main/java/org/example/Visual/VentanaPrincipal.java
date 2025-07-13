@@ -3,6 +3,7 @@ package org.example.Visual;
 import org.example.Logica.Editor;
 import org.example.Logica.LoginPersonas;
 import org.example.Logica.UsuarioBasico;
+import org.example.Logica.Usuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -211,19 +212,19 @@ public class VentanaPrincipal extends JFrame {
     private void iniciarSesion() {
             String usuario = txtUsuario.getText();
             String contra = new String(txtContra.getPassword());
-            UsuarioBasico u = new UsuarioBasico(usuario, contra);
 
-            if (iniciosesion.login(usuario, contra) && u.isEditable()) {
+            if (iniciosesion.loginEditor(usuario, contra)){
                 mostrarMensaje("Inicio de sesión como editor exitoso");
                 Editor e = new Editor(usuario, contra);
                 abrirVentanaOrganizador(e);
-            } else if (iniciosesion.login(usuario, contra)) {
+            }
+            else if(iniciosesion.loginUsuario(usuario, contra)) {
                 mostrarMensaje("Inicio de sesión como usuario exitoso");
+                UsuarioBasico u = new UsuarioBasico(usuario, contra);
                 abrirVentanaCompetidor(u);
             }
+            else { System.out.println("Credenciales inválidas");}
     }
-
-
 
     private void abrirVentanaOrganizador(Editor editor) {
         // Suscribir la ventana del admin al CrearTorneo

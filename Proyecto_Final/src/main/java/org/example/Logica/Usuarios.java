@@ -9,6 +9,8 @@ public abstract class Usuarios {
         this.contra = contra;
     }
 
+    public abstract boolean isEditable();
+
     public String getNombre_Usuario() {
         return nombre_usuario;
     }
