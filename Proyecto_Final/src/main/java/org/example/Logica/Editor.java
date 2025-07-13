@@ -27,4 +27,6 @@ public class Editor extends Usuarios{
         torneos.add(torneo);
     }
 
+    public boolean isEditable(){return true;}
+
 }

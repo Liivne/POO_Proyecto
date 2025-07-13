@@ -10,14 +10,25 @@ import java.util.List;
  */
 public class LoginPersonas {
     private List<Editor> EditoresRegistrados = new ArrayList<>(); // Almacenaría Editores
-    private List<UsuarioBasico> UsuariosBasicos = new ArrayList<>(); //Almacenaría Usuarios no editores
+    private List<UsuarioBasico> UsuariosRegistrados = new ArrayList<>(); //Almacenaría Usuarios no editores
+
+    Editor e1 = new Editor("Link", "Hyrule");
+    Editor e2 = new Editor("Ganon", "Gerudo");
+
+    UsuarioBasico u1 = new UsuarioBasico("Jake el perro", "ay canijote");
+    UsuarioBasico u2 = new UsuarioBasico("Geoffrey Hinton", "IAmevoy");
+    UsuarioBasico u3 = new UsuarioBasico("Demis Hassabis", "4lphaZer0");
     /**
      * Crea una nueva instancia de {@code LoginPersonas} y
-     * agrega algunos editores predefinidos para realizar pruebas.
+     * agrega algunos editores y usuarios predefinidos, quienes están autoriaados para ingresar a la plataforma.
      */
     public LoginPersonas(){
-        EditoresRegistrados.add(new Editor("Link", "Hyrule"));
-        EditoresRegistrados.add(new Editor("Ganon", "Gerudo"));
+        EditoresRegistrados.add(e1);
+        EditoresRegistrados.add(e2);
+
+        UsuariosRegistrados.add(u1);
+        UsuariosRegistrados.add(u2);
+        UsuariosRegistrados.add(u3);
     }
 
     /**
@@ -25,18 +36,23 @@ public class LoginPersonas {
      *
      * @param nombre_usuario Nombre de usuario ingresado.
      * @param contra Contraseña ingresada.
-     * @return {@code true} si las credenciales coinciden con un editor registrado,
+     * @return {@code true} si las credenciales coinciden con un usuario registrado,
      *         {@code false} en caso contrario.
      */
     public boolean login(String nombre_usuario, String contra) {
         for (Editor editor : EditoresRegistrados) {
             if (editor.getNombre_Usuario().equals(nombre_usuario) && editor.getContra().equals(contra)) {
-                System.out.println("Credenciales validas como editor: " + nombre_usuario);
+                System.out.println("Credenciales válidas como editor: " + nombre_usuario);
                 return true;
             }
         }
-        System.out.println("Credenciales no validas como editor: " + nombre_usuario);
-        UsuariosBasicos.add(new UsuarioBasico(nombre_usuario,contra));
+        for(UsuarioBasico usuario: UsuariosRegistrados){
+            if (usuario.getNombre_Usuario().equals(nombre_usuario) && usuario.getContra().equals(contra)) {
+                System.out.println("Credenciales válidas como usuario: " + nombre_usuario);
+                return true;
+            }
+        }
+        System.out.println("Credenciales no válidas, no puede ingresar");
         return false;
     }
 }

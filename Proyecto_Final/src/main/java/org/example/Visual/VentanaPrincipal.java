@@ -11,10 +11,6 @@ public class VentanaPrincipal extends JFrame {
     private LoginPersonas iniciosesion = new LoginPersonas();
     private JTextField txtUsuario;
     private JPasswordField txtContra;
-    // Usuario u = new Usuario(Nombre, Password);
-    // Usuario puede ser editor o usuarioParticipante
-    // Después, JTextField y JPassword son .toString de parámetros de usuario
-
 
     public VentanaPrincipal() {
         initComponents();
@@ -215,14 +211,14 @@ public class VentanaPrincipal extends JFrame {
     private void iniciarSesion() {
             String usuario = txtUsuario.getText();
             String contra = new String(txtContra.getPassword());
+            UsuarioBasico u = new UsuarioBasico(usuario, contra);
 
-            if (iniciosesion.login(usuario, contra)) {
+            if (iniciosesion.login(usuario, contra) && u.isEditable()) {
                 mostrarMensaje("Inicio de sesión como editor exitoso");
                 Editor e = new Editor(usuario, contra);
                 abrirVentanaOrganizador(e);
-            } else {
+            } else if (iniciosesion.login(usuario, contra)) {
                 mostrarMensaje("Inicio de sesión como usuario exitoso");
-                UsuarioBasico u = new UsuarioBasico(usuario, contra);
                 abrirVentanaCompetidor(u);
             }
     }
@@ -230,6 +226,7 @@ public class VentanaPrincipal extends JFrame {
 
 
     private void abrirVentanaOrganizador(Editor editor) {
+        // Suscribir la ventana del admin al CrearTorneo
         VentanaAdministrarOrganizador ventana = new VentanaAdministrarOrganizador(editor);
         ventana.setVisible(true);
         this.dispose();
