@@ -425,8 +425,29 @@ public class VentanaAdministrarOrganizador extends JFrame {
 
         return btnCircular;
     }
+
+    public void actualizarTablaTorneos() {
+        modeloTorneos.setRowCount(0); // Limpiar la tabla
+        listaTorneos.clear(); // Limpiar la lista interna (opcional, dependiendo de tu lógica)
+
+        // Volver a cargar los torneos desde el editor
+        for (Torneo torneo : editor.getTorneos()) { // Asume que Editor tiene un método getTorneos()
+            modeloTorneos.addRow(new Object[]{
+                    torneo.getNombreTorneo(),
+                    "Deporte", // Ajusta según tu lógica
+                    torneo.getCalendario().getFechaBase().toString(),
+                    "Lugar",   // Ajusta según tu lógica
+                    torneo.getFormatoTorneo().toString(),
+                    torneo.getListaParticipantes().size() + "/",
+                    "Estado",  // Ajusta según tu lógica
+                    "Premio"   // Ajusta según tu lógica
+            });
+            listaTorneos.add(torneo); // Opcional, si mantienes una lista interna
+        }
+    }
+
     private void abrirVentanaCrearTorneo() {
-        new VentanaCrearTorneo(editor).setVisible(true);
+        new VentanaCrearTorneo(editor, this).setVisible(true);
     }
 
 

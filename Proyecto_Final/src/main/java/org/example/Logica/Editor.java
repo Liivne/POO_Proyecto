@@ -27,6 +27,10 @@ public class Editor extends Usuarios{
         torneos.add(torneo);
     }
 
+    public List<Torneo> getTorneos() {
+        return torneos;
+    }
+
     public boolean isEditable(){return true;}
 
 }
