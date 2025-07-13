@@ -12,13 +12,9 @@ import java.util.ArrayList;
  */
 public class GenerarCalendario {
     protected LocalDate fechaBase;
-    //Formato de la fecha en cadena ("dd/MM/yyyy").
     protected DateTimeFormatter fecha_tipo = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    //Cantidad total de partidos.
     protected int cantidad_partidos;
-    //Fecha inicio como cadena formateada.
     protected String fechaBase_string;
-    //Lista de fechas para los partidos.
     protected ArrayList<LocalDate> fechas_partidos;
 
     /**
@@ -78,7 +74,6 @@ public class GenerarCalendario {
                 }
                 break;
 
-            //case FORMATO.SGTE
             default:
                 throw new IllegalStateException("Este formato no está contemplado: " + formato);
         }

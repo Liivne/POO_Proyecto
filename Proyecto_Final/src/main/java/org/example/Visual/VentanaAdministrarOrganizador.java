@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static org.example.Logica.FORMATO.*;
@@ -14,12 +13,11 @@ import static org.example.Logica.TIPOPARTICIPANTES.*;
 
 public class VentanaAdministrarOrganizador extends JFrame {
     private Editor editor;
-    // Se añade una lista para almacenar los objetos Torneo y poder recuperarlos por índice.
     private ArrayList<Torneo> listaTorneos;
 
     public VentanaAdministrarOrganizador(Editor editor) {
         this.editor = editor;
-        this.listaTorneos = new ArrayList<>(); // Inicializa la lista
+        this.listaTorneos = new ArrayList<>();
         initComponents();
         setupWindow();
         cargarDatosPrueba();
@@ -283,13 +281,13 @@ public class VentanaAdministrarOrganizador extends JFrame {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 6; i++) {
-            torneo2.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo2.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 8; i++) {
             torneo3.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
         }
         for (int i = 0; i < 16; i++) {
-            torneo4.addParticipantes(new Equipo("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
+            torneo4.addParticipantes(new Jugador("Jugador " + (i + 1),"Jugador"+(i+1)+"@prueba.test"));
         }
 
         listaTorneos.add(torneo1);
