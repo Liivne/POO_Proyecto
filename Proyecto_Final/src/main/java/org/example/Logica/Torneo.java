@@ -67,8 +67,6 @@ public class Torneo {
         return listaParticipantes;
     }
 
-    public void registrarResultado(){}
-
     /**
      * Crea un calendario a partir de la fecha de inicio del Torneo
      *
@@ -92,6 +90,10 @@ public class Torneo {
 
     public FORMATO getFormatoTorneo() {
         return formatoTorneo;
+    }
+
+    public LocalDate getComienzo() {
+        return comienzo;
     }
 
     public TIPOPARTICIPANTES getTipoParticipantes() {

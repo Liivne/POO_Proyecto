@@ -418,6 +418,8 @@ public class VentanaCrearTorneo extends JFrame {
             for (Equipo equipo : equiposParticipantes) {
                 torneo.addParticipantes(equipo);
             }
+            //generar calendario
+            torneo.crearCalendario();
             //agregar torneo al editor y avisar
             editor.addTorneo(torneo);
             eventManager.notify("nuevoTorneo", torneo);
