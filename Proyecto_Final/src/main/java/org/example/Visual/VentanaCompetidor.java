@@ -125,14 +125,17 @@ public class VentanaCompetidor extends JFrame {
         JButton btnInscribirse = crearBoton("Inscribirse", new Color(34, 139, 34));
         JButton btnVerDetalles = crearBoton("Ver Detalles", new Color(255, 140, 0));
         JButton btnActualizar = crearBoton("Actualizar", new Color(70, 130, 180));
+        JButton btnVerFechas = crearBoton("Ver Fechas Tentativas", new Color(150, 0, 0));
 
         btnInscribirse.addActionListener(e -> inscribirseEnTorneo());
         btnVerDetalles.addActionListener(e -> verDetallesCompetidor());
         btnActualizar.addActionListener(e -> actualizarTorneos());
+        btnVerFechas.addActionListener(e -> verFechasTentativas());
 
         panelBotones.add(btnInscribirse);
         panelBotones.add(btnVerDetalles);
         panelBotones.add(btnActualizar);
+        panelBotones.add(btnVerFechas);
 
         panel.add(panelFiltros, BorderLayout.NORTH);
         panel.add(scrollTorneos, BorderLayout.CENTER);
@@ -302,6 +305,24 @@ public class VentanaCompetidor extends JFrame {
         if (respuesta == JOptionPane.YES_OPTION) {
             JOptionPane.showMessageDialog(this, "¡Inscripción exitosa!\n\nEn una versión completa, recibirá un email con los detalles.", "Inscripción Completada", JOptionPane.INFORMATION_MESSAGE);
         }
+    }
+
+    private void verFechasTentativas() {
+        int filaSeleccionada = tablaTorneos.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un torneo.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        //ArrayList<LocalDate> fechasTentativas = torneo.calendario.getFechas_partidos();
+
+        StringBuilder mensaje = new StringBuilder("Fechas de los partidos:\n");
+        /*
+        for (LocalDate fecha : fechasTentativas) {
+            mensaje.append(fecha.toString()).append("\n");
+        }
+*/
+        JOptionPane.showMessageDialog(this, mensaje.toString(), "Fechas Tentativas", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void verDetallesCompetidor() {
