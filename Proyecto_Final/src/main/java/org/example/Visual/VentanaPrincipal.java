@@ -230,12 +230,10 @@ public class VentanaPrincipal extends JFrame {
         // Suscribir la ventana del admin al CrearTorneo
         VentanaAdministrarOrganizador ventana = new VentanaAdministrarOrganizador(editor);
         ventana.setVisible(true);
-        this.dispose();
     }
     private void abrirVentanaCompetidor(UsuarioBasico usuario) {
         VentanaCompetidor ventana = new VentanaCompetidor(usuario);
         ventana.setVisible(true);
-        this.dispose();
     }
 
     private void mostrarMensaje(String mensaje) {
