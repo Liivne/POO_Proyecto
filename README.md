@@ -57,3 +57,8 @@ Tecnologías usadas: Java Swing.
 
 # Imagenes Interfaz Gráfica.
 Para ingresar como administrador se pueden usar los siguientes logins: (cuneta:"Link", contraseña:"Hyrule") o (cuenta: "Ganon", contraseña:"Gerudo");
+
+![image](https://github.com/Liivne/POO_Proyecto/blob/main/InterfazGr1.jpeg)
+
+![image](https://github.com/Liivne/POO_Proyecto/blob/main/InterfazGr2.jpeg)
+
