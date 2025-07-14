@@ -62,3 +62,10 @@ Para ingresar como administrador se pueden usar los siguientes logins: (cuneta:"
 
 ![image](https://github.com/Liivne/POO_Proyecto/blob/main/InterfazGr2.jpeg)
 
+![image](https://github.com/Liivne/POO_Proyecto/blob/main/InterfazGr2.jpeg](https://github.com/Liivne/POO_Proyecto/blob/main/WhatsApp%20Image%202025-07-13%20at%2011.56.08%20PM%20(1).jpeg))
+
+
+
+
+
+
