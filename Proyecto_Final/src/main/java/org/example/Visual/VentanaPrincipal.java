@@ -1,7 +1,6 @@
 package org.example.Visual;
 
 import org.example.Logica.Editor;
-import org.example.Logica.EventManager;
 import org.example.Logica.LoginPersonas;
 import org.example.Logica.UsuarioBasico;
 
@@ -93,28 +92,6 @@ public class VentanaPrincipal extends JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         panelLogin.add(btnLogin, gbc);
 
-        /*
-        // Panel para los botones principales
-        JPanel panelBotones = new JPanel(new GridLayout(2, 1, 0, 20));
-        panelBotones.setOpaque(false);
-        panelBotones.setMaximumSize(new Dimension(400, 160));
-
-        // Botón para Organizadores
-        JButton btnOrganizadores = crearBotonPrincipal(
-                "ORGANIZADORES",
-                "Crear y gestionar torneos",
-                new Color(34, 139, 34),
-                new Color(46, 125, 50)
-        );
-
-        // Botón para Competidores
-        JButton btnCompetidores = crearBotonPrincipal(
-                "COMPETIDORES",
-                "Ver resultados e inscribirse",
-                new Color(30, 144, 255),
-                new Color(25, 118, 210)
-        );
-*/
         // Panel para botones secundarios
         JPanel panelSecundario = new JPanel(new FlowLayout());
         panelSecundario.setOpaque(false);
@@ -123,14 +100,9 @@ public class VentanaPrincipal extends JFrame {
         JButton btnSalir = crearBotonSecundario("Salir");
 
         // Agregar ActionListeners (sin funcionalidad por ahora)
-        //btnOrganizadores.addActionListener(e -> abrirVentanaOrganizador());
-        //btnCompetidores.addActionListener(e -> abrirVentanaCompetidor());
         btnAcerca.addActionListener(e -> mostrarAcercaDe());
         btnSalir.addActionListener(e -> System.exit(0));
 
-        // Agregar componentes al panel de botones
-        //panelBotones.add(btnOrganizadores);
-        //panelBotones.add(btnCompetidores);
 
         panelSecundario.add(btnAcerca);
         panelSecundario.add(Box.createHorizontalStrut(20));
@@ -224,7 +196,6 @@ public class VentanaPrincipal extends JFrame {
                 Desarrollado con Java Swing""";
 
         JOptionPane.showMessageDialog(this, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
-        // Esta pestaña podría ser usada como guía de uso
     }
     public static List<VentanaCompetidor> getVentanasCompetidor() {
         return ventanasCompetidor;

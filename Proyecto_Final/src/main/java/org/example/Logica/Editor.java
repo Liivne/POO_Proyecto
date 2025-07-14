@@ -1,6 +1,5 @@
 package org.example.Logica;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +9,7 @@ import java.util.List;
  */
 
 public class Editor extends Usuarios{
-
-    public EventManager events;
-    public List<Torneo> torneos;
+    private List<Torneo> torneos;
 
     /**
      * Crea un nuevo editor con credenciales específicas.
@@ -20,7 +17,6 @@ public class Editor extends Usuarios{
      * @param contra Contraseña del nombre
      */
     public Editor(String nombre_usuario, String contra) {
-        this.events = new EventManager("nuevoTorneo");
         this.torneos = new ArrayList<>();
         super(nombre_usuario,contra);
     }
@@ -31,6 +27,5 @@ public class Editor extends Usuarios{
     public List<Torneo> getTorneos() {
         return torneos;
     }
-    public boolean isEditable(){return true;}
 
 }

@@ -1,6 +1,5 @@
 package org.example.Logica;
 
-import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class GenerarCalendario {
      * las fechas de los partidos según el formato y número de participantes.
      *
      * @param comienzo Fecha de inicio del torneo.
-     * @param cant_contrincantes Numero de participantes en el torneo.
+     * @param cant_contrincantes Número de participantes en el torneo.
      * @param formato Formato del torneo (Liga Simple o Campeonato).
      */
     public GenerarCalendario(LocalDate comienzo, int cant_contrincantes, FORMATO formato){
@@ -85,7 +84,4 @@ public class GenerarCalendario {
         return fechas_partidos;
     }
 
-    public LocalDate getFechaBase() {
-        return fechaBase;
-    }
 }

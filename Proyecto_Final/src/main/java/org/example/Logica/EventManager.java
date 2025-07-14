@@ -2,7 +2,6 @@ package org.example.Logica;
 
 import java.util.*;
 
-
 /**
  * La clase {@code EventManager} implementa el patrón de diseño Observer
  * Permite suscribir, cancelar suscripciones y notificar a los oyentes
@@ -38,17 +37,6 @@ public class EventManager {
     public void subscribe(String eventType, EventListener listener) {
         List<EventListener> users = listeners.get(eventType);
         users.add(listener);
-    }
-
-    /**
-     * Cancela la suscripción de un oyente a un tipo de evento específico.
-     *
-     * @param eventType El nombre del evento del que se quiere cancelar la suscripción.
-     * @param listener  El {@code EventListener} que se desea eliminar.
-     */
-    public void unsubscribe(String eventType, EventListener listener) {
-        List<EventListener> users = listeners.get(eventType);
-        users.remove(listener);
     }
 
     /**

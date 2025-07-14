@@ -90,29 +90,8 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
-        // Panel de filtros
-        JPanel panelFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelFiltros.setBackground(new Color(240, 248, 255));
-        panelFiltros.setBorder(BorderFactory.createTitledBorder("Filtros de búsqueda"));
-
-        panelFiltros.add(new JLabel("Buscar:"));
-        txtBuscar = new JTextField(15);
-        panelFiltros.add(txtBuscar);
-
-        panelFiltros.add(Box.createHorizontalStrut(10));
-        panelFiltros.add(new JLabel("Deporte:"));
         String[] deportes = {"Todos", "Fútbol", "Baloncesto", "Tenis", "Volleyball", "Ping Pong", "Ajedrez"};
         cbFiltroDeporte = new JComboBox<>(deportes);
-        panelFiltros.add(cbFiltroDeporte);
-
-        panelFiltros.add(Box.createHorizontalStrut(10));
-        panelFiltros.add(new JLabel("Estado:"));
-        String[] estados = {"Todos", "Inscripción Abierta", "En Curso", "Finalizado"};
-        cbFiltroEstado = new JComboBox<>(estados);
-        panelFiltros.add(cbFiltroEstado);
-
-        JButton btnFiltrar = crearBotonPequeno("Filtrar", new Color(30, 144, 255));
-        panelFiltros.add(btnFiltrar);
 
         // Tabla de torneos
         String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes"};
@@ -127,7 +106,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         tablaTorneos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tablaTorneos.setRowHeight(25);
         tablaTorneos.getTableHeader().setBackground(new Color(70, 130, 180));
-        tablaTorneos.getTableHeader().setForeground(Color.WHITE);
+        tablaTorneos.getTableHeader().setForeground(Color.BLACK);
         tablaTorneos.getTableHeader().setFont(new Font("Arial", Font.BOLD, 11));
 
         // Configurar ancho de columnas
@@ -155,7 +134,6 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         panelBotones.add(btnActualizar);
         panelBotones.add(btnVerFechas);
 
-        panel.add(panelFiltros, BorderLayout.NORTH);
         panel.add(scrollTorneos, BorderLayout.CENTER);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
@@ -179,7 +157,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         tablaResultados.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tablaResultados.setRowHeight(25);
         tablaResultados.getTableHeader().setBackground(new Color(160, 82, 45));
-        tablaResultados.getTableHeader().setForeground(Color.WHITE);
+        tablaResultados.getTableHeader().setForeground(Color.BLACK);
         tablaResultados.getTableHeader().setFont(new Font("Arial", Font.BOLD, 11));
 
         // Configurar ancho de columnas
@@ -340,7 +318,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
                 torneo1.getComienzo().toString(),
                 torneo1.getLugarTorneo(),
                 torneo1.getFormatoTorneo().toString(),
-                torneo1.getListaParticipantes().size() + "/16"
+                torneo1.getListaParticipantes().size() + "/4"
         });
         modeloTorneos.addRow(new Object[]{
                 torneo2.getNombreTorneo(),
@@ -360,11 +338,11 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         });
         modeloTorneos.addRow(new Object[]{
                 torneo4.getNombreTorneo(),
-                "Tenis",
+                torneo4.getDisciplina(),
                 torneo4.getComienzo().toString(),
                 torneo4.getLugarTorneo(),
                 torneo4.getFormatoTorneo().toString(),
-                torneo4.getListaParticipantes().size() + "/16"
+                torneo4.getListaParticipantes().size() + "/5"
         });
         modeloResultados.addRow(new Object[]{"Torneo Invierno 2024", "Fútbol", "15/12/2024", "Águilas FC", "Leones SC", "Tigres United", "16"});
         modeloResultados.addRow(new Object[]{"Liga de Ajedrez", "Ajedrez", "30/11/2024", "Magnus C.", "Anna K.", "Boris S.", "12"});
@@ -425,7 +403,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         modeloTorneos.addRow(new Object[]{
                 torneo.getNombreTorneo(),
                 torneo.getFormatoTorneo(),
-                torneo.getCalendario().getFechaBase().toString(),
+                torneo.getComienzo().toString(),
                 "No especificado", //por el momento
                 torneo.getFormatoTorneo().toString(),
                 torneo.getListaParticipantes().size() + "/" + torneo.getListaParticipantes().size(),
@@ -436,7 +414,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
     @Override
     public void update(String eventType, Torneo data) {
         if (eventType.equals("nuevoTorneo")) {
-            System.out.println("Hola");
+            System.out.println("Se actualizó el torneo");
             actualizarTabla(data);
         }
     }
