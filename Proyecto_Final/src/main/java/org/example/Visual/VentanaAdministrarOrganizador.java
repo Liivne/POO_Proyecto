@@ -168,7 +168,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         JButton btnVerFechas = crearBoton("Ver Fechas Tentativas", new Color(150, 0, 0));
 
 
-        // btnAdministrar.addActionListener(e -> actualizarResultados());
+        btnAdministrar.addActionListener(e -> abrirVentanaResultados());
         btnVerDetalles.addActionListener(e -> verDetallesTorneo());
         btnActualizar.addActionListener(e -> actualizarTorneos());
         btnVerFechas.addActionListener(e -> verFechasTentativas());
@@ -392,6 +392,54 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         }
 
         JOptionPane.showMessageDialog(this, mensaje.toString(), "Fechas Tentativas", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void abrirVentanaResultados() {
+        int filaSeleccionada = tablaTorneos.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione un torneo.", "Información", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        Torneo torneoSeleccionado = listaTorneos.get(filaSeleccionada);
+
+        if (torneoSeleccionado.getFormatoTorneo() == FORMATO.LIGASIMPLE) {
+            abrirVentanaLiga(torneoSeleccionado);
+        } else if (torneoSeleccionado.getFormatoTorneo() == FORMATO.CAMPEONATO) {
+            abrirVentanaEliminacionDirecta(torneoSeleccionado);
+        }
+    }
+
+    private void abrirVentanaLiga(Torneo torneo) {
+        LigaResultadosPanel ligaPanel = new LigaResultadosPanel();
+
+        JFrame frame = new JFrame("Resultados de Liga - " + torneo.getNombreTorneo());
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.add(ligaPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private void abrirVentanaEliminacionDirecta(Torneo torneo) {
+        TorneoEliminacionDirectaBase ventanaEliminacion = null;
+        int numEquipos = torneo.getListaParticipantes().size();
+
+        if (numEquipos == 4) {
+            ventanaEliminacion = new Torneo4Equipos();
+        } else if (numEquipos == 8) {
+            ventanaEliminacion = new Torneo8Equipos();
+        } else if (numEquipos == 16) {
+            ventanaEliminacion = new Torneo16Equipos();
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Número de equipos no soportado: " + numEquipos,
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ventanaEliminacion.setTitle("Torneo de Eliminación Directa - " + torneo.getNombreTorneo());
+        ventanaEliminacion.setVisible(true);
     }
 
     private void actualizarTabla(Torneo torneo) {
