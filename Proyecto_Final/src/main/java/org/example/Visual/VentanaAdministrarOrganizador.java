@@ -248,6 +248,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         boton.setFocusPainted(false);
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.setPreferredSize(new Dimension(120, 30));
+        boton.setForeground(Color.BLACK);
 
         // Efecto hover
         Color colorHover = color.darker();
