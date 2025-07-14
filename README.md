@@ -52,5 +52,7 @@ Tecnologías usadas: Java Swing.
   
 |      Patron      | Justificación                                                                                                                                                                          |
 |:----------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|      Builder     | La clase Torneo puede tener un Constructor con muchos parámetros (debe tener Formato de liga y Formato de equipos, Fecha, Lugar, equipos o jugadores, etc) por eso se optó por Utiliutilizar builder para dar mayor orden al momento de construír nuevos Torneos.   utilizar builder para dar mayor orden al momento de construír nuevos Torneos.                                           
+|      Builder     | La clase Torneo puede tener un Constructor con muchos parámetros (debe tener Formato de liga y Formato de equipos, Fecha, Lugar, equipos o jugadores, etc) por eso se optó por Utilizar builder para dar mayor orden al momento de construír nuevos Torneos.                                             
 |     Observer     | Observer se utilizó para actualizar las listas de torneos en tiempo real, de modo que solo sean accesibles para los usuarios registrados y el propio administrador, sin tener que interferir con las listas de torneos de otros administradores.|
+
+# Imagenes Interfaz Gráfica.
