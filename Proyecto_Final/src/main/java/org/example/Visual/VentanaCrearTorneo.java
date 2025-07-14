@@ -353,6 +353,7 @@ public class VentanaCrearTorneo extends JFrame {
         boton.setFocusPainted(false);
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.setPreferredSize(new Dimension(120, 35));
+        boton.setForeground(Color.BLACK);
 
         return boton;
     }

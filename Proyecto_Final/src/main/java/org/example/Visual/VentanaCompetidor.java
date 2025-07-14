@@ -271,6 +271,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         boton.setFocusPainted(false);
         boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         boton.setPreferredSize(new Dimension(120, 30));
+        boton.setForeground(Color.BLACK);
 
         // Efecto hover
         Color colorHover = color.darker();
@@ -290,6 +291,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         JButton boton = crearBoton(texto, color);
         boton.setPreferredSize(new Dimension(80, 25));
         boton.setFont(new Font("Arial", Font.BOLD, 10));
+        boton.setForeground(Color.BLACK);
         return boton;
     }
 
