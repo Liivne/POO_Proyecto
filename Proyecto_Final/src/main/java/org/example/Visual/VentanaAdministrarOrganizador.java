@@ -287,7 +287,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         for (int i = 0; i < 16; i++) {
             torneo3.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
         }
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 5; i++) {
             torneo4.addParticipantes(new Jugador("Jugador " + (i + 1), "Jugador" + (i + 1) + "@prueba.test"));
         }
 
@@ -334,7 +334,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo4.getComienzo().toString(),
                 torneo4.getLugarTorneo(),
                 torneo4.getFormatoTorneo().toString(),
-                torneo4.getListaParticipantes().size() + "/16"
+                torneo4.getListaParticipantes().size() + "/5"
         });
     }
 
@@ -401,7 +401,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
     }
 
     private void abrirVentanaLiga(Torneo torneo) {
-        LigaResultadosPanel ligaPanel = new LigaResultadosPanel();
+        LigaResultadosPanel ligaPanel = new LigaResultadosPanel(torneo);
 
         JFrame frame = new JFrame("Resultados de Liga - " + torneo.getNombreTorneo());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
