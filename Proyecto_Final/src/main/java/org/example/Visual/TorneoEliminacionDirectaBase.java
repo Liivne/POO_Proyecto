@@ -139,14 +139,14 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         btnConfirmar = new JButton("Confirmar Torneo");
         btnConfirmar.setFont(new Font("Arial", Font.BOLD, 14));
         btnConfirmar.setBackground(new Color(34, 139, 34));
-        btnConfirmar.setForeground(Color.WHITE);
+        btnConfirmar.setForeground(Color.BLACK);
         btnConfirmar.setPreferredSize(new Dimension(150, 40));
         btnConfirmar.setEnabled(false);
 
         btnReiniciar = new JButton("Reiniciar Torneo");
         btnReiniciar.setFont(new Font("Arial", Font.BOLD, 14));
         btnReiniciar.setBackground(new Color(220, 20, 60));
-        btnReiniciar.setForeground(Color.WHITE);
+        btnReiniciar.setForeground(Color.BLACK);
         btnReiniciar.setPreferredSize(new Dimension(150, 40));
 
         // Panel de estado
