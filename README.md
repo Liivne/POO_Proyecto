@@ -33,3 +33,24 @@ y tentativo para todos los enfrentamientos correspondientes entre los jugadores/
 # Diagrama UML:
 
 # Interfaz de Usuario.
+En esta parte está toda la lógica de la interfaz gráfica del usuario. En esta etapa se encuentran elementos fundamentales 
+que facilitan el buen uso de este proyecto. 
+
+**Ventanas Principales**
+* Ventana principal: Punto de partida donde puede loguearte como administrador o participante de un torneo.
+* Ventana crear torneo: Se encarga de la creación de torneos con todas sus características.
+* Ventana Administradora: Nos permite visualizar torneos creados con sus resultados.
+
+**Interactividad**
+* Botones estilizados con efectos Hover y colores llamativos para acciones como crear, limpiar o reiniciar.
+* Listeners que reaccionan a eventos de usuario para una experiencia fluida.
+
+Tecnologías usadas: Java Swing.
+
+# Patrones de Diseño
+
+  
+|      Patron      | Justificación                                                                                                                                                                          |
+|:----------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|      Builder     | La clase Torneo puede tener un Constructor con muchos parámetros (debe tener Formato de liga y Formato de equipos, Fecha, Lugar, equipos o jugadores, etc) por eso se optó por Utiliutilizar builder para dar mayor orden al momento de construír nuevos Torneos.   utilizar builder para dar mayor orden al momento de construír nuevos Torneos.                                           
+|     Observer     | justificacion patron observer                                                                                                                                                          |
