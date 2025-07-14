@@ -1,5 +1,8 @@
 package org.example.Visual;
 
+import org.example.Logica.Jugador;
+import org.example.Logica.Participantes;
+import org.example.Logica.Torneo;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -7,21 +10,26 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
+import static org.example.Logica.FORMATO.LIGASIMPLE;
+import static org.example.Logica.TIPOPARTICIPANTES.INDIVIDUAL;
 
 public class LigaResultadosPanel extends JPanel {
-    private List<String> equipos;
+    protected Torneo torneo;
+    private ArrayList<Participantes> equipos;
     private JTable tablaResultados;
     private DefaultTableModel modeloTabla;
     private JButton btnGuardar;
-    private JButton btnCargarEquipos;
     private JLabel lblEstado;
 
-    public LigaResultadosPanel() {
-        equipos = new ArrayList<>();
+    public LigaResultadosPanel(Torneo torneo) {
+        equipos = torneo.getListaParticipantes();
         initializeComponents();
         setupLayout();
+        crearTablaResultados();
+
     }
 
     private void initializeComponents() {
@@ -45,20 +53,10 @@ public class LigaResultadosPanel extends JPanel {
         tablaResultados.setDefaultRenderer(JComponent.class, new ResultadoCellRenderer());
         tablaResultados.setDefaultEditor(JComponent.class, new ResultadoCellEditor());
 
-        btnCargarEquipos = new JButton("Cargar Equipos");
         btnGuardar = new JButton("Guardar Resultados");
         btnGuardar.setEnabled(false);
 
-        lblEstado = new JLabel("Cargue los equipos para comenzar");
-        lblEstado.setForeground(Color.BLUE);
-
-        // Configurar listeners
-        btnCargarEquipos.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarEquipos();
-            }
-        });
+        //lblEstado.setForeground(Color.BLUE);
 
         btnGuardar.addActionListener(new ActionListener() {
             @Override
@@ -75,7 +73,6 @@ public class LigaResultadosPanel extends JPanel {
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelSuperior.add(new JLabel("Liga Simple (Todos contra Todos)"));
         panelSuperior.add(Box.createHorizontalStrut(20));
-        panelSuperior.add(btnCargarEquipos);
         panelSuperior.add(btnGuardar);
 
         // Panel central con tabla
@@ -84,36 +81,11 @@ public class LigaResultadosPanel extends JPanel {
 
         // Panel inferior con estado
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelInferior.add(lblEstado);
+        //panelInferior.add(lblEstado);
 
         add(panelSuperior, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        add(panelInferior, BorderLayout.SOUTH);
-    }
-
-    private void cargarEquipos() {
-        String input = JOptionPane.showInputDialog(this,
-                "Ingrese los nombres de los equipos separados por comas:");
-
-        if (input != null && !input.trim().isEmpty()) {
-            equipos.clear();
-            String[] nombresEquipos = input.split(",");
-            for (String nombre : nombresEquipos) {
-                equipos.add(nombre.trim());
-            }
-
-            if (equipos.size() < 2) {
-                JOptionPane.showMessageDialog(this,
-                        "Debe ingresar al menos 2 equipos",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            crearTablaResultados();
-            lblEstado.setText("Equipos cargados: " + equipos.size() + " equipos");
-            lblEstado.setForeground(Color.GREEN);
-            btnGuardar.setEnabled(true);
-        }
+        //add(panelInferior, BorderLayout.SOUTH);
     }
 
     private void crearTablaResultados() {
@@ -123,14 +95,14 @@ public class LigaResultadosPanel extends JPanel {
 
         // Crear columnas
         modeloTabla.addColumn("Equipo");
-        for (String equipo : equipos) {
-            modeloTabla.addColumn(equipo);
+        for (Participantes equipo : equipos) {
+            modeloTabla.addColumn(equipo.getNombre());
         }
 
         // Crear filas
         for (int i = 0; i < equipos.size(); i++) {
             Object[] fila = new Object[equipos.size() + 1];
-            fila[0] = equipos.get(i);
+            fila[0] = equipos.get(i).getNombre();
 
             for (int j = 1; j <= equipos.size(); j++) {
                 if (i == j - 1) {
@@ -197,7 +169,7 @@ public class LigaResultadosPanel extends JPanel {
                                     int golesLocal = Integer.parseInt(golLocal);
                                     int golesVisitante = Integer.parseInt(golVisitante);
 
-                                    String equipoVisitante = equipos.get(j - 1);
+                                    Participantes equipoVisitante = equipos.get(j - 1);
                                     sb.append(String.format("%s %d - %d %s\n",
                                             equipoLocal, golesLocal, golesVisitante, equipoVisitante));
                                     hayResultados = true;
@@ -281,7 +253,13 @@ public class LigaResultadosPanel extends JPanel {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Gestor de Torneos - Liga Simple");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.add(new LigaResultadosPanel());
+            Torneo torneo = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1), "Club de Tenis", "Tenis");
+
+            for (int i = 0; i < 6; i++) {
+                torneo.addParticipantes(new Jugador("Jugador " + (i + 1), "Jugador" + (i + 1) + "@prueba.test"));
+            }
+
+            frame.add(new LigaResultadosPanel(torneo));
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
