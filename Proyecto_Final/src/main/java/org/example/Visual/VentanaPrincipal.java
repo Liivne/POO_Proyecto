@@ -175,6 +175,8 @@ public class VentanaPrincipal extends JFrame {
     }
     private void abrirVentanaCompetidor(UsuarioBasico usuario) {
         VentanaCompetidor ventana = new VentanaCompetidor(usuario);
+        ventana.setVisible(true);
+
     }
 
     private void mostrarMensaje(String mensaje) {
