@@ -9,10 +9,13 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.Set;
 
 public class VentanaCrearTorneo extends JFrame {
     private EventManager eventManager;
+    private final List<Observer> observadoresCompetidores = new ArrayList<>();
+
     // Componentes del formulario
     private JTextField txtNombreTorneo;
     private JComboBox<String> cbDisciplina;

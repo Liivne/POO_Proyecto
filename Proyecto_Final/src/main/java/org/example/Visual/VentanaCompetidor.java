@@ -392,9 +392,36 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         JOptionPane.showMessageDialog(this, "Lista de torneos actualizada", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    private void actualizarTabla(Torneo torneo) {
+
+        String estado = "Inscripción Abierta";
+        String premio = "No especificado";
+
+        //agregar una nueva fila a la tabla
+        modeloTorneos.addRow(new Object[]{
+                torneo.getNombreTorneo(),
+                torneo.getFormatoTorneo(),
+                torneo.getCalendario().getFechaBase().toString(),
+                "No especificado", //por el momento
+                torneo.getFormatoTorneo().toString(),
+                torneo.getListaParticipantes().size() + "/" + torneo.getListaParticipantes().size(),
+                estado,
+                premio
+        });
+    }
+    @Override
+    public void update(String eventType, Torneo data) {
+        if (eventType.equals("nuevoTorneo")) {
+            System.out.println("Hola");
+            actualizarTabla(data);
+        }
+    }
+
     private void verResultados() {
         JOptionPane.showMessageDialog(this, "Abriendo bracket del torneo (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    public UsuarioBasico getUsuario(){return usuario;}
 
 
     private void setupWindow() {
@@ -416,14 +443,5 @@ public class VentanaCompetidor extends JFrame implements EventListener {
 
             new VentanaCompetidor(u).setVisible(true);
         });
-    }
-
-    @Override
-    public void update(String eventType, Object data) {
-        if (eventType.equals("nuevoTorneo")) {
-            System.out.println("ventanaAdmin recibió notificación: nuevo torneo ");
-            // lógica para actualizar lista de torneos
-        }
-
     }
 }

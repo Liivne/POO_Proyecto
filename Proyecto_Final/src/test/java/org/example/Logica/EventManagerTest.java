@@ -45,7 +45,7 @@ class EventManagerTest {
         boolean notificado = false;
 
         @Override
-        public void update(String eventType, Object data) {
+        public void update(String eventType, Torneo data) {
             notificado  = true;
         }
     }

@@ -7,9 +7,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
+import static org.example.Visual.VentanaPrincipal.getVentanasCompetidor;
 
 public class VentanaAdministrarOrganizador extends JFrame implements EventListener {
     private Editor editor;
@@ -447,16 +449,23 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
     }
 
     private void abrirVentanaCrearTorneo() {
-        VentanaCrearTorneo v = new VentanaCrearTorneo(editor);
-        v.getEventManager().subscribe("nuevoTorneo", this);
-        v.setVisible(true);
+        VentanaCrearTorneo ve = new VentanaCrearTorneo(editor);
+        ve.getEventManager().subscribe("nuevoTorneo", this);
+        List<VentanaCompetidor> lista = VentanaPrincipal.getVentanasCompetidor();
+        for (VentanaCompetidor v : lista) {
+            ve.getEventManager().subscribe("nuevoTorneo", v);
+        }
+        ve.setVisible(true);
     }
 
+    public Editor getUsuario(){return editor;}
+
     @Override
-    public void update(String eventType, Object data) {
+    public void update(String eventType, Torneo data) {
         if (eventType.equals("nuevoTorneo")) {
+            System.out.println(editor.getNombre_Usuario() + ": Subiste un torneo");
             //para obtener el último torneo agregado al editor
-            Torneo nuevoTorneo = editor.getTorneos().get(editor.getTorneos().size() - 1);
+            Torneo nuevoTorneo = editor.getTorneos().getLast();
 
             listaTorneos.add(nuevoTorneo);
 

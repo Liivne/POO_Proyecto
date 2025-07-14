@@ -12,12 +12,12 @@ public class LoginPersonas {
     private List<Editor> EditoresRegistrados = new ArrayList<>(); // Almacenaría Editores
     private List<UsuarioBasico> UsuariosRegistrados = new ArrayList<>(); //Almacenaría Usuarios no editores
 
-    public Editor e1 = new Editor("Link", "Hyrule");
-    public Editor e2 = new Editor("Ganon", "Gerudo");
+    public static Editor e1 = new Editor("Link", "Hyrule");
+    public static Editor e2 = new Editor("Ganon", "Gerudo");
 
-    public UsuarioBasico u1 = new UsuarioBasico("Jake el perro", "ay canijote");
-    public UsuarioBasico u2 = new UsuarioBasico("Geoffrey Hinton", "IAmevoy");
-    public UsuarioBasico u3 = new UsuarioBasico("Demis Hassabis", "4lphaZer0");
+    public static UsuarioBasico u1 = new UsuarioBasico("Jake el perro", "ay canijote");
+    public static UsuarioBasico u2 = new UsuarioBasico("Geoffrey Hinton", "IAmevoy");
+    public static UsuarioBasico u3 = new UsuarioBasico("Demis Hassabis", "4lphaZer0");
     /**
      * Crea una nueva instancia de {@code LoginPersonas} y
      * agrega algunos editores y usuarios predefinidos, quienes están autoriaados para ingresar a la plataforma.

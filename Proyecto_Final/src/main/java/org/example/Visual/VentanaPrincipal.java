@@ -1,14 +1,27 @@
 package org.example.Visual;
 
 import org.example.Logica.Editor;
+import org.example.Logica.EventManager;
 import org.example.Logica.LoginPersonas;
 import org.example.Logica.UsuarioBasico;
-import org.example.Logica.Usuarios;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
+
+import static org.example.Logica.LoginPersonas.*;
 
 public class VentanaPrincipal extends JFrame {
+    // Lista de ventanas
+    static List<VentanaCompetidor> ventanasCompetidor = new ArrayList<>(
+            List.of(
+                    new VentanaCompetidor(u1),
+                    new VentanaCompetidor(u2),
+                    new VentanaCompetidor(u3)
+            )
+    );
+
     private LoginPersonas iniciosesion = new LoginPersonas();
     private JTextField txtUsuario;
     private JPasswordField txtContra;
@@ -138,49 +151,6 @@ public class VentanaPrincipal extends JFrame {
         add(panelPrincipal, BorderLayout.CENTER);
     }
 
-    private JButton crearBotonPrincipal(String titulo, String descripcion, Color colorBase, Color colorHover) {
-        JButton boton = new JButton();
-        boton.setLayout(new BorderLayout());
-        boton.setBackground(colorBase);
-        boton.setBorder(BorderFactory.createRaisedBevelBorder());
-        boton.setFocusPainted(false);
-        boton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        // Panel interno del botón
-        JPanel panelInterno = new JPanel();
-        panelInterno.setLayout(new BoxLayout(panelInterno, BoxLayout.Y_AXIS));
-        panelInterno.setOpaque(false);
-        panelInterno.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
-
-        JLabel lblTitulo = new JLabel(titulo);
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 18));
-        lblTitulo.setForeground(Color.WHITE);
-        lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JLabel lblDescripcion = new JLabel(descripcion);
-        lblDescripcion.setFont(new Font("Arial", Font.PLAIN, 12));
-        lblDescripcion.setForeground(new Color(230, 230, 230));
-        lblDescripcion.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        panelInterno.add(lblTitulo);
-        panelInterno.add(Box.createRigidArea(new Dimension(0, 5)));
-        panelInterno.add(lblDescripcion);
-
-        boton.add(panelInterno);
-
-        // Efecto hover
-        boton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                boton.setBackground(colorHover);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                boton.setBackground(colorBase);
-            }
-        });
-
-        return boton;
-    }
-
     private JButton crearBotonSecundario(String texto) {
         JButton boton = new JButton(texto);
         boton.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -230,12 +200,14 @@ public class VentanaPrincipal extends JFrame {
         // Suscribir la ventana del admin al CrearTorneo
         VentanaAdministrarOrganizador ventana = new VentanaAdministrarOrganizador(editor);
         ventana.setVisible(true);
-        this.dispose();
     }
     private void abrirVentanaCompetidor(UsuarioBasico usuario) {
-        VentanaCompetidor ventana = new VentanaCompetidor(usuario);
-        ventana.setVisible(true);
-        this.dispose();
+        for (VentanaCompetidor v : ventanasCompetidor) {
+            if (v.getUsuario().equals(usuario)) {
+                v.setVisible(true);
+                break;
+            }
+        }
     }
 
     private void mostrarMensaje(String mensaje) {
@@ -253,6 +225,9 @@ public class VentanaPrincipal extends JFrame {
 
         JOptionPane.showMessageDialog(this, mensaje, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
         // Esta pestaña podría ser usada como guía de uso
+    }
+    public static List<VentanaCompetidor> getVentanasCompetidor() {
+        return ventanasCompetidor;
     }
 
     // Método main para ejecutar la aplicación

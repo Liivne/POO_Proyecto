@@ -56,7 +56,7 @@ public class EventManager {
      *
      * @param eventType El nombre del evento que ocurrió.
      */
-    public void notify(String eventType, Object data) {
+    public void notify(String eventType, Torneo data) {
         List<EventListener> users = listeners.get(eventType);
         for (EventListener listener : users) {
             listener.update(eventType, data);
