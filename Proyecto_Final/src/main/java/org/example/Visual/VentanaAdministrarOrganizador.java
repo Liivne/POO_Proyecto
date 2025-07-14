@@ -46,7 +46,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
     private JTabbedPane pestanas;
     private JTable tablaTorneos;
     private DefaultTableModel modeloTorneos;
-    private JTextField txtBuscar;
 
     private void initComponents() {
         setTitle("Competidor - Torneos y Resultados");
@@ -147,47 +146,12 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         panelAux.add(panelBotonCircular, BorderLayout.SOUTH);
 
         // Agregar ambos paneles al contenedor con overlay
-        panelContenedor.add(panel);
         panelContenedor.add(panelAux);
+        panelContenedor.add(panel);
 
         return panelContenedor;
     }
 
-    private JPanel crearPanelMisTorneos() {
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        // Panel de información personal
-        JPanel panelInfo = new JPanel();
-        panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.Y_AXIS));
-        panelInfo.setBackground(new Color(245, 245, 220));
-        panelInfo.setBorder(BorderFactory.createTitledBorder("Mi Información"));
-
-        JLabel lblNombre = new JLabel("Nombre: " + editor.getNombre_Usuario());
-        JLabel lblTorneosActivos = new JLabel("Torneos Activos: 0");
-        JLabel lblTorneosCompletados = new JLabel("Torneos Completados: 0");
-        JLabel lblVictorias = new JLabel("Victorias: 0");
-
-        lblNombre.setFont(new Font("Arial", Font.BOLD, 12));
-
-        panelInfo.add(Box.createRigidArea(new Dimension(0, 10)));
-        panelInfo.add(lblNombre);
-        panelInfo.add(Box.createRigidArea(new Dimension(0, 5)));
-        panelInfo.add(lblTorneosActivos);
-        panelInfo.add(Box.createRigidArea(new Dimension(0, 5)));
-        panelInfo.add(lblTorneosCompletados);
-        panelInfo.add(Box.createRigidArea(new Dimension(0, 5)));
-        panelInfo.add(lblVictorias);
-        panelInfo.add(Box.createRigidArea(new Dimension(0, 10)));
-
-        // Panel de botones
-        JPanel panelBotonesMis = new JPanel(new FlowLayout());
-
-        panel.add(panelInfo, BorderLayout.NORTH);
-        panel.add(panelBotonesMis, BorderLayout.SOUTH);
-
-        return panel;
-    }
 
     private JButton crearBoton(String texto, Color color) {
         JButton boton = new JButton(texto);
@@ -400,17 +364,11 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         // Configurar el botón
         btnCircular.setPreferredSize(new Dimension(50, 50));
         btnCircular.setFont(new Font("Arial", Font.BOLD, 20));
-        btnCircular.setForeground(Color.WHITE);
+        btnCircular.setForeground(Color.BLACK);
         btnCircular.setBackground(new Color(30, 144, 255));
-        btnCircular.setBorder(BorderFactory.createEmptyBorder());
+        btnCircular.setBorder(BorderFactory.createRaisedBevelBorder());
         btnCircular.setFocusPainted(false);
         btnCircular.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        // Hacer el botón circular usando un borde redondeado
-        btnCircular.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(30, 144, 255), 2),
-                BorderFactory.createEmptyBorder()
-        ));
 
         btnCircular.addActionListener(e -> abrirVentanaCrearTorneo());
 
