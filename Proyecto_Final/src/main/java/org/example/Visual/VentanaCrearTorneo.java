@@ -413,6 +413,8 @@ public class VentanaCrearTorneo extends JFrame {
                     .conFormato(formato)
                     .conTipoParticipantes(tipo)
                     .conFechaInicio(fechaInicio)
+                    .conDisciplina(disciplina)
+                    .conLugar(txtLugar.toString())
                     .build();
             //agregar equipos al torneo
             for (Equipo equipo : equiposParticipantes) {

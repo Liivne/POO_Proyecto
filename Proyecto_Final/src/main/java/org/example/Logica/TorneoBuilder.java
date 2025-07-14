@@ -16,7 +16,7 @@ public class TorneoBuilder {
     private TIPOPARTICIPANTES tipoParticipantes;
     private String lugarTorneo;
     private LocalDate comienzoTorneo;
-    private String premiosTorneo;
+    private String disciplina;
 
     //Establece nombre del Torneo.
     public TorneoBuilder conNombre(String nombre) {
@@ -49,8 +49,8 @@ public class TorneoBuilder {
     }
 
     //Establece los premios que podría tener el Torneo.
-    public TorneoBuilder conPremios(String premios) {
-        this.premiosTorneo = premios;
+    public TorneoBuilder conDisciplina(String disciplina) {
+        this.disciplina = disciplina;
         return this;
     }
 
@@ -61,6 +61,6 @@ public class TorneoBuilder {
      * @return una instancia configurada de {@code Torneo}
      */
     public Torneo build() {
-        return new Torneo(nombreTorneo, formatoTorneo, tipoParticipantes, comienzoTorneo, lugarTorneo);
+        return new Torneo(nombreTorneo, formatoTorneo, tipoParticipantes, comienzoTorneo, lugarTorneo, disciplina);
     }
 }

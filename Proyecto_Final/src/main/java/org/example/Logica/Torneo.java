@@ -17,6 +17,8 @@ public class Torneo {
     private TIPOPARTICIPANTES tipoParticipantes;
     private LocalDate comienzo;
     private String lugarTorneo;
+    private String disciplina;
+
 
 
     /**
@@ -28,12 +30,13 @@ public class Torneo {
      * @param comienzo Refiere a fecha inicial del torneo para generar calendario.
      * @param lugarTorneo Refiere al lugar donde se va a realizar el torneo.
      */
-    public Torneo (String nombreTorneo, FORMATO formatoTorneo, TIPOPARTICIPANTES tipoParticipantes, LocalDate comienzo, String lugarTorneo) {
+    public Torneo (String nombreTorneo, FORMATO formatoTorneo, TIPOPARTICIPANTES tipoParticipantes, LocalDate comienzo, String lugarTorneo, String disciplina) {
         this.nombreTorneo = nombreTorneo;
         this.formatoTorneo = formatoTorneo;
         this.tipoParticipantes = tipoParticipantes;
         this.comienzo = comienzo;
         this.lugarTorneo = lugarTorneo;
+        this.disciplina = disciplina;
         this.listaParticipantes = new ArrayList<>();
     }
 
@@ -105,5 +108,9 @@ public class Torneo {
 
     public String getLugarTorneo(){
         return lugarTorneo;
+    }
+
+    public String getDisciplina() {
+        return disciplina;
     }
 }

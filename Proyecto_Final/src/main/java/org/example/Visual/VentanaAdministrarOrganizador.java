@@ -273,10 +273,10 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         modeloTorneos.setRowCount(0);
         listaTorneos.clear();
 
-        Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15),"Estadio Central");
-        Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20), "Club Deportivo");
-        Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10), "Polideportivo Norte");
-        Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1), "Club de Tenis");
+        Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15),"Estadio Central","Fútbol");
+        Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20), "Club Deportivo","Ping Pong");
+        Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10), "Polideportivo Norte", "Baloncesto");
+        Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1), "Club de Tenis", "Tenis");
 
         for (int i = 0; i < 12; i++) {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
@@ -303,7 +303,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
 
         modeloTorneos.addRow(new Object[]{
                 torneo1.getNombreTorneo(),
-                "Fútbol",
+                torneo1.getDisciplina(),
                 torneo1.getComienzo().toString(),
                 torneo1.getLugarTorneo(),
                 torneo1.getFormatoTorneo().toString(),
@@ -312,7 +312,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
 
         modeloTorneos.addRow(new Object[]{
                 torneo2.getNombreTorneo(),
-                "Ping Pong",
+                torneo2.getDisciplina(),
                 torneo2.getComienzo().toString(),
                 torneo2.getLugarTorneo(),
                 torneo2.getFormatoTorneo().toString(),
@@ -321,7 +321,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
 
         modeloTorneos.addRow(new Object[]{
                 torneo3.getNombreTorneo(),
-                "Baloncesto",
+                torneo3.getDisciplina(),
                 torneo3.getComienzo().toString(),
                 torneo3.getLugarTorneo(),
                 torneo3.getFormatoTorneo().toString(),
@@ -330,7 +330,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
 
         modeloTorneos.addRow(new Object[]{
                 torneo4.getNombreTorneo(),
-                "Tenis",
+                torneo4.getDisciplina(),
                 torneo4.getComienzo().toString(),
                 torneo4.getLugarTorneo(),
                 torneo4.getFormatoTorneo().toString(),
