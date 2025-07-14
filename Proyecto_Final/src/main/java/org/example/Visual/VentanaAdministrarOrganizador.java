@@ -416,11 +416,11 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         int numEquipos = torneo.getListaParticipantes().size();
 
         if (numEquipos == 4) {
-            ventanaEliminacion = new Torneo4Equipos();
+            ventanaEliminacion = new Torneo4Equipos(torneo);
         } else if (numEquipos == 8) {
-            ventanaEliminacion = new Torneo8Equipos();
+            ventanaEliminacion = new Torneo8Equipos(torneo);
         } else if (numEquipos == 16) {
-            ventanaEliminacion = new Torneo16Equipos();
+            ventanaEliminacion = new Torneo16Equipos(torneo);
         } else {
             JOptionPane.showMessageDialog(this,
                     "Número de equipos no soportado: " + numEquipos,
