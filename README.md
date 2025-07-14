@@ -56,3 +56,4 @@ Tecnologías usadas: Java Swing.
 |     Observer     | Observer se utilizó para actualizar las listas de torneos en tiempo real, de modo que solo sean accesibles para los usuarios registrados y el propio administrador, sin tener que interferir con las listas de torneos de otros administradores.|
 
 # Imagenes Interfaz Gráfica.
+Para ingresar como administrador se pueden usar los siguientes logins: (cuneta:"Link", contraseña:"Hyrule") o (cuenta: "Ganon", contraseña:"Gerudo");
