@@ -61,6 +61,6 @@ public class TorneoBuilder {
      * @return una instancia configurada de {@code Torneo}
      */
     public Torneo build() {
-        return new Torneo(nombreTorneo, formatoTorneo, tipoParticipantes, comienzoTorneo);
+        return new Torneo(nombreTorneo, formatoTorneo, tipoParticipantes, comienzoTorneo, lugarTorneo);
     }
 }
