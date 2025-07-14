@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import static org.example.Logica.FORMATO.LIGASIMPLE;
 import static org.example.Logica.TIPOPARTICIPANTES.INDIVIDUAL;
 
+/**
+ * Panel para visualizar y gestionar los resultados de torneos en formato de liga simple (todos contra todos).
+ * Permite ingresar resultados de partidos entre participantes.
+ */
 public class LigaResultadosPanel extends JPanel {
     protected Torneo torneo;
     private ArrayList<Participantes> equipos;
@@ -24,6 +28,11 @@ public class LigaResultadosPanel extends JPanel {
     private JButton btnGuardar;
     private JLabel lblEstado;
 
+    /**
+     * Constructor que inicializa el panel con los datos del torneo.
+     *
+     * @param torneo El torneo cuyos resultados se van a gestionar
+     */
     public LigaResultadosPanel(Torneo torneo) {
         equipos = torneo.getListaParticipantes();
         initializeComponents();
@@ -32,6 +41,10 @@ public class LigaResultadosPanel extends JPanel {
 
     }
 
+    /**
+     * Inicializa los componentes gráficos del panel.
+     * Configura el modelo de tabla y la tabla de resultados
+     */
     private void initializeComponents() {
         // Configurar modelo de tabla
         modeloTabla = new DefaultTableModel() {
@@ -66,40 +79,44 @@ public class LigaResultadosPanel extends JPanel {
         });
     }
 
+    /**
+     * Configura el diseño del panel, organizando los componentes en áreas norte, centro y sur.
+     */
     private void setupLayout() {
         setLayout(new BorderLayout());
-
-        // Panel superior con controles
+        //Panel superior con controles
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.LEFT));
         panelSuperior.add(new JLabel("Liga Simple (Todos contra Todos)"));
         panelSuperior.add(Box.createHorizontalStrut(20));
         panelSuperior.add(btnGuardar);
 
-        // Panel central con tabla
+        //Panel central con tabla
         JScrollPane scrollPane = new JScrollPane(tablaResultados);
         scrollPane.setPreferredSize(new Dimension(800, 400));
 
-        // Panel inferior con estado
+        //Panel inferior con estado
         JPanel panelInferior = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        //panelInferior.add(lblEstado);
 
         add(panelSuperior, BorderLayout.NORTH);
         add(scrollPane, BorderLayout.CENTER);
-        //add(panelInferior, BorderLayout.SOUTH);
     }
 
+    /**
+     * Crea y configura la tabla de resultados con los equipos participantes.
+     * La tabla muestra una matriz de enfrentamientos con campos para ingresar resultados.
+     */
     private void crearTablaResultados() {
-        // Limpiar tabla
+        //Limpiar tabla
         modeloTabla.setRowCount(0);
         modeloTabla.setColumnCount(0);
 
-        // Crear columnas
+        //crear columnas
         modeloTabla.addColumn("Equipo");
         for (Participantes equipo : equipos) {
             modeloTabla.addColumn(equipo.getNombre());
         }
 
-        // Crear filas
+        //Crear filas
         for (int i = 0; i < equipos.size(); i++) {
             Object[] fila = new Object[equipos.size() + 1];
             fila[0] = equipos.get(i).getNombre();
@@ -123,6 +140,11 @@ public class LigaResultadosPanel extends JPanel {
         }
     }
 
+    /**
+     * Crea un panel para ingresar el resultado de un partido.
+     *
+     * @return JPanel con campos para ingresar goles local y visitante
+     */
     private JPanel crearPanelResultado() {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 2, 2));
         panel.setBackground(Color.WHITE);
@@ -141,6 +163,10 @@ public class LigaResultadosPanel extends JPanel {
         return panel;
     }
 
+    /**
+     * Recoge los resultados ingresados en la tabla.
+     * Valida que los resultados sean numéricos antes de mostrarlos.
+     */
     private void guardarResultados() {
         StringBuilder sb = new StringBuilder();
         sb.append("=== RESULTADOS DE LA LIGA ===\n\n");
@@ -248,7 +274,11 @@ public class LigaResultadosPanel extends JPanel {
         }
     }
 
-    // Método main para pruebas
+    /**
+     * Método main para pruebas de la interfaz.
+     *
+     * @param args Argumentos de línea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             JFrame frame = new JFrame("Gestor de Torneos - Liga Simple");
@@ -266,10 +296,3 @@ public class LigaResultadosPanel extends JPanel {
         });
     }
 }
-/** Esta pestaña gestiona torneos todos contra todos de ida y vuelta
- *  podría hacerse otra similar solo para vuelta
- *
- *  Falta gestionar que es lo que pasa cuando faltan equipos, no debería estar permitido
- *  inicializar el torneo hasta que estén todos los equipos propuestos al ocupar crearTorneo
- *
- */

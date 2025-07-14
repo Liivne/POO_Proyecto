@@ -1,3 +1,10 @@
+/**
+ * Clase base para representar un torneo de eliminación directa.
+ * Este torneo permite la creación de rondas en las que los participantes
+ * se enfrentan en partidas directas. Los ganadores avanzan a la siguiente
+ * ronda hasta que se determina un campeón.
+ */
+
 package org.example.Visual;
 
 import org.example.Logica.Equipo;
@@ -39,7 +46,12 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     protected String[] equiposIniciales;
     protected boolean torneoConfirmado = false;
 
-    // Constructor
+    /**
+     * Constructor de la clase TorneoEliminacionDirectaBase.
+     * Inicializa la ventana y los componentes gráficos.
+     *
+     * @param torneo El objeto Torneo con los datos y participantes.
+     */
     public TorneoEliminacionDirectaBase(Torneo torneo) {
         this.torneo = torneo;
         panelesRondas = new ArrayList<>();
@@ -55,7 +67,12 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         poblarEquiposIniciales();
     }
 
-    // Método para obtener los equipos del objeto Torneo
+    /**
+     * Inicializa los equipos participantes desde el objeto Torneo
+     *
+     * @throws IllegalArgumentException si el número de participantes
+     * no coincide con el número esperado de equipos.
+     */
     protected void inicializarEquiposDesdeTorneo() {
         List<String> nombresParticipantes = torneo.getListaParticipantes().stream()
                 .map(p -> p.getNombre())
@@ -81,7 +98,9 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     protected abstract int getNumeroRondas();
     protected abstract String[] getNombresRondas();
 
-
+    /**
+     * Configura las propiedades básicas de la ventana.
+     */
     private void configurarVentana() {
         setTitle("Gestión de Torneo - Eliminación Directa (" + getNumeroEquipos() + " Equipos)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,6 +108,9 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         setMinimumSize(new Dimension(800, 600));
     }
 
+    /**
+     * Inicializa los paneles y botones comunes (campeón, controles, estado).
+     */
     protected void inicializarComponentesComunes() {
         // Panel principal
         panelPrincipal = new JPanel(new BorderLayout());
@@ -134,6 +156,14 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         panelEstado.setBackground(Color.WHITE);
     }
 
+    /**
+     * Crea un panel para una ronda del torneo.
+     *
+     * @param titulo Título del panel.
+     * @param numEnfrentamientos Número de enfrentamientos en la ronda.
+     * @param habilitado Si los botones de esta ronda deben estar habilitados al inicio.
+     * @return JPanel con el diseño de la ronda.
+     */
     protected JPanel crearPanelRonda(String titulo, int numEnfrentamientos, boolean habilitado) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(numEnfrentamientos, 1, 5, 10));
@@ -142,6 +172,13 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         return panel;
     }
 
+    /**
+     * Crea un arreglo de botones para representar equipos en una ronda.
+     *
+     * @param numBotones Cantidad de botones a crear.
+     * @param habilitado Estado inicial de habilitación de los botones.
+     * @return Arreglo de botones.
+     */
     protected JButton[] crearBotonesRonda(int numBotones, boolean habilitado) {
         JButton[] botones = new JButton[numBotones];
         for (int i = 0; i < numBotones; i++) {
@@ -155,6 +192,13 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         return botones;
     }
 
+    /**
+     * Crea un panel de enfrentamiento con dos botones y un texto "VS" entre ellos.
+     *
+     * @param equipo1 Botón del primer equipo.
+     * @param equipo2 Botón del segundo equipo.
+     * @return JPanel con el enfrentamiento.
+     */
     protected JPanel crearEnfrentamiento(JButton equipo1, JButton equipo2) {
         JPanel enfrentamiento = new JPanel(new GridLayout(3, 1, 2, 2));
         enfrentamiento.add(equipo1);
@@ -167,6 +211,14 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         return enfrentamiento;
     }
 
+    /**
+     * Crea una etiqueta que muestra el estado de una ronda específica.
+     *
+     * @param nombreRonda Nombre de la ronda.
+     * @param actual Número actual de enfrentamientos jugados.
+     * @param total Total de enfrentamientos.
+     * @return JLabel con el estado de la ronda.
+     */
     protected JLabel crearLabelEstado(String nombreRonda, int actual, int total) {
         JLabel label = new JLabel(nombreRonda + actual + "/" + total);
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -231,8 +283,12 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         }
     }
 
-    // Métodos que pueden ser sobrescritos por las subclases
-    // Método principal para manejar la selección de equipos ganadores
+    /**
+     * Maneja el evento cuando un botón es presionado en una ronda.
+     *
+     * @param ronda Índice de la ronda.
+     * @param indice Índice del botón presionado en la ronda.
+     */
     protected void manejarSeleccion(int ronda, int indice) {
         if (torneoConfirmado) return;
 
@@ -251,7 +307,13 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         actualizarEstadoTorneo();
     }
 
-    // Método para pasar el ganador a la siguiente ronda
+    /**
+     * Pasa el equipo ganador a la siguiente ronda o lo declara campeón si es la final.
+     *
+     * @param ronda Índice de la ronda actual.
+     * @param indice Índice del botón del equipo ganador.
+     * @param nombreGanador Nombre del equipo ganador.
+     */
     protected void pasarGanadorSiguienteRonda(int ronda, int indice, String nombreGanador) {
         // Verificar que existe una ronda siguiente
         if (ronda + 1 >= botonesRondas.size()) {
@@ -278,7 +340,7 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         }
     }
 
-    // Método para actualizar el estado del torneo
+    //Método para actualizar el estado del torneo
     protected void actualizarEstadoTorneo() {
         String[] nombresRondas = getNombresRondas();
 
@@ -298,6 +360,9 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
         }
     }
 
+    /**
+     * Confirma el torneo una vez que se ha definido un campeón.
+     */
     protected void confirmarTorneo() {
         if (!labelCampeon.getText().equals("Esperando campeón...")) {
             torneoConfirmado = true;
@@ -349,7 +414,7 @@ public abstract class TorneoEliminacionDirectaBase extends JFrame {
     public List<JLabel> getLabelsEstado() { return labelsEstado; }
 }
 
-// Implementación para 16 equipos
+//Implementación para 16 equipos
 class Torneo16Equipos extends TorneoEliminacionDirectaBase {
     public Torneo16Equipos(Torneo torneo) {
         super(torneo);
@@ -400,7 +465,7 @@ class Torneo16Equipos extends TorneoEliminacionDirectaBase {
     }
 }
 
-// Implementación para 8 equipos
+//Implementación para 8 equipos
 class Torneo8Equipos extends TorneoEliminacionDirectaBase {
     public Torneo8Equipos(Torneo torneo) {
         super(torneo);
@@ -442,7 +507,7 @@ class Torneo8Equipos extends TorneoEliminacionDirectaBase {
     }
 }
 
-// Implementación para 4 equipos
+//Implementación para 4 equipos
 class Torneo4Equipos extends TorneoEliminacionDirectaBase {
     public Torneo4Equipos(Torneo torneo) {
         super(torneo);

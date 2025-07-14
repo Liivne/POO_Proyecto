@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
 
+/**
+ * VentanaCompetidor es la interfaz gráfica principal para usuarios con rol de competidor.
+ * Permite visualizar torneos disponibles y resultados.
+ * También ofrece funciones para filtrar y consultar detalles de los torneos.
+ */
 public class VentanaCompetidor extends JFrame implements EventListener {
 
     private UsuarioBasico usuario;
@@ -25,6 +30,11 @@ public class VentanaCompetidor extends JFrame implements EventListener {
     private JComboBox<String> cbFiltroDeporte;
     private JComboBox<String> cbFiltroEstado;
 
+    /**
+     * Crea una nueva instancia de VentanaCompetidor.
+     *
+     * @param usuario El usuario que inicia sesión.
+     */
     public VentanaCompetidor(UsuarioBasico usuario) {
         this.usuario = usuario;
         this.listaTorneos = new ArrayList<>();
@@ -33,6 +43,9 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         cargarDatosPrueba();
     }
 
+    /**
+     * Inicializa todos los componentes gráficos de la ventana.
+     */
     private void initComponents() {
         setTitle("Competidor - Torneos y Resultados");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,6 +81,11 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         add(pestanas, BorderLayout.CENTER);
     }
 
+    /**
+     * Crea el panel con la lista de torneos disponibles y filtros de búsqueda.
+     *
+     * @return JPanel con tabla y controles de filtros.
+     */
     private JPanel crearPanelTorneos() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
@@ -237,6 +255,13 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         return panel;
     }
 
+    /**
+     * Crea un JButton personalizado con estilo y efecto hover.
+     *
+     * @param texto El texto que se mostrará en el botón.
+     * @param color El color de fondo base del botón.
+     * @return Un objeto {@link JButton} configurado con el estilo y efectos especificados.
+     */
     private JButton crearBoton(String texto, Color color) {
         JButton boton = new JButton(texto);
         boton.setFont(new Font("Arial", Font.BOLD, 11));
@@ -268,6 +293,13 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         return boton;
     }
 
+    /**
+     * Carga datos de ejemplo en la interfaz gráfica para simular torneos y resultados.
+     * <p>
+     * Es útil para pruebas y demostraciones de la interfaz, ya que permite mostrar
+     * información sin necesidad de datos reales.
+     * </p>
+     */
     private void cargarDatosPrueba() {
         modeloTorneos.setRowCount(0);
         listaTorneos.clear();
