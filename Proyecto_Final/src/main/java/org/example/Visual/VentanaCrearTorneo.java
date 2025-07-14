@@ -11,6 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Ventana de la interfaz gráfica que permite al organizador crear un nuevo torneo.
+ * <p>
+ * Permite ingresar datos del torneo como nombre, disciplina, lugar, fecha, formato,
+ * máximo de participantes, premio y una descripción. Además, permite agregar y
+ * eliminar equipos participantes antes de crear el torneo.
+ * </p>
+ *
+ */
 public class VentanaCrearTorneo extends JFrame {
     private EventManager eventManager;
     // Componentes del formulario
@@ -34,7 +43,11 @@ public class VentanaCrearTorneo extends JFrame {
     private JButton btnEliminarEquipo;
     private ArrayList<Equipo> equiposParticipantes;
 
-
+    /**
+     * Crea una nueva ventana para registrar un torneo.
+     *
+     * @param editor El editor que crea el torneo.
+     */
     public VentanaCrearTorneo(Editor editor) {
         this.eventManager = new EventManager("nuevoTorneo");
         this.editor = editor;
@@ -42,10 +55,23 @@ public class VentanaCrearTorneo extends JFrame {
         initComponents();
         setupWindow();
     }
+
+   /**
+    * Devuelve el EventManager asociado a esta ventana.
+    *
+    * @return El EventManager utilizado para notificar eventos.
+    */
     public EventManager getEventManager() {
         return eventManager;
     }
 
+    /**
+     * Inicializa todos los componentes gráficos de la ventana.
+     * <p>
+     * Configura campos de texto, botones, listas y paneles necesarios para
+     * crear un nuevo torneo, incluyendo la interfaz para agregar equipos.
+     * </p>
+     */
     private void initComponents() {
         setTitle("Organizador - Crear Nuevo Torneo");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -295,6 +321,12 @@ public class VentanaCrearTorneo extends JFrame {
         }
     }
 
+    /**
+     * Crea y devuelve una etiqueta personalizada con estilo uniforme.
+     *
+     * @param texto El texto a mostrar en la etiqueta.
+     * @return La JLabel creada.
+     */
     private JLabel crearEtiqueta(String texto) {
         JLabel etiqueta = new JLabel(texto);
         etiqueta.setFont(new Font("Arial", Font.BOLD, 12));
@@ -302,6 +334,13 @@ public class VentanaCrearTorneo extends JFrame {
         return etiqueta;
     }
 
+    /**
+     * Crea y devuelve un botón estilizado con color y fuente personalizada.
+     *
+     * @param texto Texto que se muestra en el botón
+     * @param color Color de fondo del botón.
+     * @return JButton creado y configurado.
+     */
     private JButton crearBoton(String texto, Color color) {
         JButton boton = new JButton(texto);
         boton.setFont(new Font("Arial", Font.BOLD, 12));
@@ -451,6 +490,11 @@ public class VentanaCrearTorneo extends JFrame {
         txtPremio.setText("");
     }
 
+    /**
+     * Muestra un cuadro de diálogo de error con el mensaje proporcionado.
+     *
+     * @param mensaje Texto del error a mostrar.
+     */
     private void mostrarError(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }

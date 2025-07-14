@@ -11,6 +11,18 @@ import java.util.ArrayList;
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
 
+/**
+ * Ventana principal para administradores de torneos.
+ * <p>
+ * Permite visualizar, crear y gestionar torneos de diferentes formatos (liga simple, eliminación directa).
+ * Muestra los torneos asociados a un organizador y permite acceder a detalles, fechas tentativas
+ * y resultados de los mismos.
+ * </p>
+ * <p>
+ * Incluye un botón "+" para agregar nuevos torneos y una tabla para listar los existentes.
+ * </p>
+ *
+ */
 public class VentanaAdministrarOrganizador extends JFrame implements EventListener {
     private Editor editor;
     private ArrayList<Torneo> listaTorneos;
@@ -28,12 +40,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         setLocationRelativeTo(null);
         setResizable(true);
     }
-
-    /**
-     * Recibe la lista de torneos en proceso y te permite escoger cual administrar
-     * al confirmar pasas a la pestaña actualizarResultados
-     */
-    // private void elegirTorneo(Torneos t){}
 
     /**
      * actualizarResultados simplemente deriva según el tipo de torneo
