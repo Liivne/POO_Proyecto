@@ -32,6 +32,8 @@ y tentativo para todos los enfrentamientos correspondientes entre los jugadores/
 
 # Diagrama UML:
 
+![image](https://github.com/Liivne/POO_Proyecto/blob/main/Proyecto_FinalUML.jpg)
+
 # Interfaz de Usuario.
 En esta parte está toda la lógica de la interfaz gráfica del usuario. En esta etapa se encuentran elementos fundamentales 
 que facilitan el buen uso de este proyecto. 
