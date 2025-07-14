@@ -33,7 +33,7 @@ public class Editor extends Usuarios{
         System.out.println("Torneo creado: " + nombreTorneo);
 
         // notificar a los observadores
-        events.notify("nuevoTorneo" + nombreTorneo);
+        //events.notify("nuevoTorneo" + nombreTorneo);
     }
 
     public List<Torneo> getTorneos() {
