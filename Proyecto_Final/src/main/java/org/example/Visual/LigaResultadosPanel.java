@@ -69,8 +69,6 @@ public class LigaResultadosPanel extends JPanel {
         btnGuardar = new JButton("Guardar Resultados");
         btnGuardar.setEnabled(false);
 
-        //lblEstado.setForeground(Color.BLUE);
-
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

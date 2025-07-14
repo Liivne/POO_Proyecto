@@ -22,9 +22,5 @@ public abstract class Participantes {
         return nombreyApellido;
     }
 
-    public String getContacto() {
-        return contacto;
-    }
-
     public abstract String getTipo();
 }

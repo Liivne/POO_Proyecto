@@ -2,8 +2,6 @@ package org.example.Logica;
 
 /**
  * Clase abstracta que representa a un usuario genérico en el sistema.
- * También define un método abstracto {@code isEditable()} que debe ser
- * implementado por las subclases para indicar si el usuario puede ser editado.
  */
 public abstract class Usuarios {
     private String nombre_usuario;
@@ -19,8 +17,6 @@ public abstract class Usuarios {
         this.nombre_usuario = nombre_usuario;
         this.contra = contra;
     }
-
-    public abstract boolean isEditable();
 
     public String getNombre_Usuario() {
         return nombre_usuario;

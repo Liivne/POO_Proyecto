@@ -11,7 +11,6 @@ import java.util.List;
 
 import static org.example.Logica.FORMATO.*;
 import static org.example.Logica.TIPOPARTICIPANTES.*;
-import static org.example.Visual.VentanaPrincipal.getVentanasCompetidor;
 
 /**
  * Ventana principal para administradores de torneos.
@@ -43,35 +42,11 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         setResizable(true);
     }
 
-    /**
-     * actualizarResultados simplemente deriva según el tipo de torneo
-     * si es campeonato simple, deriva a una pestaña con llaves de octavos, cuartos, semis...
-     * si es liga, otra pestaña con los partidos programados
-     */
-    private void actualizarResultados(FORMATO f) {
-        if (LIGASIMPLE == f) {
-            abrirVentanaLiga();
-        } else {
-            abrirVentanaCampeonato();
-        }
-    }
-
-    private void abrirVentanaLiga() {
-        // new VentanaLiga().setVisible(true);
-    }
-
-    private void abrirVentanaCampeonato() {
-        // case torneo == torneo16
-        // v = new Torneo16Equipos
-        // v.setVisible(true);
-    }
-
     // Componentes principales
     private JTabbedPane pestanas;
     private JTable tablaTorneos;
     private DefaultTableModel modeloTorneos;
     private JTextField txtBuscar;
-    // Se eliminan los JComboBox de filtro de deporte y estado.
 
     private void initComponents() {
         setTitle("Competidor - Torneos y Resultados");
@@ -96,11 +71,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         JPanel panelTorneos = crearPanelTorneos();
         pestanas.addTab("Mis Torneos ", new ImageIcon(), panelTorneos, "Ver torneos");
 
-
-        // Pestaña de Mis Torneos
-        JPanel panelMisTorneos = crearPanelMisTorneos();
-        pestanas.addTab("Perfil", new ImageIcon(), panelMisTorneos, "Torneos en los que participo");
-
         add(panelTitulo, BorderLayout.NORTH);
         add(pestanas, BorderLayout.CENTER);
     }
@@ -113,31 +83,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         // Panel base que contiene el contenido principal
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
-
-        // Panel de filtros
-        JPanel panelFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panelFiltros.setBackground(new Color(240, 248, 255));
-        panelFiltros.setBorder(BorderFactory.createTitledBorder("Filtros de búsqueda"));
-
-        panelFiltros.add(new JLabel("Buscar:"));
-        txtBuscar = new JTextField(15);
-        panelFiltros.add(txtBuscar);
-
-        // HAY QUE VER SI OCUPAMOS ESTOS FILTROS DEL TORNEO
-        // panelFiltros.add(Box.createHorizontalStrut(10));
-        // panelFiltros.add(new JLabel("Deporte:"));
-        // String[] deportes = {"Todos", "Fútbol", "Baloncesto", "Tenis", "Volleyball", "Ping Pong", "Ajedrez"};
-        // cbFiltroDeporte = new JComboBox<>(deportes);
-        // panelFiltros.add(cbFiltroDeporte);
-
-        // panelFiltros.add(Box.createHorizontalStrut(10));
-        // panelFiltros.add(new JLabel("Estado:"));
-        // String[] estados = {"Todos", "Inscripción Abierta", "En Curso", "Finalizado"};
-        // cbFiltroEstado = new JComboBox<>(estados);
-        // panelFiltros.add(cbFiltroEstado);
-
-        JButton btnFiltrar = crearBotonPequeno("Filtrar", new Color(30, 144, 255));
-        panelFiltros.add(btnFiltrar);
 
         // Tabla de torneos
         String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes"};
@@ -152,7 +97,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         tablaTorneos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tablaTorneos.setRowHeight(25);
         tablaTorneos.getTableHeader().setBackground(new Color(70, 130, 180));
-        tablaTorneos.getTableHeader().setForeground(Color.WHITE);
+        tablaTorneos.getTableHeader().setForeground(Color.BLACK);
         tablaTorneos.getTableHeader().setFont(new Font("Arial", Font.BOLD, 11));
 
         // Configurar ancho de columnas
@@ -184,7 +129,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         panelBotones.add(btnActualizar);
         panelBotones.add(btnVerFechas);
 
-        panel.add(panelFiltros, BorderLayout.NORTH);
         panel.add(scrollTorneos, BorderLayout.CENTER);
         panel.add(panelBotones, BorderLayout.SOUTH);
 
@@ -268,13 +212,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
             }
         });
 
-        return boton;
-    }
-
-    private JButton crearBotonPequeno(String texto, Color color) {
-        JButton boton = crearBoton(texto, color);
-        boton.setPreferredSize(new Dimension(80, 25));
-        boton.setFont(new Font("Arial", Font.BOLD, 10));
         return boton;
     }
 
@@ -446,15 +383,12 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         modeloTorneos.addRow(new Object[]{
                 torneo.getNombreTorneo(),
                 torneo.getFormatoTorneo(),
-                torneo.getCalendario().getFechaBase().toString(),
+                torneo.getComienzo().toString(),
                 torneo.getFormatoTorneo().toString(),
                 torneo.getListaParticipantes().size() + "/" + torneo.getListaParticipantes().size()
         });
     }
 
-    private void verResultados() {
-        JOptionPane.showMessageDialog(this, "Abriendo bracket del torneo (función en desarrollo)", "Información", JOptionPane.INFORMATION_MESSAGE);
-    }
 
 
     /**
