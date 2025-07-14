@@ -132,7 +132,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         panelFiltros.add(btnFiltrar);
 
         // Tabla de torneos
-        String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes", "Estado", "Premio"};
+        String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes"};
         modeloTorneos = new DefaultTableModel(columnasTorneos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -154,8 +154,6 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         tablaTorneos.getColumnModel().getColumn(3).setPreferredWidth(100); // Lugar
         tablaTorneos.getColumnModel().getColumn(4).setPreferredWidth(120); // Formato
         tablaTorneos.getColumnModel().getColumn(5).setPreferredWidth(80);  // Participantes
-        tablaTorneos.getColumnModel().getColumn(6).setPreferredWidth(100); // Estado
-        tablaTorneos.getColumnModel().getColumn(7).setPreferredWidth(100); // Premio
 
         JScrollPane scrollTorneos = new JScrollPane(tablaTorneos);
         scrollTorneos.setPreferredSize(new Dimension(800, 300));
@@ -309,9 +307,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo1.getCalendario().getFechaBase().toString(),
                 "Estadio Central",
                 torneo1.getFormatoTorneo().toString(),
-                torneo1.getListaParticipantes().size() + "/16",
-                "Inscripción Abierta",
-                "$1000"
+                torneo1.getListaParticipantes().size() + "/16"
         });
 
         modeloTorneos.addRow(new Object[]{
@@ -320,9 +316,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo2.getCalendario().getFechaBase().toString(),
                 "Club Deportivo",
                 torneo2.getFormatoTorneo().toString(),
-                torneo2.getListaParticipantes().size() + "/8",
-                "Inscripción Abierta",
-                "Trofeo"
+                torneo2.getListaParticipantes().size() + "/8"
         });
 
         modeloTorneos.addRow(new Object[]{
@@ -331,9 +325,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo3.getCalendario().getFechaBase().toString(),
                 "Polideportivo Norte",
                 torneo3.getFormatoTorneo().toString(),
-                torneo3.getListaParticipantes().size() + "/16",
-                "En Curso",
-                "$500"
+                torneo3.getListaParticipantes().size() + "/16"
         });
 
         modeloTorneos.addRow(new Object[]{
@@ -342,9 +334,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo4.getCalendario().getFechaBase().toString(),
                 "Club de Tenis",
                 torneo4.getFormatoTorneo().toString(),
-                torneo4.getListaParticipantes().size() + "/16",
-                "Finalizado",
-                "Medalla"
+                torneo4.getListaParticipantes().size() + "/16"
         });
     }
 
