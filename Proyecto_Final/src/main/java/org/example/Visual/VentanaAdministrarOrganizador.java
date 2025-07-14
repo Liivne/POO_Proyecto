@@ -278,13 +278,13 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
         Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10), "Polideportivo Norte", "Baloncesto");
         Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1), "Club de Tenis", "Tenis");
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 8; i++) {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
         }
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 8; i++) {
             torneo2.addParticipantes(new Jugador("Jugador " + (i + 1), "Jugador" + (i + 1) + "@prueba.test"));
         }
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 16; i++) {
             torneo3.addParticipantes(new Equipo("Equipo " + (i + 1), "Equipo" + (i + 1) + "@prueba.test"));
         }
         for (int i = 0; i < 16; i++) {
@@ -307,7 +307,7 @@ public class VentanaAdministrarOrganizador extends JFrame implements EventListen
                 torneo1.getComienzo().toString(),
                 torneo1.getLugarTorneo(),
                 torneo1.getFormatoTorneo().toString(),
-                torneo1.getListaParticipantes().size() + "/16"
+                torneo1.getListaParticipantes().size() + "/8"
         });
 
         modeloTorneos.addRow(new Object[]{
