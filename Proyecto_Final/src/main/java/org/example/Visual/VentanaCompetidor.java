@@ -97,7 +97,7 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         panelFiltros.add(btnFiltrar);
 
         // Tabla de torneos
-        String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes", "Estado", "Premio"};
+        String[] columnasTorneos = {"Nombre", "Deporte", "Fecha", "Lugar", "Formato", "Participantes"};
         modeloTorneos = new DefaultTableModel(columnasTorneos, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -119,8 +119,6 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         tablaTorneos.getColumnModel().getColumn(3).setPreferredWidth(100); // Lugar
         tablaTorneos.getColumnModel().getColumn(4).setPreferredWidth(120); // Formato
         tablaTorneos.getColumnModel().getColumn(5).setPreferredWidth(80);  // Participantes
-        tablaTorneos.getColumnModel().getColumn(6).setPreferredWidth(100); // Estado
-        tablaTorneos.getColumnModel().getColumn(7).setPreferredWidth(100); // Premio
 
         JScrollPane scrollTorneos = new JScrollPane(tablaTorneos);
         scrollTorneos.setPreferredSize(new Dimension(800, 300));
@@ -274,10 +272,10 @@ public class VentanaCompetidor extends JFrame implements EventListener {
         modeloTorneos.setRowCount(0);
         listaTorneos.clear();
 
-        Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15));
-        Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20));
-        Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10));
-        Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1));
+        Torneo torneo1 = new Torneo("Copa Primavera 2025", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 15),"Estadio Central","Fútbol");
+        Torneo torneo2 = new Torneo("Torneo Relámpago", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 20),"Club Deportivo","Ping Pong");
+        Torneo torneo3 = new Torneo("Championship Basketball", CAMPEONATO, ENEQUIPOS, LocalDate.of(2025, 7, 10),"Polideportivo Norte", "Baloncesto");
+        Torneo torneo4 = new Torneo("Masters de Tenis", LIGASIMPLE, INDIVIDUAL, LocalDate.of(2025, 6, 1),"Club de Tenis", "Tenis");
 
         for (int i = 0; i < 12; i++) {
             torneo1.addParticipantes(new Equipo("Equipo " + (i + 1),"Equipo"+(i+1)+"@prueba.test"));
@@ -304,43 +302,35 @@ public class VentanaCompetidor extends JFrame implements EventListener {
 
         modeloTorneos.addRow(new Object[]{
                 torneo1.getNombreTorneo(),
-                "Fútbol",
-                torneo1.getCalendario().getFechaBase().toString(),
-                "Estadio Central",
+                torneo1.getDisciplina(),
+                torneo1.getComienzo().toString(),
+                torneo1.getLugarTorneo(),
                 torneo1.getFormatoTorneo().toString(),
-                torneo1.getListaParticipantes().size() + "/16",
-                "Inscripción Abierta",
-                "$1000"
+                torneo1.getListaParticipantes().size() + "/16"
         });
         modeloTorneos.addRow(new Object[]{
                 torneo2.getNombreTorneo(),
-                "Ping Pong",
-                torneo2.getCalendario().getFechaBase().toString(),
-                "Club Deportivo",
+                torneo2.getDisciplina(),
+                torneo2.getComienzo().toString(),
+                torneo2.getLugarTorneo(),
                 torneo2.getFormatoTorneo().toString(),
-                torneo2.getListaParticipantes().size() + "/8",
-                "Inscripción Abierta",
-                "Trofeo"
+                torneo2.getListaParticipantes().size() + "/8"
         });
         modeloTorneos.addRow(new Object[]{
                 torneo3.getNombreTorneo(),
-                "Baloncesto",
-                torneo3.getCalendario().getFechaBase().toString(),
-                "Polideportivo Norte",
+                torneo3.getDisciplina(),
+                torneo3.getComienzo().toString(),
+                torneo3.getLugarTorneo(),
                 torneo3.getFormatoTorneo().toString(),
-                torneo3.getListaParticipantes().size() + "/16",
-                "En Curso",
-                "$500"
+                torneo3.getListaParticipantes().size() + "/16"
         });
         modeloTorneos.addRow(new Object[]{
                 torneo4.getNombreTorneo(),
                 "Tenis",
-                torneo4.getCalendario().getFechaBase().toString(),
-                "Club de Tenis",
+                torneo4.getComienzo().toString(),
+                torneo4.getLugarTorneo(),
                 torneo4.getFormatoTorneo().toString(),
-                torneo4.getListaParticipantes().size() + "/16",
-                "Finalizado",
-                "Medalla"
+                torneo4.getListaParticipantes().size() + "/16"
         });
         modeloResultados.addRow(new Object[]{"Torneo Invierno 2024", "Fútbol", "15/12/2024", "Águilas FC", "Leones SC", "Tigres United", "16"});
         modeloResultados.addRow(new Object[]{"Liga de Ajedrez", "Ajedrez", "30/11/2024", "Magnus C.", "Anna K.", "Boris S.", "12"});

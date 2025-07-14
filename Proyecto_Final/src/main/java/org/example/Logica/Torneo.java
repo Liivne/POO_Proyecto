@@ -16,6 +16,10 @@ public class Torneo {
     public GenerarCalendario calendario;
     private TIPOPARTICIPANTES tipoParticipantes;
     private LocalDate comienzo;
+    private String lugarTorneo;
+    private String disciplina;
+
+
 
     /**
      * Crea un nuevo torneo.
@@ -24,13 +28,15 @@ public class Torneo {
      * @param formatoTorneo Formato del torneo (liga simple o eliminación directa).
      * @param tipoParticipantes Tipo de participantes (Individuales o en equipos).
      * @param comienzo Refiere a fecha inicial del torneo para generar calendario.
+     * @param lugarTorneo Refiere al lugar donde se va a realizar el torneo.
      */
-    public Torneo (String nombreTorneo, FORMATO formatoTorneo, TIPOPARTICIPANTES tipoParticipantes, LocalDate comienzo) {
+    public Torneo (String nombreTorneo, FORMATO formatoTorneo, TIPOPARTICIPANTES tipoParticipantes, LocalDate comienzo, String lugarTorneo, String disciplina) {
         this.nombreTorneo = nombreTorneo;
         this.formatoTorneo = formatoTorneo;
         this.tipoParticipantes = tipoParticipantes;
         this.comienzo = comienzo;
-
+        this.lugarTorneo = lugarTorneo;
+        this.disciplina = disciplina;
         this.listaParticipantes = new ArrayList<>();
     }
 
@@ -98,5 +104,13 @@ public class Torneo {
 
     public TIPOPARTICIPANTES getTipoParticipantes() {
         return tipoParticipantes;
+    }
+
+    public String getLugarTorneo(){
+        return lugarTorneo;
+    }
+
+    public String getDisciplina() {
+        return disciplina;
     }
 }

@@ -99,7 +99,7 @@ public class VentanaCrearTorneo extends JFrame {
         gbc.weightx = 1.0;
         String[] disciplinas = {
                 "Seleccionar disciplina...",
-                "Fútbol", "Baloncesto", "Volleyball", "Ajedrez", "Rugby", "Boxeo"
+                "Fútbol", "Baloncesto", "Volleyball", "Ajedrez", "Rugby", "Boxeo", "Tenis", "Ping Pong"
         };
         cbDisciplina = new JComboBox<>(disciplinas);
         panelFormulario.add(cbDisciplina, gbc);
@@ -202,10 +202,6 @@ public class VentanaCrearTorneo extends JFrame {
         gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        chkInscripcionAbierta = new JCheckBox("Inscripción abierta inmediatamente");
-        chkInscripcionAbierta.setSelected(true);
-        chkInscripcionAbierta.setBackground(Color.WHITE);
-        panelFormulario.add(chkInscripcionAbierta, gbc);
 
         //Panel para agregar equipos
         JPanel panelEquipos = new JPanel(new BorderLayout());
@@ -416,6 +412,8 @@ public class VentanaCrearTorneo extends JFrame {
                     .conFormato(formato)
                     .conTipoParticipantes(tipo)
                     .conFechaInicio(fechaInicio)
+                    .conDisciplina(disciplina)
+                    .conLugar(txtLugar.toString())
                     .build();
             //agregar equipos al torneo
             for (Equipo equipo : equiposParticipantes) {
@@ -435,7 +433,6 @@ public class VentanaCrearTorneo extends JFrame {
             info.append("Formato: ").append(formatoSeleccionado).append("\n");
             info.append("Máx. Participantes: ").append(spnMaxParticipantes.getValue()).append("\n");
             info.append("Premio: ").append(txtPremio.getText().isEmpty() ? "No especificado" : txtPremio.getText()).append("\n");
-            info.append("Inscripción: ").append(chkInscripcionAbierta.isSelected() ? "Abierta" : "Cerrada").append("\n");
 
             JOptionPane.showMessageDialog(this, info.toString(), "Torneo Creado", JOptionPane.INFORMATION_MESSAGE);
 
@@ -455,7 +452,6 @@ public class VentanaCrearTorneo extends JFrame {
         spnMaxParticipantes.setValue(16);
         txtDescripcion.setText("");
         txtPremio.setText("");
-        chkInscripcionAbierta.setSelected(true);
     }
 
     private void mostrarError(String mensaje) {
